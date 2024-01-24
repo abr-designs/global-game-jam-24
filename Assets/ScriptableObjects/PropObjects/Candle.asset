@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   objectName: Candle
-  collideScore: 0
-  kingPenalty: 0
+  collideScore: 10
+  kingPenalty: -50

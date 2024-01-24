@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3679449893845787293}
   - component: {fileID: 4793638751032295920}
   - component: {fileID: 7760260391217102420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2303514928916863514}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0ad03f5850d94064badb62493d12184b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
