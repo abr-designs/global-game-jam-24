@@ -2425,7 +2425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsPopupPrefab: {fileID: 8932141067758509684, guid: e8b6debba6be9374bbb306d0149c59d7,
     type: 3}
-  clearExistingPopups: 1
+  clearExistingPopups: 0
 --- !u!1 &1872957906
 GameObject:
   m_ObjectHideFlags: 0

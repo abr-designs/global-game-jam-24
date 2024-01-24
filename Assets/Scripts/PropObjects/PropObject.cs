@@ -25,7 +25,7 @@ public class PropObject : MonoBehaviour {
 
                 string pointsDescription = propObjectSO.objectName + "!";
 
-                GameScoreManager.Instance.ScorePoints(pointsDescription, propObjectSO.collideScore);
+                GameScoreManager.Instance.ScorePoints(pointsDescription, propObjectSO.collideScore, transform.position);
             }
         }
     }

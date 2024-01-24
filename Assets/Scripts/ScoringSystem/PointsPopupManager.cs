@@ -31,6 +31,6 @@ public class PointsPopupManager : MonoBehaviour {
         GameObject newPopup = Instantiate(pointsPopupPrefab, transform);
         PointsPopup pointsPopup = newPopup.GetComponent<PointsPopup>();
 
-        pointsPopup.PopulateVisual(args.description, args.points);
+        pointsPopup.InitializeVisual(args);
     }
 }

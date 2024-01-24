@@ -18,13 +18,14 @@ public class GameScoreManager : MonoBehaviour {
         Instance = this;
     }
 
-    public void ScorePoints(string description, int points) {
+    public void ScorePoints(string description, int points, Vector3 worldPos) {
 
         gameScore += points;
 
         ScorePointsArgs args = new ScorePointsArgs();
         args.description = description;
         args.points = points;
+        args.worldPos = worldPos;
         OnPointsScored?.Invoke(this, args);
     }
 
@@ -36,4 +37,5 @@ public class GameScoreManager : MonoBehaviour {
 public class ScorePointsArgs : EventArgs {
     public string description;
     public int points;
+    public Vector3 worldPos;
 }
