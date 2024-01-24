@@ -30,6 +30,9 @@ public class PuppetRagdoll : MonoBehaviour
     [SerializeField]
     private JointConnectData[] jointMirrors;
 
+    [SerializeField]
+    private bool ragdollActive;
+
     //============================================================================================================//
     
     // Start is called before the first frame update
@@ -44,9 +47,41 @@ public class PuppetRagdoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            EnableRagdoll(!ragdollActive);
+        
+        if (ragdollActive)
+            return;
+        
         for (int i = 0; i < jointMirrors.Length; i++)
         {
             jointMirrors[i].MirrorRotation();
+        }
+    }
+
+    [SerializeField]
+    private ConfigurableJoint hipsJoint;
+    private void EnableRagdoll(bool isActive)
+    {
+        const float targetSpring = 1000f;
+        const float dampening = 100f;
+
+        ragdollActive = isActive;
+        
+        hipsJoint.xMotion = isActive ? ConfigurableJointMotion.Free : ConfigurableJointMotion.Limited;
+        hipsJoint.yMotion = isActive ? ConfigurableJointMotion.Free : ConfigurableJointMotion.Limited;
+        hipsJoint.zMotion = isActive ? ConfigurableJointMotion.Free : ConfigurableJointMotion.Limited;
+        
+        
+        for (int i = 0; i < jointMirrors.Length; i++)
+        {
+            var joint = jointMirrors[i].joint;
+
+            var jointSlerpDrive = joint.slerpDrive;
+            jointSlerpDrive.positionSpring = isActive ? 0f : targetSpring;
+            jointSlerpDrive.positionDamper = isActive ? 0f : dampening;
+
+            joint.slerpDrive = jointSlerpDrive;
         }
     }
 
