@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class GameScoreManager : MonoBehaviour {
 
-    //public event EventHandler OnPointsScored;
     public event EventHandler<ScorePointsArgs> OnPointsScored;
 
     public static GameScoreManager Instance { get; private set; }
-
-    [SerializeField] private GameObject scorePointsPopupPrefab;
 
     private int gameScore;
 
