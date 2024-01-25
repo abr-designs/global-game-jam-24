@@ -43,9 +43,18 @@ public class Toggler : MonoBehaviour
 
     private void Activate(int index)
     {
+        var interactionController = FindObjectOfType<ObjectInteractionController>();
         for (int i = 0; i < GameObjects.Length; i++)
         {
-            GameObjects[i].SetActive(i == index);
+            var activate = i == index;
+            
+            GameObjects[i].SetActive(activate);
+
+            if (activate)
+            {
+                GameObjects[i].transform.FindObjectWithName("Hips", out var target);
+                interactionController.playerRootTransform = target;
+            }
         }
     }
 }

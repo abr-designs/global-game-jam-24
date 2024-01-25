@@ -35,6 +35,9 @@ public class PuppetRagdoll : MonoBehaviour
     [SerializeField]
     private bool ragdollActive;
 
+    [SerializeField]
+    private KeyCode enableRagdollKeyCode = KeyCode.Space;
+
     //============================================================================================================//
     
     // Start is called before the first frame update
@@ -49,7 +52,7 @@ public class PuppetRagdoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(enableRagdollKeyCode))
             EnableRagdoll(!ragdollActive);
         
         if (ragdollActive)
@@ -101,28 +104,7 @@ public class PuppetRagdoll : MonoBehaviour
     private void FindJoints()
     {
         //------------------------------------------------//
-        bool FindObjectWithName(Transform parent, in string name, out Transform foundTransform)
-        {
-            foundTransform = null;
-            var childCount = parent.childCount;
-            for (int i = 0; i < childCount; i++)
-            {
-                var child = parent.GetChild(i);
 
-                if (child.gameObject.name.Equals(name))
-                {
-                    foundTransform = child;
-                    return true;
-                }
-
-                if (FindObjectWithName(child, in name, out foundTransform))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
         
         //------------------------------------------------//
         
@@ -132,7 +114,7 @@ public class PuppetRagdoll : MonoBehaviour
         for (int i = 0; i < joints.Length; i++)
         {
             var name = joints[i].gameObject.name;
-            FindObjectWithName(puppeteerReference.transform, in name, out var foundTransform);
+            puppeteerReference.transform.FindObjectWithName(in name, out var foundTransform);
             
             jointMirrors[i] = new JointConnectData
             {

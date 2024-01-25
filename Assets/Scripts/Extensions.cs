@@ -50,4 +50,27 @@ public static class ConfigurableJointExtensions {
 		// Set target rotation to our newly calculated rotation
 		joint.targetRotation = resultRotation;
 	}
+	
+	public static bool FindObjectWithName(this Transform parent, in string name, out Transform foundTransform)
+	{
+		foundTransform = null;
+		var childCount = parent.childCount;
+		for (int i = 0; i < childCount; i++)
+		{
+			var child = parent.GetChild(i);
+
+			if (child.gameObject.name.Equals(name))
+			{
+				foundTransform = child;
+				return true;
+			}
+
+			if (FindObjectWithName(child, in name, out foundTransform))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
