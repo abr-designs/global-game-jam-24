@@ -7,6 +7,7 @@ using Debug = UnityEngine.Debug;
 
 public class PuppetRagdoll : MonoBehaviour
 {
+    public static event Action<bool> OnRagdollActive; 
     [Serializable]
     private class JointConnectData
     {
@@ -67,6 +68,8 @@ public class PuppetRagdoll : MonoBehaviour
         const float dampening = 100f;
 
         ragdollActive = isActive;
+        
+        OnRagdollActive?.Invoke(ragdollActive);
         
         hipsJoint.xMotion = isActive ? ConfigurableJointMotion.Free : ConfigurableJointMotion.Limited;
         hipsJoint.yMotion = isActive ? ConfigurableJointMotion.Free : ConfigurableJointMotion.Limited;
