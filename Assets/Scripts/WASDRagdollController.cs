@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class RagdollController : MonoBehaviour
+public class WASDRagdollController : MonoBehaviour
 {
     private static readonly int SpeedAnimator = Animator.StringToHash("Speed");
     
@@ -30,22 +29,11 @@ public class RagdollController : MonoBehaviour
     private float _groundHeightOffset;
     private float _heightOffGround;
 
-    [Min(0f)]
-    public float mult = 10f;
-
-    private Rigidbody[] _rigidbodies;
-
-    [SerializeField]
-    private Transform sphereTransform;
-    [SerializeField]
-    private Material material;
-
     //============================================================================================================//
 
     private void OnEnable()
     {
         PuppetRagdoll.OnRagdollActive += OnRagdollActive;
-        _rigidbodies = GetComponentsInChildren < Rigidbody>();
     }
 
 
@@ -53,63 +41,54 @@ public class RagdollController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        //CheckGroundHeight(out _groundHeightOffset);
-        //_groundHeightOffset *= 0.95f;
+        CheckGroundHeight(out _groundHeightOffset);
+        _groundHeightOffset *= 0.95f;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        const float radius = 2.5f;
-        if (Input.GetKeyDown(KeyCode.R))
+        if (_ragdollActive)
+            return;
+        
+        UpdateInputDirection(ref _inputDirections);
+        CheckGroundHeight(out _heightOffGround);
+
+        _hasInput = _inputDirections != Vector2.zero;
+
+        if (_hasInput == false)
         {
-            SceneManager.LoadScene(0);
+            puppeteerAnimator.SetFloat(SpeedAnimator, 0f);
             return;
         }
         
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        
-        if (Physics.Raycast(ray, out var raycastHit, 100, groundMask.value) == false)
-            return;
+        puppeteerAnimator.SetFloat(SpeedAnimator, speed);
 
-        sphereTransform.position = raycastHit.point;
+        var dir = GetCameraMoveDirection(cameraTransform, _inputDirections);
 
-        var color1 = Color.cyan;
-        if (Input.GetKey(KeyCode.Mouse0) == false)
-        {
-            
-            color1.a = 0.1f;
-            material.SetColor("_Color", color1);
-            sphereTransform.localScale = Vector3.one * (radius / 3f);
-            return;
-        }
-        
-        color1.a = 0.5f;
-        material.SetColor("_Color", color1);
-        sphereTransform.localScale = Vector3.one * (radius * 2f);
+        var rotation = Quaternion.LookRotation(dir);
 
-        for (int i = 0; i < _rigidbodies.Length; i++)
-        {
-            _rigidbodies[i].AddExplosionForce(mult, raycastHit.point, radius, 2f);
-        }
+        root.transform.rotation = rotation;
 
+        var newPosition = root.transform.position;
+        newPosition.y = _heightOffGround;
+        newPosition += dir * (speed * Time.deltaTime);
+
+        root.transform.position = newPosition;
     }
 
-    private void MouseMove()
+    /*private void FixedUpdate()
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out var raycastHit, 100, groundMask.value) == false)
+        if (hasInput == false)
             return;
 
+        var dir = GetCameraMoveDirection(cameraTransform, inputDirections);
 
-        Debug.DrawLine(ray.origin, raycastHit.point, Color.green, 1f);
-        var dif = root.transform.position - raycastHit.point;
-        root.transform.position = Vector3.MoveTowards(root.transform.position,
-            raycastHit.point,
-            dif.magnitude * mult * Time.deltaTime);
-    }
+        var rotation = Quaternion.LookRotation(dir);
+        
+        //root.MoveRotation(rotation);
+        root.position += dir * (speed);
+    }*/
     
     private void OnDisable()
     {

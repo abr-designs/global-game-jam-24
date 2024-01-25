@@ -12,6 +12,7 @@ public class PuppetRagdoll : MonoBehaviour
     private class JointConnectData
     {
         public string name;
+        public bool enabled = true;
         public ConfigurableJoint joint;
         public Transform animationSkeletonReference;
         private Quaternion cachedRotation;
@@ -56,6 +57,9 @@ public class PuppetRagdoll : MonoBehaviour
         
         for (int i = 0; i < jointMirrors.Length; i++)
         {
+            if (jointMirrors[i].enabled == false)
+                continue;
+            
             jointMirrors[i].MirrorRotation();
         }
     }
