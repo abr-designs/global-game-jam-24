@@ -1,6 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class WASDRagdollController : MonoBehaviour
@@ -29,14 +28,17 @@ public class WASDRagdollController : MonoBehaviour
     private float _groundHeightOffset;
     private float _heightOffGround;
 
+    [SerializeField]
+    private Vector3 minRoomPosition;
+    [SerializeField]
+    private Vector3 maxRoomPosition;
+    
     //============================================================================================================//
 
     private void OnEnable()
     {
         PuppetRagdoll.OnRagdollActive += OnRagdollActive;
     }
-
-
 
     // Start is called before the first frame update
     private void Start()
@@ -74,21 +76,8 @@ public class WASDRagdollController : MonoBehaviour
         newPosition.y = _heightOffGround;
         newPosition += dir * (speed * Time.deltaTime);
 
-        root.transform.position = newPosition;
+        root.transform.position = ClampPositionToBounds(newPosition, minRoomPosition, maxRoomPosition);
     }
-
-    /*private void FixedUpdate()
-    {
-        if (hasInput == false)
-            return;
-
-        var dir = GetCameraMoveDirection(cameraTransform, inputDirections);
-
-        var rotation = Quaternion.LookRotation(dir);
-        
-        //root.MoveRotation(rotation);
-        root.position += dir * (speed);
-    }*/
     
     private void OnDisable()
     {
@@ -113,6 +102,24 @@ public class WASDRagdollController : MonoBehaviour
     private void OnRagdollActive(bool ragdollActive)
     {
         _ragdollActive = ragdollActive;
+    }
+
+    /// <summary>
+    /// Does not apply clamp to Y position
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="min"></param>
+    /// <param name="max"></param>
+    /// <param name="mult"></param>
+    /// <returns></returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static Vector3 ClampPositionToBounds(Vector3 position, Vector3 min, Vector3 max, float mult = 1f)
+    {
+        position.x = Math.Clamp(position.x, min.x, max.x);
+        //position.y = Math.Clamp(position.y, min.y, max.y);
+        position.z = Math.Clamp(position.z, min.z, max.z);
+
+        return position;
     }
 
     //============================================================================================================//
@@ -151,4 +158,32 @@ public class WASDRagdollController : MonoBehaviour
     }
     
     //============================================================================================================//
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        var points = new[]
+        {
+            /*tl*/new Vector3(minRoomPosition.x, maxRoomPosition.y, maxRoomPosition.z),
+            /*tr*/maxRoomPosition,
+            /*br*/new Vector3(maxRoomPosition.x, minRoomPosition.y, minRoomPosition.z),
+            /*bl*/minRoomPosition
+        };
+        
+        
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLineStrip(points, true);
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            Gizmos.DrawWireSphere(points[i], 0.1f);
+        }
+
+        if (root.transform == null)
+            return;
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(root.transform.position, 0.2f);
+    }
+#endif
 }
