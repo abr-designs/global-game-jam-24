@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class ExplosionRagdollController : MonoBehaviour
 {
+    const float radius = 2.5f;
+
     private static readonly int SpeedAnimator = Animator.StringToHash("Speed");
     
     [SerializeField]
@@ -57,10 +59,13 @@ public class ExplosionRagdollController : MonoBehaviour
         //_groundHeightOffset *= 0.95f;
     }
 
+    private bool applyingForce;
+    private float _forceToApply;
+
+    private Vector3 hitPoint;
     // Update is called once per frame
     private void Update()
     {
-        const float radius = 2.5f;
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(0);
@@ -73,27 +78,48 @@ public class ExplosionRagdollController : MonoBehaviour
         if (Physics.Raycast(ray, out var raycastHit, 100, groundMask.value) == false)
             return;
 
-        sphereTransform.position = raycastHit.point;
+        hitPoint = raycastHit.point;
+        sphereTransform.position = hitPoint;
+        Color color1 = Color.cyan;
 
-        var color1 = Color.cyan;
-        if (Input.GetKey(KeyCode.Mouse0) == false)
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            
+            color1 = Color.cyan;
+            _forceToApply = mult;
+            applyingForce = true;
+        }
+        else if (Input.GetKey(KeyCode.Mouse1))
+        {
+            color1 = Color.red;
+            _forceToApply = -mult * 10f;
+            applyingForce = true;
+            //Offset up so doesn't stick to the ground
+            hitPoint += Vector3.up * radius;
+        }
+        else
+        {
+            applyingForce = false;
             color1.a = 0.1f;
-            material.SetColor("_Color", color1);
+            _forceToApply = 0f;
+            material.SetColor("_BaseColor", color1);
             sphereTransform.localScale = Vector3.one * (radius / 3f);
             return;
         }
         
         color1.a = 0.5f;
-        material.SetColor("_Color", color1);
+        material.SetColor("_BaseColor", color1);
         sphereTransform.localScale = Vector3.one * (radius * 2f);
+    }
 
+    private void FixedUpdate()
+    {
+        if (applyingForce == false)
+            return;
+        
         for (int i = 0; i < _rigidbodies.Length; i++)
         {
-            _rigidbodies[i].AddExplosionForce(mult, raycastHit.point, radius, 2f);
+            _rigidbodies[i].AddExplosionForce(_forceToApply, hitPoint, radius, 2f);
         }
-
     }
 
     private void MouseMove()

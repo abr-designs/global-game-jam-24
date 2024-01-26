@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 2673698822715556140, guid: 396e20f21059a0a4abbdaf39fda7ed5a,
         type: 3}
       propertyPath: m_Name
-      value: Puppet Variant
+      value: Puppet Explosion Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 672244539840537855, guid: 396e20f21059a0a4abbdaf39fda7ed5a, type: 3}
@@ -115,6 +115,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
-  mult: 20
+  mult: 50
   sphereTransform: {fileID: 0}
   material: {fileID: 2100000, guid: b7c83390e781d654eb570e16edd2f61a, type: 2}

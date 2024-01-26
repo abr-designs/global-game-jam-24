@@ -41,7 +41,7 @@ public class HandsController : MonoBehaviour
     
     private void OnDisable()
     {
-        throw new NotImplementedException();
+        ObjectInteractionController.OnNewInteractableObject -= OnNewInteractableObject;
     }
     
     //============================================================================================================//
