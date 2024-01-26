@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 2673698822715556140, guid: 396e20f21059a0a4abbdaf39fda7ed5a,
         type: 3}
       propertyPath: m_Name
-      value: Puppet Variant
+      value: Puppet Jumping Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 672244539840537855, guid: 396e20f21059a0a4abbdaf39fda7ed5a, type: 3}
@@ -73,6 +73,12 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 3665450674092531727}
   m_SourcePrefab: {fileID: 100100000, guid: 396e20f21059a0a4abbdaf39fda7ed5a, type: 3}
+--- !u!95 &5125186624082229825 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3050027525536338613, guid: 396e20f21059a0a4abbdaf39fda7ed5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7886803277197666548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5217823838101285336 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2673698822715556140, guid: 396e20f21059a0a4abbdaf39fda7ed5a,
@@ -91,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbf5da3a5f716247a179d2a807ad444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puppeteerAnimator: {fileID: 0}
+  puppeteerAnimator: {fileID: 5125186624082229825}
   root: {fileID: 0}
   cameraTransform: {fileID: 0}
   speed: 0

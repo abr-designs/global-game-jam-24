@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/_Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Prototype/Alex/Ragdoll_1.unity
-    guid: 32c7d9a8b7fbf9a419ff966b4697d399
+    path: Assets/_Scenes/Main.unity
+    guid: d876552d63d7fe3498b99b0be7a35fbc
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}

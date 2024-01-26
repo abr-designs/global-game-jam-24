@@ -9,17 +9,14 @@ public class Toggler : MonoBehaviour
 
     [SerializeField]
     private TMP_Text TMPText;
+
+    private int _activeIndex = -1;
+
+    //============================================================================================================//
     // Start is called before the first frame update
     void Start()
     {
-        string text = string.Empty;
-
-        for (int i = 0; i < GameObjects.Length; i++)
-        {
-            text += $"[{i + 1}]{GameObjects[i].name}\n";
-        }
-
-        TMPText.text = text;
+        UpdateText();
     }
 
     // Update is called once per frame
@@ -40,9 +37,24 @@ public class Toggler : MonoBehaviour
             }
         }
     }
+    
+    //============================================================================================================//
+
+    private void UpdateText()
+    {
+        string text = string.Empty;
+
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            text += $"[{i + 1}]{GameObjects[i].name}{(i == _activeIndex ? " <==" : string.Empty)}\n";
+        }
+
+        TMPText.text = text;
+    }
 
     private void Activate(int index)
     {
+        _activeIndex = index;
         var interactionController = FindObjectOfType<ObjectInteractionController>();
         for (int i = 0; i < GameObjects.Length; i++)
         {
@@ -56,5 +68,7 @@ public class Toggler : MonoBehaviour
                 interactionController.playerRootTransform = target;
             }
         }
+
+        UpdateText();
     }
 }

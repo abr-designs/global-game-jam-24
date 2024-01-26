@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -97,6 +98,7 @@ public class PuppetRagdoll : MonoBehaviour
 
     //============================================================================================================//
 
+#if UNITY_EDITOR
     [SerializeField]
     private GameObject puppeteerReference;
     [ContextMenu("Find Joints")]
@@ -123,6 +125,8 @@ public class PuppetRagdoll : MonoBehaviour
                 animationSkeletonReference = foundTransform
             };
         }
+        
+        EditorUtility.SetDirty(this);
     }
 
     [ContextMenu("Convert Character Joints")]
@@ -173,6 +177,7 @@ public class PuppetRagdoll : MonoBehaviour
             DestroyImmediate(charJoint);
         }
     }
+#endif
     
     //============================================================================================================//
 }
