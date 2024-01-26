@@ -1089,6 +1089,7 @@ Transform:
   m_Children:
   - {fileID: 5909620358743358412}
   - {fileID: 2151284929665661606}
+  - {fileID: 7550878369728847074}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2453343728703494889
@@ -1107,47 +1108,47 @@ MonoBehaviour:
   - name: LeftLeg
     enabled: 1
     joint: {fileID: 7145208387145528299}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 3897560379214567345}
   - name: LeftCalf
     enabled: 1
     joint: {fileID: 8483738360373639158}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 4902705711289118798}
   - name: RightLeg
     enabled: 1
     joint: {fileID: 3308296664981126196}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 631063264422772344}
   - name: RightCalf
     enabled: 1
     joint: {fileID: 8087399682743057823}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 1574146395707789500}
   - name: Spine2
     enabled: 1
     joint: {fileID: 8717864010706103959}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 8024994790934870212}
   - name: LeftUpperArm
     enabled: 1
     joint: {fileID: 8635731486360108585}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 3782025072498179243}
   - name: LeftArm
     enabled: 1
     joint: {fileID: 8996789759391053188}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 4166397173710938767}
   - name: Head
     enabled: 1
     joint: {fileID: 5390151693177274926}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 4060147158867415591}
   - name: RightUpperArm
     enabled: 1
     joint: {fileID: 4149586489629774926}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 5181797643681320211}
   - name: RightArm
     enabled: 1
     joint: {fileID: 6961975857878829607}
-    animationSkeletonReference: {fileID: 0}
+    animationSkeletonReference: {fileID: 4599787223313111223}
   ragdollActive: 0
   enableRagdollKeyCode: 9
   hipsJoint: {fileID: 1241026573710427367}
-  puppeteerReference: {fileID: 0}
+  puppeteerReference: {fileID: 5919189142889480828}
 --- !u!114 &3545681968802404362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3722,3 +3723,143 @@ Transform:
   - {fileID: 8453259682904146047}
   m_Father: {fileID: 7353197593505770479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8250634121332933171
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2614962003834036974}
+    m_Modifications:
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2352298677021868111, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+        type: 3}
+      propertyPath: m_Name
+      value: Puppeteer Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e, type: 3}
+--- !u!4 &631063264422772344 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8809560626863275083, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1574146395707789500 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7446800714440610447, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3782025072498179243 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5115059788796640920, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3897560379214567345 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4942364719236044162, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4060147158867415591 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5393252218065309716, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4166397173710938767 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5427435834187915452, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4599787223313111223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5572533969287715460, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4902705711289118798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3929897392478810749, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5181797643681320211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3848701389174771488, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5919189142889480828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2352298677021868111, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7550878369728847074 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1894396807322672849, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8024994790934870212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2152340446339939063, guid: 4afa967cc4d4b9b46acc6fcfaa06a75e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250634121332933171}
+  m_PrefabAsset: {fileID: 0}

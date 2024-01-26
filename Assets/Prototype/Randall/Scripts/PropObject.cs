@@ -53,13 +53,17 @@ public class PropObject : MonoBehaviour {
 
         // check if a prop object is colliding with another prop object
         // also make sure they are not both kinematic
-        if(collision.gameObject.layer == gameObject.layer) {
-            if(collision.gameObject.GetComponent<Rigidbody>().isKinematic
-                || gameObject.GetComponent<Rigidbody>().isKinematic) {
-
+        /*if(collision.gameObject.layer == gameObject.layer)
+        {
+            var other = collision.gameObject.GetComponent<Rigidbody>();
+            var mine = gameObject.GetComponent<Rigidbody>();
+            
+            
+            if(other.isKinematic || mine.isKinematic) 
+            {
                 SetPropObjectAsKinematic(this, collision.impulse);
             }
-        }
+        }*/
 
         // check with player collision
         if (!initialCollision) {

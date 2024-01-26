@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 2673698822715556140, guid: 396e20f21059a0a4abbdaf39fda7ed5a,
         type: 3}
       propertyPath: m_Name
-      value: Puppet Variant
+      value: Puppet WASD Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75,6 +75,12 @@ PrefabInstance:
 --- !u!54 &5440300177222683861 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 471430670081753142, guid: 396e20f21059a0a4abbdaf39fda7ed5a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5617413280229805283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7468886015443803734 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3050027525536338613, guid: 396e20f21059a0a4abbdaf39fda7ed5a,
     type: 3}
   m_PrefabInstance: {fileID: 5617413280229805283}
   m_PrefabAsset: {fileID: 0}
@@ -96,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547650130009e2946adf1034554251f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puppeteerAnimator: {fileID: 0}
+  puppeteerAnimator: {fileID: 7468886015443803734}
   root: {fileID: 5440300177222683861}
   cameraTransform: {fileID: 0}
   speed: 5

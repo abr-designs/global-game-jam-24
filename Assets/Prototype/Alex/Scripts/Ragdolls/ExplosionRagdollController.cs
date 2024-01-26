@@ -34,6 +34,8 @@ public class ExplosionRagdollController : MonoBehaviour
 
     [Min(0f)]
     public float mult = 10f;
+    [Min(0f)]
+    public float upForceMult = 2f;
 
     private Rigidbody[] _rigidbodies;
 
@@ -118,7 +120,7 @@ public class ExplosionRagdollController : MonoBehaviour
         
         for (int i = 0; i < _rigidbodies.Length; i++)
         {
-            _rigidbodies[i].AddExplosionForce(_forceToApply, hitPoint, radius, 2f);
+            _rigidbodies[i].AddExplosionForce(_forceToApply, hitPoint, radius, upForceMult);
         }
     }
 
