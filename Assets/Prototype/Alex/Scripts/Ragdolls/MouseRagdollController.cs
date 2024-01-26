@@ -1,3 +1,4 @@
+using GameInput;
 using UnityEngine;
 
 public class MouseRagdollController : MonoBehaviour
