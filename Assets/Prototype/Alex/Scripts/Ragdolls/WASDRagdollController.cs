@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using GameInput;
 using UnityEngine;
 
 public class WASDRagdollController : MonoBehaviour
@@ -37,6 +38,7 @@ public class WASDRagdollController : MonoBehaviour
 
     private void OnEnable()
     {
+        GameInputDelegator.OnMovementChanged += OnMovementChanged;
         PuppetRagdoll.OnRagdollActive += OnRagdollActive;
     }
 
@@ -53,7 +55,6 @@ public class WASDRagdollController : MonoBehaviour
         if (_ragdollActive)
             return;
         
-        UpdateInputDirection(ref _inputDirections);
         CheckGroundHeight(out _heightOffGround);
 
         _hasInput = _inputDirections != Vector2.zero;
@@ -82,6 +83,7 @@ public class WASDRagdollController : MonoBehaviour
     private void OnDisable()
     {
         PuppetRagdoll.OnRagdollActive -= OnRagdollActive;
+        GameInputDelegator.OnMovementChanged -= OnMovementChanged;
     }
 
     //============================================================================================================//
@@ -124,27 +126,9 @@ public class WASDRagdollController : MonoBehaviour
 
     //============================================================================================================//
 
-    private static void UpdateInputDirection(ref Vector2 direction)
+    private void OnMovementChanged(Vector2 movementInput)
     {
-        direction = Vector2.zero;
-        
-        if (Input.GetKey(KeyCode.W))
-        {
-            direction.y = 1;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            direction.y = -1;
-        }
-        
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction.x = -1;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            direction.x = 1;
-        }
+        _inputDirections = movementInput;
     }
 
     private static Vector3 GetCameraMoveDirection(in Transform cameraTransform, in Vector2 inputDirection)
