@@ -42,6 +42,9 @@ namespace Levels
             {
                 var scriptableObject = propObject.GetPropObjectSO();
 
+                if(scriptableObject == null)
+                    continue;
+                
                 if (avoidObjects != null && avoidObjects.Length > 0)
                 {
                     var meantToAvoid = avoidObjects.Any(x => x.Equals(scriptableObject));
