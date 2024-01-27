@@ -1,26 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using GameInput;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using VisualFX;
 
 public class ExplosionRagdollController : MonoBehaviour
 {
-    const float radius = 2.5f;
-
-    private static readonly int SpeedAnimator = Animator.StringToHash("Speed");
-    
-    [SerializeField]
-    private Animator puppeteerAnimator;
-
-    [SerializeField]
-    private Rigidbody root;
-
-    [SerializeField]
-    private Transform cameraTransform;
-    [SerializeField, Min(0)]
-    private float speed;
+    const float Radius = 2.5f;
 
     private Vector2 _inputDirections;
     private bool _hasInput;
@@ -44,6 +27,14 @@ public class ExplosionRagdollController : MonoBehaviour
     private Transform sphereTransform;
     [SerializeField]
     private Material material;
+    
+    private bool _applyingForce;
+    private float _forceToApply;
+
+    private Vector3 _hitPoint;
+    
+    private bool _leftMousePressed;
+    private bool _rightMousePressed;
 
     //============================================================================================================//
 
@@ -51,156 +42,89 @@ public class ExplosionRagdollController : MonoBehaviour
     {
         PuppetRagdoll.OnRagdollActive += OnRagdollActive;
         _rigidbodies = GetComponentsInChildren < Rigidbody>();
+        
+        GameInputDelegator.OnLeftClick += OnLeftClick;
+        GameInputDelegator.OnRightClick += OnRightClick;
     }
 
-
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        //CheckGroundHeight(out _groundHeightOffset);
-        //_groundHeightOffset *= 0.95f;
-    }
-
-    private bool applyingForce;
-    private float _forceToApply;
-
-    private Vector3 hitPoint;
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(0);
-            return;
-        }
-        
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         
         
         if (Physics.Raycast(ray, out var raycastHit, 100, groundMask.value) == false)
             return;
 
-        hitPoint = raycastHit.point;
-        sphereTransform.position = hitPoint;
+        _hitPoint = raycastHit.point;
+        sphereTransform.position = _hitPoint;
         Color color1 = Color.cyan;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-            VFX.EXPLOSION.PlayAtLocation(hitPoint);
-
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (_leftMousePressed)
         {
             color1 = Color.cyan;
             _forceToApply = mult;
-            applyingForce = true;
+            _applyingForce = true;
         }
-        else if (Input.GetKey(KeyCode.Mouse1))
+        else if (_rightMousePressed)
         {
             color1 = Color.red;
             _forceToApply = -mult * 10f;
-            applyingForce = true;
+            _applyingForce = true;
             //Offset up so doesn't stick to the ground
-            hitPoint += Vector3.up * radius;
+            _hitPoint += Vector3.up * Radius;
         }
         else
         {
-            applyingForce = false;
+            _applyingForce = false;
             color1.a = 0.1f;
             _forceToApply = 0f;
             material.SetColor("_BaseColor", color1);
-            sphereTransform.localScale = Vector3.one * (radius / 3f);
+            sphereTransform.localScale = Vector3.one * (Radius / 3f);
             return;
         }
         
         color1.a = 0.5f;
         material.SetColor("_BaseColor", color1);
-        sphereTransform.localScale = Vector3.one * (radius * 2f);
+        sphereTransform.localScale = Vector3.one * (Radius * 2f);
     }
 
     private void FixedUpdate()
     {
-        if (applyingForce == false)
+        if (_applyingForce == false)
             return;
         
         for (int i = 0; i < _rigidbodies.Length; i++)
         {
-            _rigidbodies[i].AddExplosionForce(_forceToApply, hitPoint, radius, upForceMult);
+            _rigidbodies[i].AddExplosionForce(_forceToApply, _hitPoint, Radius, upForceMult);
         }
     }
 
-    private void MouseMove()
-    {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out var raycastHit, 100, groundMask.value) == false)
-            return;
-
-
-        Debug.DrawLine(ray.origin, raycastHit.point, Color.green, 1f);
-        var dif = root.transform.position - raycastHit.point;
-        root.transform.position = Vector3.MoveTowards(root.transform.position,
-            raycastHit.point,
-            dif.magnitude * mult * Time.deltaTime);
-    }
-    
     private void OnDisable()
     {
         PuppetRagdoll.OnRagdollActive -= OnRagdollActive;
+        GameInputDelegator.OnLeftClick -= OnLeftClick;
+        GameInputDelegator.OnRightClick -= OnRightClick;
     }
 
     //============================================================================================================//
-
-    private void CheckGroundHeight(out float height)
-    {
-        height = 0f;
-        
-        var origin = root.transform.position;
-        origin.y = 10f;
-
-        if (Physics.Raycast(origin, Vector3.down, out var raycastHit, 20f, groundMask.value) == false)
-            return;
-
-        height = raycastHit.point.y + _groundHeightOffset;
-    }
     
     private void OnRagdollActive(bool ragdollActive)
     {
         _ragdollActive = ragdollActive;
     }
-
+    
     //============================================================================================================//
 
-    private static void UpdateInputDirection(ref Vector2 direction)
+    
+    private void OnRightClick(bool pressed)
     {
-        direction = Vector2.zero;
-        
-        if (Input.GetKey(KeyCode.W))
-        {
-            direction.y = 1;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            direction.y = -1;
-        }
-        
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction.x = -1;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            direction.x = 1;
-        }
+        _rightMousePressed = pressed;
     }
 
-    private static Vector3 GetCameraMoveDirection(in Transform cameraTransform, in Vector2 inputDirection)
+    private void OnLeftClick(bool pressed)
     {
-        var cameraFwd = Vector3.ProjectOnPlane(cameraTransform.forward, Vector3.up).normalized;
-        var cameraRight = Vector3.ProjectOnPlane(cameraTransform.right, Vector3.up).normalized;
-        
-        var finalForce = (cameraFwd * inputDirection.y) + (cameraRight * inputDirection.x);
-
-        return finalForce;
+        _leftMousePressed = pressed;
     }
     
     //============================================================================================================//
