@@ -65,7 +65,7 @@ namespace VisualFX
         //============================================================================================================//
 
         //This is meant to be called via the VFXExtensions class
-        internal GameObject PlayAtLocation(VFX vfx, Vector3 worldPosition, float scale = 1f)
+        internal GameObject PlayAtLocation(VFX vfx, Vector3 worldPosition, float scale = 1f, bool keepAlive = false)
         {
             var vfxData = GetVFXData(vfx);
 
@@ -74,8 +74,9 @@ namespace VisualFX
             if(scale != 1f)
                 instance.transform.localScale = Vector3.one * scale;
 
-            //Destroy the VFX after its set lifetime
-            Destroy(instance, vfxData.lifetime);
+            if(keepAlive == false)
+                //Destroy the VFX after its set lifetime
+                Destroy(instance, vfxData.lifetime);
             
             return instance;
         }

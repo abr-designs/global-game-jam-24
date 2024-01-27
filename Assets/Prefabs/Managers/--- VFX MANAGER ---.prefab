@@ -45,7 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vfxDatas:
-  - name: EXPLOSION
-    type: 1
-    prefab: {fileID: 1804206099813350, guid: 4dd02b5f854b6c84990fbeb810abffe4, type: 3}
+  - name: LAUGH BUBBLE
+    type: 4
+    prefab: {fileID: 5045606639927114893, guid: 40f7e941b7e10c64cae33626126ad249,
+      type: 3}
+    lifetime: 4
+  - name: ANGRY_BUBBLE
+    type: 5
+    prefab: {fileID: 4157195840533985236, guid: 0d402a085270e324aac2989139f073b0,
+      type: 3}
     lifetime: 4
