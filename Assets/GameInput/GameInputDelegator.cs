@@ -12,6 +12,8 @@ namespace GameInput
         public static event Action<bool> OnLeftClick;
         public static event Action<bool> OnRightClick;
 
+        public static bool LockInputs { get; set; }
+
         private Vector2 _currentInput;
     
         //============================================================================================================//\
@@ -38,7 +40,13 @@ namespace GameInput
 
         public void OnHorizontalMovement(InputAction.CallbackContext context)
         {
-
+            if (LockInputs)
+            {
+                _currentInput = Vector2.zero;
+                OnMovementChanged?.Invoke(_currentInput);
+                return;
+            }
+            
             var x = context.ReadValue<float>();
 
             _currentInput.x = x;
@@ -48,6 +56,13 @@ namespace GameInput
 
         public void OnVerticalMovement(InputAction.CallbackContext context)
         {
+            if (LockInputs)
+            {
+                _currentInput = Vector2.zero;
+                OnMovementChanged?.Invoke(_currentInput);
+                return;
+            }
+            
             var y = context.ReadValue<float>();
 
             _currentInput.y = y;
@@ -56,6 +71,8 @@ namespace GameInput
 
         public void OnGrabItem(InputAction.CallbackContext context)
         {
+            if (LockInputs) return;
+            
             if (context.ReadValueAsButton() == false)
                 return;
         
@@ -64,12 +81,24 @@ namespace GameInput
 
         public void OnMouseLeftClick(InputAction.CallbackContext context)
         {
+            if (LockInputs)
+            {
+                OnLeftClick?.Invoke(false);
+                return;
+            }
+            
             var pressed = context.ReadValueAsButton();
             OnLeftClick?.Invoke(pressed);
         }
 
         public void OnMouseRightClick(InputAction.CallbackContext context)
         {
+            if (LockInputs)
+            {
+                OnRightClick?.Invoke(false);
+                return;
+            }
+            
             var pressed = context.ReadValueAsButton();
             OnRightClick?.Invoke(pressed);
         }

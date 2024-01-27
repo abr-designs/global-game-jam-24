@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ImphenziaPixPal_URP
-  m_Shader: {fileID: -6465566751694194690, guid: af30c186ef992d640adef6c81ac7ac1f,
+  m_Shader: {fileID: -6465566751694194690, guid: af040c3f3bd67cf4aa10df8da45c46c0,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -38,11 +38,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Attributes:
-        m_Texture: {fileID: 2800000, guid: 57791cface7aaa946ba340298c70f908, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2ef56fd1e36dba848bf7022ebf5c4f3e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: a715a79d8bd8bce4eb3edb8c15861a12, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6812932be22e69948ab96f542dacedf0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -66,7 +66,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission:
-        m_Texture: {fileID: 2800000, guid: d48da49ff29a41a46855dbd436632982, type: 3}
+        m_Texture: {fileID: 2800000, guid: b4cbf33c1f4bb7947a93f4c37f7e7f1d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:

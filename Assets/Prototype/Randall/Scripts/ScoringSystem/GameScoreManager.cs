@@ -1,38 +1,54 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Utilities.ReadOnly;
 
-public class GameScoreManager : MonoBehaviour {
-
-    public event EventHandler<ScorePointsArgs> OnPointsScored;
-
-    public static GameScoreManager Instance { get; private set; }
-
-    private int gameScore;
-
-    private void Awake() {
-        Instance = this;
+namespace Prototype.Randall.Scripts.ScoringSystem
+{
+    public class ScorePointsArgs : EventArgs
+    {
+        public string description;
+        public int points;
+        public Vector3 worldPos;
     }
+    
+    public class GameScoreManager : MonoBehaviour
+    {
+        public static event EventHandler<ScorePointsArgs> OnPointsScored;
+        public static event Action<int> OnPointsTotalChanged;
 
-    public void ScorePoints(string description, int points, Vector3 worldPos) {
+        public int GameScore => gameScore;
 
-        gameScore += points;
+        [SerializeField, ReadOnly] private int gameScore;
 
-        ScorePointsArgs args = new ScorePointsArgs();
-        args.description = description;
-        args.points = points;
-        args.worldPos = worldPos;
-        OnPointsScored?.Invoke(this, args);
-    }
+        //Unity Functions
+        //============================================================================================================//
 
-    public int GetGameScore() {
-        return gameScore;
+        private void OnEnable()
+        {
+            PropObject.OnPointsScored += ScorePoints;
+        }
+    
+        private void OnDisable()
+        {
+            PropObject.OnPointsScored -= ScorePoints;
+        }
+    
+        //============================================================================================================//
+
+        private void ScorePoints(string description, int points, Vector3 worldPos)
+        {
+
+            gameScore += points;
+            OnPointsTotalChanged?.Invoke(gameScore);
+            ScorePointsArgs args = new ScorePointsArgs
+            {
+                description = description,
+                points = points,
+                worldPos = worldPos,
+            };
+            OnPointsScored?.Invoke(this, args);
+
+        }
     }
 }
 
-public class ScorePointsArgs : EventArgs {
-    public string description;
-    public int points;
-    public Vector3 worldPos;
-}

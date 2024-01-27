@@ -448,10 +448,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb92c697c3b8c2d408df6c12e8900974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraBlendTime: 1
   camera: {fileID: 7215660244151342233}
-  defaultVirtualCamera: {fileID: 342075269847451467}
+  brain: {fileID: 2317310656974505198}
   dollyTrack: {fileID: 8159263873728971565}
-  throneVirtualCamera: {fileID: 767441174999716169}
+  virtualCameras:
+  - {fileID: 342075269847451467}
+  - {fileID: 767441174999716169}
 --- !u!1 &7721492860463078011
 GameObject:
   m_ObjectHideFlags: 0

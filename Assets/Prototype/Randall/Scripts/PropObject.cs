@@ -1,21 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Audio;
 using Audio.SoundFX;
 using UnityEngine;
 
-public class PropObject : MonoBehaviour {
+public class PropObject : MonoBehaviour
+{
+    private const string PLAYER_TAG = "Player";
 
-    private const string CONST_TAG_PLAYER = "Player";
+    public static event Action<string, int, Vector3> OnPointsScored;
 
     [SerializeField] private PropObjectSO propObjectSO;
 
-    [Header("Related Prop Objects")]
-    [SerializeField] private PropObject parentPropObject;
+    [Header("Related Prop Objects")] [SerializeField]
+    private PropObject parentPropObject;
+
     [SerializeField] private List<PropObject> childPropObjectList;
 
-    [Header("Destructable Prop Objects")]
-    [SerializeField] private float shatterForceThreshold;
+    [Header("Destructable Prop Objects")] [SerializeField]
+    private float shatterForceThreshold;
+
     [SerializeField] private GameObject swapOutMeshPrefab;
     [SerializeField] private Vector3 swapOutTransformOffset;
 
@@ -23,35 +28,43 @@ public class PropObject : MonoBehaviour {
 
     private Rigidbody rigidbody;
 
-    private void Awake() {
+    private void Awake()
+    {
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    public PropObjectSO GetPropObjectSO() {
+    public PropObjectSO GetPropObjectSO()
+    {
         return propObjectSO;
     }
 
-    public Rigidbody GetRigidbody() {
+    public Rigidbody GetRigidbody()
+    {
         return rigidbody;
     }
 
-    public PropObject GetParentPropObject() {
+    public PropObject GetParentPropObject()
+    {
         return parentPropObject;
     }
 
-    public List<PropObject> GetChildPropObjectList() {
+    public List<PropObject> GetChildPropObjectList()
+    {
         return childPropObjectList;
     }
 
-    public GameObject GetSwapOutMeshPrefab() {
+    public GameObject GetSwapOutMeshPrefab()
+    {
         return swapOutMeshPrefab;
     }
 
-    public float GetShatterForceThreshold() {
+    public float GetShatterForceThreshold()
+    {
         return shatterForceThreshold;
     }
 
-    private void OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision)
+    {
 
         // check if a prop object is colliding with another prop object
         // also make sure they are not both kinematic
@@ -59,23 +72,25 @@ public class PropObject : MonoBehaviour {
         {
             var other = collision.gameObject.GetComponent<Rigidbody>();
             var mine = gameObject.GetComponent<Rigidbody>();
-            
-            
-            if(other.isKinematic || mine.isKinematic) 
+
+
+            if(other.isKinematic || mine.isKinematic)
             {
                 SetPropObjectAsKinematic(this, collision.impulse);
             }
         }*/
 
         // check with player collision
-        if (!initialCollision) {
-            if(collision.gameObject.tag == CONST_TAG_PLAYER) {
+        if (!initialCollision)
+        {
+            if (collision.gameObject.tag == PLAYER_TAG)
+            {
 
                 initialCollision = true;
 
                 string pointsDescription = propObjectSO.objectName + "!";
 
-                GameScoreManager.Instance.ScorePoints(pointsDescription, propObjectSO.collideScore, transform.position);
+                OnPointsScored?.Invoke(pointsDescription, propObjectSO.collideScore, transform.position);
                 SFX.IMPACT.PlaySoundAtLocation(transform.position);
 
 
@@ -83,53 +98,66 @@ public class PropObject : MonoBehaviour {
                 //Debug.Log($"Player initial collision with [{gameObject.name}]. Score points [{propObjectSO.collideScore}]");
                 SetPropObjectAsKinematic(this, collision.impulse);
             }
-        } else {
+        }
+        else
+        {
 
             // check for shatter only
             //if (collision.gameObject.tag == CONST_TAG_PLAYER) {
-                // check for shatter force
-                if (this.GetSwapOutMeshPrefab() != null) {
-                    if (collision.impulse.magnitude > this.GetShatterForceThreshold()) {
-                        SwapShatteredMesh(collision.impulse);
-                    }
+            // check for shatter force
+            if (this.GetSwapOutMeshPrefab() != null)
+            {
+                if (collision.impulse.magnitude > this.GetShatterForceThreshold())
+                {
+                    SwapShatteredMesh(collision.impulse);
                 }
+            }
             //}
         }
     }
 
-    public void SetPropObjectAsKinematic(PropObject kinematicPropObject, Vector3 impulse) {
+    public void SetPropObjectAsKinematic(PropObject kinematicPropObject, Vector3 impulse)
+    {
 
-        if(kinematicPropObject.GetParentPropObject() != null) {
+        if (kinematicPropObject.GetParentPropObject() != null)
+        {
 
             PropObject parentPropObject = kinematicPropObject.GetParentPropObject();
             parentPropObject.SetPropObjectAsKinematic(parentPropObject, impulse);
 
-        } else {
+        }
+        else
+        {
 
             Rigidbody kinematicRigidbody = kinematicPropObject.GetRigidbody();
 
-            if (kinematicRigidbody.isKinematic) {
+            if (kinematicRigidbody.isKinematic)
+            {
                 kinematicRigidbody.isKinematic = false;
                 //rigidbody.WakeUp();
                 //rigidbody.AddForce(impulse, ForceMode.Impulse);
             }
 
-            foreach (PropObject child in kinematicPropObject.GetChildPropObjectList()) {
+            foreach (PropObject child in kinematicPropObject.GetChildPropObjectList())
+            {
                 child.GetRigidbody().isKinematic = false;
                 //child.GetRigidbody().WakeUp();
             }
         }
 
         // check for shatter force
-        if (kinematicPropObject.GetSwapOutMeshPrefab() != null) {
-            if (impulse.magnitude > kinematicPropObject.GetShatterForceThreshold()) {
+        if (kinematicPropObject.GetSwapOutMeshPrefab() != null)
+        {
+            if (impulse.magnitude > kinematicPropObject.GetShatterForceThreshold())
+            {
                 SwapShatteredMesh(impulse);
             }
         }
 
     }
 
-    private void SwapShatteredMesh(Vector3 impulse) {
+    private void SwapShatteredMesh(Vector3 impulse)
+    {
 
         Transform parentTransform = transform.parent;
 
@@ -137,8 +165,9 @@ public class PropObject : MonoBehaviour {
             transform.position + swapOutTransformOffset, transform.rotation, parentTransform);
 
         // remove children in shard container
-        foreach (Transform child in newMeshGameObject.transform) {
-            
+        foreach (Transform child in newMeshGameObject.transform)
+        {
+
             child.parent = parentTransform;
 
             //PropObject childPropObject = child.GetComponent<PropObject>();

@@ -13,8 +13,7 @@ public class WASDRagdollController : MonoBehaviour
     [SerializeField]
     private Rigidbody root;
 
-    [SerializeField]
-    private Transform cameraTransform;
+    private Transform _cameraTransform;
     [SerializeField, Min(0)]
     private float speed;
 
@@ -45,6 +44,7 @@ public class WASDRagdollController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        _cameraTransform = Camera.main.transform;
         CheckGroundHeight(out _groundHeightOffset);
         _groundHeightOffset *= 0.95f;
     }
@@ -67,7 +67,7 @@ public class WASDRagdollController : MonoBehaviour
         
         puppeteerAnimator.SetFloat(SpeedAnimator, speed);
 
-        var dir = GetCameraMoveDirection(cameraTransform, _inputDirections);
+        var dir = GetCameraMoveDirection(_cameraTransform, _inputDirections);
 
         var rotation = Quaternion.LookRotation(dir);
 
