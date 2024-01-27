@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using GameInput;
 using UnityEngine;
 
 public class MouseRagdollController : MonoBehaviour
@@ -12,11 +10,6 @@ public class MouseRagdollController : MonoBehaviour
 
     [SerializeField]
     private Rigidbody root;
-
-    [SerializeField]
-    private Transform cameraTransform;
-    [SerializeField, Min(0)]
-    private float speed;
 
     private Vector2 _inputDirections;
     private bool _hasInput;
@@ -32,20 +25,14 @@ public class MouseRagdollController : MonoBehaviour
     [SerializeField]
     private float mult = 10f;
 
+    private bool _leftMousePressed;
+
     //============================================================================================================//
 
     private void OnEnable()
     {
         PuppetRagdoll.OnRagdollActive += OnRagdollActive;
-    }
-
-
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        //CheckGroundHeight(out _groundHeightOffset);
-        //_groundHeightOffset *= 0.95f;
+        GameInputDelegator.OnLeftClick += OnLeftClick;
     }
 
     // Update is called once per frame
@@ -55,7 +42,7 @@ public class MouseRagdollController : MonoBehaviour
             return;
 
 
-        if (Input.GetKey(KeyCode.Mouse0) == false)
+        if (_leftMousePressed == false)
         {
             puppeteerAnimator.SetFloat(SpeedAnimator, 0f);
 
@@ -77,40 +64,15 @@ public class MouseRagdollController : MonoBehaviour
         
         
         puppeteerAnimator.SetFloat(SpeedAnimator, speed);
-
-
-        /*var dir = GetCameraMoveDirection(cameraTransform, _inputDirections);
-
-        var rotation = Quaternion.LookRotation(dir);
-
-        root.transform.rotation = rotation;
-
-        var newPosition = root.transform.position;
-        newPosition.y = _heightOffGround;
-        newPosition += dir * (speed * Time.deltaTime);
-
-        root.transform.position = newPosition;*/
     }
     
     private void OnDisable()
     {
         PuppetRagdoll.OnRagdollActive -= OnRagdollActive;
+        GameInputDelegator.OnLeftClick -= OnLeftClick;
     }
 
     //============================================================================================================//
-
-    private void CheckGroundHeight(out float height)
-    {
-        height = 0f;
-        
-        var origin = root.transform.position;
-        origin.y = 10f;
-
-        if (Physics.Raycast(origin, Vector3.down, out var raycastHit, 20f, groundMask.value) == false)
-            return;
-
-        height = raycastHit.point.y + _groundHeightOffset;
-    }
     
     private void OnRagdollActive(bool ragdollActive)
     {
@@ -119,37 +81,9 @@ public class MouseRagdollController : MonoBehaviour
 
     //============================================================================================================//
 
-    private static void UpdateInputDirection(ref Vector2 direction)
+    private void OnLeftClick(bool pressed)
     {
-        direction = Vector2.zero;
-        
-        if (Input.GetKey(KeyCode.W))
-        {
-            direction.y = 1;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            direction.y = -1;
-        }
-        
-        if (Input.GetKey(KeyCode.A))
-        {
-            direction.x = -1;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            direction.x = 1;
-        }
-    }
-
-    private static Vector3 GetCameraMoveDirection(in Transform cameraTransform, in Vector2 inputDirection)
-    {
-        var cameraFwd = Vector3.ProjectOnPlane(cameraTransform.forward, Vector3.up).normalized;
-        var cameraRight = Vector3.ProjectOnPlane(cameraTransform.right, Vector3.up).normalized;
-        
-        var finalForce = (cameraFwd * inputDirection.y) + (cameraRight * inputDirection.x);
-
-        return finalForce;
+        _leftMousePressed = pressed;
     }
     
     //============================================================================================================//
