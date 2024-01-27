@@ -7,7 +7,7 @@ namespace Utilities
 {
     public class ScreenFader : HiddenSingleton<ScreenFader>
     {
-        private static readonly Color32 black = new Color32(0, 0, 0, 1);
+        private static readonly Color32 black = new Color32(0, 0, 0, 255);
         private static readonly Color32 clear = new Color32(0, 0, 0, 0);
         
         [SerializeField]
@@ -56,7 +56,7 @@ namespace Utilities
         {
             blackImage.color = startColor;
 
-            for (float t = 0; t < time; t+= Time.deltaTime)
+            for (float t = 0; t < time; t += Time.deltaTime)
             {
                 blackImage.color = Color32.Lerp(startColor, endColor, t / time);
                 yield return null;

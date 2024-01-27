@@ -63,18 +63,23 @@ namespace Gameplay
                 //TODO This text could be part of the level Controller data
                 GameplayUI.DisplayOptionWindow("HA HA HA!", "Next Level", () =>
                 {
+                    ScreenFader.FadeOut(1f, () =>
+                    {
+                        LevelLoader.LoadNextLevel();
+                        StartCoroutine(LoadLevelCoroutine());
+                    });
 
-                    LevelLoader.LoadNextLevel();
-                    StartCoroutine(LoadLevelCoroutine());
                 });
                 return;
             }
 
             GameplayUI.DisplayOptionWindow("You think this is FUNNY?", "Try Again", () =>
             {
-
-                LevelLoader.Restart();
-                StartCoroutine(LoadLevelCoroutine());
+                ScreenFader.FadeOut(1f, () =>
+                {
+                    LevelLoader.Restart();
+                    StartCoroutine(LoadLevelCoroutine());
+                });
             });
         }
         
@@ -175,11 +180,10 @@ namespace Gameplay
             
             //TODO Play some cinematic
             //TODO Fade to black
+            
+            DisplayGameOptions(wonLevel);
 
-            ScreenFader.FadeOut(1f, () =>
-            {
-                DisplayGameOptions(wonLevel);
-            });
+            
         }
 
         private static IEnumerator WaitCoroutine(float seconds, Action onCompleted)
