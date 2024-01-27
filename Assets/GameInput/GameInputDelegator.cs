@@ -8,6 +8,7 @@ namespace GameInput
     {
         public static event Action<Vector2> OnMovementChanged;
         public static event Action OnGrabItemPressed;
+    
         public static event Action<bool> OnLeftClick;
         public static event Action<bool> OnRightClick;
 
@@ -39,7 +40,12 @@ namespace GameInput
 
         public void OnHorizontalMovement(InputAction.CallbackContext context)
         {
-            if (LockInputs) return;
+            if (LockInputs)
+            {
+                _currentInput = Vector2.zero;
+                OnMovementChanged?.Invoke(_currentInput);
+                return;
+            }
             
             var x = context.ReadValue<float>();
 
@@ -50,7 +56,12 @@ namespace GameInput
 
         public void OnVerticalMovement(InputAction.CallbackContext context)
         {
-            if (LockInputs) return;
+            if (LockInputs)
+            {
+                _currentInput = Vector2.zero;
+                OnMovementChanged?.Invoke(_currentInput);
+                return;
+            }
             
             var y = context.ReadValue<float>();
 
@@ -70,7 +81,11 @@ namespace GameInput
 
         public void OnMouseLeftClick(InputAction.CallbackContext context)
         {
-            if (LockInputs) return;
+            if (LockInputs)
+            {
+                OnLeftClick?.Invoke(false);
+                return;
+            }
             
             var pressed = context.ReadValueAsButton();
             OnLeftClick?.Invoke(pressed);
@@ -78,7 +93,11 @@ namespace GameInput
 
         public void OnMouseRightClick(InputAction.CallbackContext context)
         {
-            if (LockInputs) return;
+            if (LockInputs)
+            {
+                OnRightClick?.Invoke(false);
+                return;
+            }
             
             var pressed = context.ReadValueAsButton();
             OnRightClick?.Invoke(pressed);

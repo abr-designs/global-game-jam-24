@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using UnityEngine;
 using Utilities;
@@ -27,11 +28,21 @@ namespace Cameras
         private CinemachineVirtualCamera[] virtualCameras;
 
         //============================================================================================================//
-        
+
+        private void OnEnable()
+        {
+            CameraTarget.OnNewCameraTarget += SetDefaultCameraTarget;
+        }
+
         // Start is called before the first frame update
         private void Start()
         {
             SetCamera(CINEMATIC_CAMERA.DEFAULT);
+        }
+        
+        private void OnDisable()
+        {
+            CameraTarget.OnNewCameraTarget -= SetDefaultCameraTarget;
         }
 
         //============================================================================================================//
@@ -61,6 +72,12 @@ namespace Cameras
 
             SetCamera(cinematicCamera);
             brain.enabled = true;
+        }
+
+        private void SetDefaultCameraTarget(Transform targetTransform)
+        {
+            var defaultCamera = virtualCameras[(int)CINEMATIC_CAMERA.DEFAULT];
+            defaultCamera.Follow = targetTransform;
         }
         
         //============================================================================================================//

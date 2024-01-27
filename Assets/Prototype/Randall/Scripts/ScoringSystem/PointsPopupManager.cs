@@ -1,36 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PointsPopupManager : MonoBehaviour {
+namespace Prototype.Randall.Scripts.ScoringSystem
+{
+    public class PointsPopupManager : MonoBehaviour
+    {
 
-    [SerializeField] private GameObject pointsPopupPrefab;
+        [SerializeField] private GameObject pointsPopupPrefab;
 
-    [SerializeField] private bool clearExistingPopups = true;
+        [SerializeField] private bool clearExistingPopups = true;
 
-    private void Start() {
-
-        GameScoreManager.Instance.OnPointsScored += GameScoreManager_OnPointsScored;
-
-    }
-
-    private void GameScoreManager_OnPointsScored(object sender, ScorePointsArgs args) {
-
-        if(clearExistingPopups) {
-            foreach(Transform child in transform) {
-                Destroy(child.gameObject);
-            }
+        private void OnEnable()
+        {
+            GameScoreManager.OnPointsScored += GameScoreManager_OnPointsScored;
         }
 
-        GeneratePopup(args);
+        private void OnDisable()
+        {
 
-    }
+            GameScoreManager.OnPointsScored -= GameScoreManager_OnPointsScored;
+        }
 
-    private void GeneratePopup(ScorePointsArgs args) {
-        
-        GameObject newPopup = Instantiate(pointsPopupPrefab, transform);
-        PointsPopup pointsPopup = newPopup.GetComponent<PointsPopup>();
+        private void GameScoreManager_OnPointsScored(object sender, ScorePointsArgs args)
+        {
 
-        pointsPopup.InitializeVisual(args);
+            if (clearExistingPopups)
+            {
+                foreach (Transform child in transform)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+
+            GeneratePopup(args);
+
+        }
+
+        private void GeneratePopup(ScorePointsArgs args)
+        {
+
+            GameObject newPopup = Instantiate(pointsPopupPrefab, transform);
+            PointsPopup pointsPopup = newPopup.GetComponent<PointsPopup>();
+
+            pointsPopup.InitializeVisual(args);
+        }
     }
 }

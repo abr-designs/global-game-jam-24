@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 using Utilities;
@@ -54,6 +55,10 @@ namespace Levels
             Destroy(_currentLevelGameObject);
         }
         //============================================================================================================//
+        public static bool OnLastLevel()
+        {
+            return Instance._currentLevelIndex == Instance.levels.Length - 1;
+        }
 
         public static bool LoadNextLevel() => Instance.TryLoadNextLevel();
         

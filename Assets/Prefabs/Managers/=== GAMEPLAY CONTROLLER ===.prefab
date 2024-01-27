@@ -58,6 +58,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53068db4ca614f9b80d1319b7c46b670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPosition: {x: 0.31046653, y: 0.033, z: -3.46}
+  playerControllerPrefab: {fileID: 7561523383477702095, guid: d0f8076b03b830a40a44f72d815fb6b7,
+    type: 3}
 --- !u!114 &7402073662007839701
 MonoBehaviour:
   m_ObjectHideFlags: 0
