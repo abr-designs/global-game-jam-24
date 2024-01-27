@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VisualFX;
 
 public class ExplosionRagdollController : MonoBehaviour
 {
@@ -83,6 +84,9 @@ public class ExplosionRagdollController : MonoBehaviour
         hitPoint = raycastHit.point;
         sphereTransform.position = hitPoint;
         Color color1 = Color.cyan;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+            VFX.EXPLOSION.PlayAtLocation(hitPoint);
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
