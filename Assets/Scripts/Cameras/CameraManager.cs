@@ -1,23 +1,79 @@
 using Cinemachine;
 using UnityEngine;
+using Utilities;
 
 namespace Cameras
 {
-    public class CameraManager : MonoBehaviour
+    public enum CINEMATIC_CAMERA : int
     {
+        DEFAULT, //Go to Default
+        THRONE,
+        
+    }
+    public class CameraManager : HiddenSingleton<CameraManager>
+    {
+        public static float CameraBlendTime => Instance.cameraBlendTime;
+        [SerializeField, Min(0)]
+        private float cameraBlendTime;
+        
         [SerializeField]
-        private UnityEngine.Camera camera;
+        private Camera camera;
         [SerializeField]
-        private CinemachineVirtualCamera defaultVirtualCamera;
+        private CinemachineBrain brain;
         [SerializeField]
         private CinemachineSmoothPath dollyTrack;
+
         [SerializeField]
-        private CinemachineVirtualCamera throneVirtualCamera;
-    
-        // Start is called before the first frame update
-        void Start()
-        {
+        private CinemachineVirtualCamera[] virtualCameras;
+
+        //============================================================================================================//
         
+        // Start is called before the first frame update
+        private void Start()
+        {
+            SetCamera(CINEMATIC_CAMERA.DEFAULT);
+        }
+
+        //============================================================================================================//
+        
+        private void SetCamera(CINEMATIC_CAMERA cinematicCamera)
+        {
+            var index = (int)cinematicCamera;
+            for (var i = 0; i < virtualCameras.Length; i++)
+            {
+                virtualCameras[i].enabled = index == i;
+                virtualCameras[i].Priority = index == i ? 1000 : -1000;
+            }
+        }
+
+        private void ForceSetCamera(CINEMATIC_CAMERA cinematicCamera)
+        {
+            brain.enabled = false;
+            var index = (int)cinematicCamera;
+            for (var i = 0; i < virtualCameras.Length; i++)
+            {
+                virtualCameras[i].enabled = false;
+            }
+            var newCameraTransform = virtualCameras[index].transform;
+
+            camera.transform.position = newCameraTransform.position;
+            camera.transform.rotation = newCameraTransform.rotation;
+
+            SetCamera(cinematicCamera);
+            brain.enabled = true;
+        }
+        
+        //============================================================================================================//
+
+        public static void SetCinematicCamera(CINEMATIC_CAMERA cinematicCamera, bool forceSet = false)
+        {
+            if (forceSet)
+            {
+                Instance.ForceSetCamera(cinematicCamera);
+                return;
+            }
+            
+            Instance.SetCamera(cinematicCamera);
         }
 
     }
