@@ -4065,6 +4065,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 346392014160604493}
+  - component: {fileID: 657294084529715608}
   - component: {fileID: 7219151333051659937}
   - component: {fileID: 276533472704057155}
   - component: {fileID: 7579551626477434993}
@@ -4093,6 +4094,18 @@ Transform:
   - {fileID: 379534230623939485}
   m_Father: {fileID: 4864286248719982655}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &657294084529715608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7949963624847742801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbf5a760b7ff6c47b4c659973a0b5ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &7219151333051659937
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4482,7 +4495,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puppeteerAnimator: {fileID: 5855541595701494714}
   root: {fileID: 603830095010594062}
-  cameraTransform: {fileID: 0}
   speed: 5
   groundMask:
     serializedVersion: 2
