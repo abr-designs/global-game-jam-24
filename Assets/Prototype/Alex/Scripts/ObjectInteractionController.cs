@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
+using Gameplay;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class ObjectInteractionController : MonoBehaviour
 {
@@ -14,8 +16,6 @@ public class ObjectInteractionController : MonoBehaviour
 
     [SerializeField]
     public Transform playerRootTransform;
-
-
     
     [SerializeField, Min(0)]
     private float interactionRefreshTime = 0.05f;
@@ -27,7 +27,14 @@ public class ObjectInteractionController : MonoBehaviour
     private Collider[] _colliders;
     [SerializeField]
     private int _lastCollisionCount;
-    
+
+    private void OnEnable()
+    {
+        GameplayController.OnLevelReady += OnLevelReady;
+    }
+
+
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -51,6 +58,25 @@ public class ObjectInteractionController : MonoBehaviour
         _lastCollisionCount = Physics.OverlapSphereNonAlloc(playerRootTransform.position, interactionRadius, _colliders, layerMask.value);
 
         TryFindNewReachableInRange();
+    }
+    
+    private void OnDisable()
+    {
+        GameplayController.OnLevelReady -= OnLevelReady;
+    }
+    
+    //============================================================================================================//
+    
+    private void OnLevelReady()
+    {
+        var player = FindObjectOfType<WASDRagdollController>();
+        Assert.IsNotNull(player, "Cannot find Player!!");
+        
+        player.transform.FindObjectWithName("KinematicRoot", out var root);
+        
+        Assert.IsNotNull(root, $"Cannot find KinematicRoot on {player.gameObject.name}");
+
+        playerRootTransform = root;
     }
     
     private void TryFindNewReachableInRange()
