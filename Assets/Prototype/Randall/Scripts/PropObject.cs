@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
+using Audio.SoundFX;
 using UnityEngine;
 
 public class PropObject : MonoBehaviour {
@@ -74,6 +76,7 @@ public class PropObject : MonoBehaviour {
                 string pointsDescription = propObjectSO.objectName + "!";
 
                 GameScoreManager.Instance.ScorePoints(pointsDescription, propObjectSO.collideScore, transform.position);
+                SFX.IMPACT.PlaySoundAtLocation(transform.position);
 
 
                 //Debug.Log($"Impulse: {collision.impulse}, Magnitude: {collision.impulse.magnitude}");
