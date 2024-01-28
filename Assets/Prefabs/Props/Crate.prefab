@@ -51,9 +51,8 @@ MonoBehaviour:
   propObjectSO: {fileID: 11400000, guid: f178a50c96851e74a8765824b45bfa04, type: 2}
   parentPropObject: {fileID: 0}
   childPropObjects: []
-  shatterForceThreshold: 5
-  swapOutMeshPrefab: {fileID: 5630029350393624040, guid: 61788da47bdc8d9488775970635c36f6,
-    type: 3}
+  shatterForceThreshold: 0
+  swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &6924403365595485116
 MeshFilter:

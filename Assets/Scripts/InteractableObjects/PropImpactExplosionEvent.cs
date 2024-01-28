@@ -61,8 +61,7 @@ namespace InteractableObjects
             }
             
             //TODO Need to add the gibs
-            vfxOnExplosion.PlayAtLocation(transform.position, 1f);
-            VFX.RED_CLOUD.PlayAtLocation(transform.position, explosionRadius * 1.5f);
+            vfxOnExplosion.PlayAtLocation(transform.position, explosionRadius * 1.5f);
             sfxOnExplosion.PlaySoundAtLocation(transform.position);
             Destroy(gameObject);
         }

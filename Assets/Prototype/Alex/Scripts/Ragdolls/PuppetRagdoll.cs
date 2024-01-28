@@ -70,7 +70,7 @@ public class PuppetRagdoll : MonoBehaviour
 
     [SerializeField]
     private ConfigurableJoint hipsJoint;
-    public void EnableRagdoll(bool isActive)
+    private void EnableRagdoll(bool isActive)
     {
         const float targetSpring = 1000f;
         const float dampening = 100f;

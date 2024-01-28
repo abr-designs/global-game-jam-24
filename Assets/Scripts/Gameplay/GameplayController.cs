@@ -3,7 +3,6 @@ using System.Collections;
 using Audio.Music;
 using Cameras;
 using Characters;
-using Cinematics;
 using GameInput;
 using Levels;
 using Prototype.Randall.Scripts.ScoringSystem;
@@ -142,16 +141,23 @@ namespace Gameplay
             }
             _kingCharacter.SetState(KingCharacter.STATE.DEFAULT);
             OnLevelReady?.Invoke();
-            CameraManager.SetDefaultCameraTargets(FindObjectOfType<CameraTarget>().transform);
             GameInputDelegator.LockInputs = true;
             var gameplaySeconds = LevelLoader.CurrentLevelController.levelTime;
-
+            
+            CameraManager.SetCinematicCamera(CINEMATIC_CAMERA.THRONE, true);
             
             //Setup Timer
             OnTimerCountdownUpdate?.Invoke(1f, gameplaySeconds);
             
-            ScreenFader.FadeIn(1f, null);
-            yield return CinematicController.PlayCinematic("IntroCinematic");
+            yield return ScreenFader.FadeIn(1f, null);
+
+            yield return new WaitForSeconds(1f);
+            
+            //TODO DO some intro cinematic
+            
+            CameraManager.SetCinematicCamera(CINEMATIC_CAMERA.DEFAULT);
+
+            yield return new WaitForSeconds(CameraManager.CameraBlendTime);
             
             for (int i = 3; i > 0; i--)
             {
@@ -183,18 +189,18 @@ namespace Gameplay
             GameInputDelegator.LockInputs = true;
             yield return new WaitForSeconds(1f);
             
+            CameraManager.SetCinematicCamera(CINEMATIC_CAMERA.THRONE);
+            
             OnDisplayText?.Invoke(string.Empty);
+            yield return new WaitForSeconds(CameraManager.CameraBlendTime);
             
             //TODO Review Score
             //TODO Win or Lose
             var wonLevel = DidWin();
             
-            if(wonLevel)
-                yield return CinematicController.PlayCinematic("VictoryCinematic");
-            else
-            {
-                yield return CinematicController.PlayCinematic("LossCinematic");
-            }
+            yield return new WaitForSeconds(1f);
+            
+            _kingCharacter.SetState(wonLevel ? KingCharacter.STATE.HAPPY : KingCharacter.STATE.ANGRY);
             
             yield return new WaitForSeconds(2f);
             

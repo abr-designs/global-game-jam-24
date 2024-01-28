@@ -139,7 +139,7 @@ MonoBehaviour:
   explosionTimer: 2
   explosionForce: 100
   explosionRadius: 3
-  vfxOnExplosion: 8
+  vfxOnExplosion: 7
   sfxOnExplosion: 3
   layerMask:
     serializedVersion: 2

@@ -8,6 +8,7 @@ namespace Cameras
     public enum CINEMATIC_CAMERA : int
     {
         DEFAULT, //Go to Default
+        THRONE,
         
     }
     public class CameraManager : HiddenSingleton<CameraManager>
@@ -28,6 +29,21 @@ namespace Cameras
 
         //============================================================================================================//
 
+        private void OnEnable()
+        {
+            CameraTarget.OnNewCameraTarget += SetDefaultCameraTarget;
+        }
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+            SetCamera(CINEMATIC_CAMERA.DEFAULT);
+        }
+        
+        private void OnDisable()
+        {
+            CameraTarget.OnNewCameraTarget -= SetDefaultCameraTarget;
+        }
 
         //============================================================================================================//
         
@@ -41,21 +57,43 @@ namespace Cameras
             }
         }
 
+        private void ForceSetCamera(CINEMATIC_CAMERA cinematicCamera)
+        {
+            brain.enabled = false;
+            var index = (int)cinematicCamera;
+            for (var i = 0; i < virtualCameras.Length; i++)
+            {
+                virtualCameras[i].enabled = false;
+            }
+            var newCameraTransform = virtualCameras[index].transform;
+
+            camera.transform.position = newCameraTransform.position;
+            camera.transform.rotation = newCameraTransform.rotation;
+
+            SetCamera(cinematicCamera);
+            brain.enabled = true;
+        }
+
         private void SetDefaultCameraTarget(Transform targetTransform)
         {
             var defaultCamera = virtualCameras[(int)CINEMATIC_CAMERA.DEFAULT];
             defaultCamera.Follow = targetTransform;
             defaultCamera.LookAt = targetTransform;
             
-            if(targetTransform != null)
-                Debug.Log($"Set Camera target to: {targetTransform.gameObject.name}", targetTransform.gameObject);
+            Debug.Log($"Set Camera target to: {targetTransform.gameObject.name}", targetTransform.gameObject);
         }
         
         //============================================================================================================//
 
-        public static void SetDefaultCameraTargets(Transform target)
+        public static void SetCinematicCamera(CINEMATIC_CAMERA cinematicCamera, bool forceSet = false)
         {
-            Instance.SetDefaultCameraTarget(target);
+            if (forceSet)
+            {
+                Instance.ForceSetCamera(cinematicCamera);
+                return;
+            }
+            
+            Instance.SetCamera(cinematicCamera);
         }
 
     }
