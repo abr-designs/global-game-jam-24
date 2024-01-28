@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propObjectSO: {fileID: 11400000, guid: 075e2e173ce107044b51a41b57db1b6a, type: 2}
   parentPropObject: {fileID: 0}
-  childPropObjectList: []
+  childPropObjects: []
   shatterForceThreshold: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}

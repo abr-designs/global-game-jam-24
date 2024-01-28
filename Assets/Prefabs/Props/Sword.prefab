@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propObjectSO: {fileID: 11400000, guid: 4cfe60b3ef0ef644189f37022f275f67, type: 2}
   parentPropObject: {fileID: 0}
-  childPropObjectList: []
+  childPropObjects: []
   shatterForceThreshold: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
@@ -68,6 +68,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPivotOffset: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!33 &8752643617022452758
 MeshFilter:
   m_ObjectHideFlags: 0
