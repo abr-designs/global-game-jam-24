@@ -15,7 +15,7 @@ namespace Prototype.Alex.Scripts
 
         //Unity Functions
         //============================================================================================================//
-    
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -24,7 +24,7 @@ namespace Prototype.Alex.Scripts
         }
 
         //============================================================================================================//
-    
+
         public void Pickup(Vector3 worldPosition, Rigidbody attachTo)
         {
             _rigidbody.mass = 0;
@@ -45,7 +45,7 @@ namespace Prototype.Alex.Scripts
             _rigidbody.mass = _initialMass;
             _joint.connectedBody = null;
             Destroy(_joint);
-        
+
             var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(screenPointToRay, out var raycastHit, 100, groundMask.value) == false)
@@ -54,7 +54,7 @@ namespace Prototype.Alex.Scripts
             var hitPoint = raycastHit.point;
             //dest - origin
             var launchDirection = (hitPoint - (throwDirection + Vector3.up)).normalized;
-        
+
             _rigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
             Debug.DrawLine(throwDirection, hitPoint, Color.cyan, 5.0f, true);
