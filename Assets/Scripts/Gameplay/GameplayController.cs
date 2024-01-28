@@ -193,7 +193,7 @@ namespace Gameplay
                 yield return CinematicController.PlayCinematic("VictoryCinematic");
             else
             {
-                
+                yield return CinematicController.PlayCinematic("LossCinematic");
             }
             
             yield return new WaitForSeconds(2f);

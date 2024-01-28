@@ -44,4 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc5f6bc4fa3f4e4888c922aca60ecc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinematicPrefabs: []
+  cinematicPrefabs:
+  - {fileID: 7348642710258666478, guid: 7a97ed9f189a75e4a8a1e8a413016b83, type: 3}
+  - {fileID: 8415215562784870750, guid: ebc9ab79ae77fa345b5d50f421202644, type: 3}
+  - {fileID: 6724122610972995806, guid: 9f100b35340b3b24482e6f36ac142837, type: 3}
