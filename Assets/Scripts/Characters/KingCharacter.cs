@@ -14,6 +14,18 @@ namespace Characters
             ANGRY
         }
 
+        private Animator Animator
+        {
+            get
+            {
+                if (_animator)
+                    return _animator;
+
+                _animator = GetComponent<Animator>();
+                return _animator;
+            }
+            
+        }
         private Animator _animator;
 
         [SerializeField] private STATE currentState;
@@ -27,7 +39,6 @@ namespace Characters
         // Start is called before the first frame update
         private void Start()
         {
-            _animator = GetComponent<Animator>();
             SetState(STATE.DEFAULT);
         }
 
@@ -40,10 +51,10 @@ namespace Characters
             switch (state)
             {
                 case STATE.DEFAULT:
-                    _animator.Play("Idle");
+                    Animator.Play("Idle");
                     break;
                 case STATE.HAPPY:
-                    _animator.Play("Laughing");
+                    Animator.Play("Laughing");
 
                     if (_laughingVFX == null)
                         _laughingVFX = VFX.LAUGH_BUBBLE.PlayAtLocation(vfxSpawnLocation.transform.position, keepAlive: true);
@@ -51,7 +62,7 @@ namespace Characters
                     _laughingVFX.SetActive(true);
                     break;
                 case STATE.ANGRY:
-                    _animator.Play("Angry");
+                    Animator.Play("Angry");
                     
                     
                     if (_angryVFX == null)
