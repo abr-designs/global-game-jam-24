@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53068db4ca614f9b80d1319b7c46b670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0.31046653, y: 0.033, z: -3.46}
+  startPosition: {x: 0.3104665, y: 0.033, z: -3.46}
   playerControllerPrefab: {fileID: 8099531365694269092, guid: 9df5eda9a860ea944b203d2d488eda80,
     type: 3}
 --- !u!114 &7402073662007839701
@@ -81,3 +81,4 @@ MonoBehaviour:
   - {fileID: 2133432920484984409, guid: 96e8eda1607fd674ea02732e39edafcf, type: 3}
   - {fileID: 1464128561189379914, guid: a5a606263bd5ed9419640a8fbfa52fa3, type: 3}
   - {fileID: 1008745261951595068, guid: 0317fcd7a8bbbe845a7cd6098bb21777, type: 3}
+  - {fileID: 574695366518036127, guid: 50ea8fbb503b448409e881bf887105d8, type: 3}
