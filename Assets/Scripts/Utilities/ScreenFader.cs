@@ -7,8 +7,8 @@ namespace Utilities
 {
     public class ScreenFader : HiddenSingleton<ScreenFader>
     {
-        private static readonly Color32 black = new Color32(0, 0, 0, 255);
-        private static readonly Color32 clear = new Color32(0, 0, 0, 0);
+        private static readonly Color32 Black = new Color32(0, 0, 0, 255);
+        private static readonly Color32 Clear = new Color32(0, 0, 0, 0);
         
         [SerializeField]
         private Image blackImage;
@@ -18,11 +18,11 @@ namespace Utilities
 
         public static void ForceSetColorBlack()
         {
-            Instance.blackImage.color = black;
+            Instance.blackImage.color = Black;
         }
         public static void ForceSetColorClear()
         {
-            Instance.blackImage.color = clear;
+            Instance.blackImage.color = Clear;
         }
 
         public static Coroutine FadeInOut(float time, Action onFaded, Action onComplete)
@@ -32,12 +32,12 @@ namespace Utilities
         
         public static Coroutine FadeOut(float time, Action onComplete)
         {
-            return Instance.StartCoroutine(Instance.FadeCoroutine(clear, black, time, onComplete));
+            return Instance.StartCoroutine(Instance.FadeCoroutine(Clear, Black, time, onComplete));
         }
         
         public static Coroutine FadeIn(float time, Action onComplete)
         {
-            return Instance.StartCoroutine(Instance.FadeCoroutine(black, clear, time, onComplete));
+            return Instance.StartCoroutine(Instance.FadeCoroutine(Black, Clear, time, onComplete));
         }
         
         //Instance Coroutines
@@ -47,9 +47,9 @@ namespace Utilities
         {
             var halfTime = time / 2f;
 
-            yield return StartCoroutine(FadeCoroutine(clear, black, halfTime, onFaded));
+            yield return StartCoroutine(FadeCoroutine(Clear, Black, halfTime, onFaded));
             
-            yield return StartCoroutine(FadeCoroutine(black, clear, halfTime, onComplete));
+            yield return StartCoroutine(FadeCoroutine(Black, Clear, halfTime, onComplete));
         }
 
         private IEnumerator FadeCoroutine(Color32 startColor, Color32 endColor, float time, Action onCompleted)
