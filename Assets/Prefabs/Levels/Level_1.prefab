@@ -80,6 +80,8 @@ Transform:
   - {fileID: 1225046439953527432}
   - {fileID: 3925217743569280724}
   - {fileID: 7209653610004971086}
+  - {fileID: 1419168454935607614}
+  - {fileID: 4050467945234318044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2133432920484984409
@@ -99,7 +101,7 @@ MonoBehaviour:
   avoidObjects: []
   levelTime: 2000
   minScoreToPass: 0
-  maxScorePossibleInLevel: 4270
+  maxScorePossibleInLevel: 4770
 --- !u!1 &1010430672130857345
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +543,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 3346882045390622697, guid: c193d4889de102b48b4867ed5d8caeb7,
     type: 3}
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
+  minSize: 0
+  maxSize: 0
 --- !u!4 &5564130694599111161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5736192393239316880, guid: 6ce3ee58faa0f944890f3473b9848f34,
@@ -2803,6 +2807,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 3346882045390622697, guid: c193d4889de102b48b4867ed5d8caeb7,
     type: 3}
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
+  minSize: 0
+  maxSize: 0
 --- !u!4 &8334035856406504703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5736192393239316880, guid: 6ce3ee58faa0f944890f3473b9848f34,
@@ -3263,6 +3269,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4827552415117184348}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4959085680249331717
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5864141412077214879}
+    m_Modifications:
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.2325435
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.089998245
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.96952486
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899309194269197085, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_Name
+      value: Barrel-Explosive
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8510eb04ae2018f45b9bdad590bb3427, type: 3}
+--- !u!4 &1419168454935607614 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+    type: 3}
+  m_PrefabInstance: {fileID: 4959085680249331717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4980640064074723509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3373,6 +3453,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 3346882045390622697, guid: c193d4889de102b48b4867ed5d8caeb7,
     type: 3}
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
+  minSize: 0
+  maxSize: 0
 --- !u!1001 &5185225539442582144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4521,6 +4603,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 3346882045390622697, guid: c193d4889de102b48b4867ed5d8caeb7,
     type: 3}
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
+  minSize: 0
+  maxSize: 0
 --- !u!1001 &7487110543188560497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4983,6 +5067,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7860672505320524327}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8022590117242788839
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5864141412077214879}
+    m_Modifications:
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.089998245
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899309194269197085, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_Name
+      value: Barrel-Explosive (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8510eb04ae2018f45b9bdad590bb3427, type: 3}
+--- !u!4 &4050467945234318044 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+    type: 3}
+  m_PrefabInstance: {fileID: 8022590117242788839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8176429974728037317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5378,6 +5536,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 3346882045390622697, guid: c193d4889de102b48b4867ed5d8caeb7,
     type: 3}
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
+  minSize: 0
+  maxSize: 0
 --- !u!1001 &8994639226163555472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5567,3 +5727,5 @@ MonoBehaviour:
   decalPrefab: {fileID: 3346882045390622697, guid: c193d4889de102b48b4867ed5d8caeb7,
     type: 3}
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
+  minSize: 0
+  maxSize: 0
