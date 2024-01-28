@@ -182,8 +182,8 @@ MonoBehaviour:
   levelName: 
   levelDescription: 
   avoidObjects: []
-  levelTime: 30
-  minScoreToPass: 100
+  levelTime: 15
+  minScoreToPass: 1000
   maxScorePossibleInLevel: 4900
 --- !u!1001 &23304862601333876
 PrefabInstance:
@@ -251,11 +251,6 @@ PrefabInstance:
     - target: {fileID: 6897369047980420368, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -335,11 +330,6 @@ PrefabInstance:
     - target: {fileID: 6897369047980420368, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -567,11 +557,6 @@ PrefabInstance:
     - target: {fileID: 6897369047980420368, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1119,11 +1104,6 @@ PrefabInstance:
     - target: {fileID: -2485431495669163005, guid: 8510eb04ae2018f45b9bdad590bb3427,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582386555257593388, guid: 8510eb04ae2018f45b9bdad590bb3427,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
@@ -1709,11 +1689,6 @@ PrefabInstance:
       propertyPath: groundMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1791,11 +1766,6 @@ PrefabInstance:
     - target: {fileID: 6897369047980420368, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1877,11 +1847,6 @@ PrefabInstance:
       propertyPath: groundMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1961,11 +1926,6 @@ PrefabInstance:
       propertyPath: groundMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2043,11 +2003,6 @@ PrefabInstance:
     - target: {fileID: 6897369047980420368, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2351,11 +2306,6 @@ PrefabInstance:
       propertyPath: groundMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2423,11 +2373,6 @@ PrefabInstance:
     - target: {fileID: 730756156628970007, guid: b871a9eac22f5ec43b2c4f323b0de38e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5677684771387339524, guid: b871a9eac22f5ec43b2c4f323b0de38e,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7622507451689701961, guid: b871a9eac22f5ec43b2c4f323b0de38e,
@@ -2512,11 +2457,6 @@ PrefabInstance:
     - target: {fileID: 6897369047980420368, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2677,11 +2617,6 @@ PrefabInstance:
       propertyPath: groundMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2833,11 +2768,6 @@ PrefabInstance:
     - target: {fileID: 6897369047980420368, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9065309279014221208, guid: 9ad68d3672935fb4dad6daa1b502ce1a,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3015,11 +2945,6 @@ PrefabInstance:
     - target: {fileID: -2485431495669163005, guid: 8510eb04ae2018f45b9bdad590bb3427,
         type: 3}
       propertyPath: groundMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582386555257593388, guid: 8510eb04ae2018f45b9bdad590bb3427,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
