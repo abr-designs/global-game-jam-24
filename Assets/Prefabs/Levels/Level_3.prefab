@@ -85,8 +85,8 @@ MonoBehaviour:
   levelName: 
   levelDescription: 
   avoidObjects: []
-  levelTime: 1000
-  minScoreToPass: 0
+  levelTime: 15
+  minScoreToPass: 500
   maxScorePossibleInLevel: 910
 --- !u!1 &3902420014414309840
 GameObject:
