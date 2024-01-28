@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.VFX;
 using VisualFX;
 
 namespace InteractableObjects
@@ -22,7 +21,7 @@ namespace InteractableObjects
         private Vector3 localVfxPosition;
         
         private GameObject _flamesVfx;
-        
+
         protected override void TriggerImpactEvent(Collision _)
         {
             if (_triggered)
@@ -33,8 +32,10 @@ namespace InteractableObjects
             //TODO Need to add sparks effect
             _flamesVfx = VFX.FLAMES.PlayAtLocation(transform.TransformPoint(localVfxPosition), keepAlive: true);
 
+            _flamesVfx.transform.SetParent(transform, true);
             _triggered = true;
         }
+        
 
         private IEnumerator ExplosionTimerCoroutine(float waitTime)
         {
@@ -57,7 +58,6 @@ namespace InteractableObjects
             //TODO Need to add the gibs
             VFX.EXPLOSION_BARREL.PlayAtLocation(transform.position, explosionRadius * 1.5f);
             Destroy(gameObject);
-            Destroy(_flamesVfx);
         }
 
 #if UNITY_EDITOR
