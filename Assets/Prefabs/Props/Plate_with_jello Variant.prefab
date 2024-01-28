@@ -100,6 +100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plate_with_jello Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2526914084025975249, guid: 6ce3ee58faa0f944890f3473b9848f34,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5736192393239316880, guid: 6ce3ee58faa0f944890f3473b9848f34,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -162,6 +167,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2563554314032827633}
+    - targetCorrespondingSourceObject: {fileID: 2526914084025975249, guid: 6ce3ee58faa0f944890f3473b9848f34,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8941196598136830658}
   m_SourcePrefab: {fileID: 100100000, guid: 6ce3ee58faa0f944890f3473b9848f34, type: 3}
 --- !u!4 &1100121696891928574 stripped
 Transform:
@@ -206,3 +215,19 @@ MonoBehaviour:
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
   minSize: 2
   maxSize: 4
+--- !u!114 &8941196598136830658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191686434073245631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a0ee2e4cfe55a419d78a6c71cf5038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPivotOffset: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
