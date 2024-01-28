@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
+using VisualFX;
 
 namespace InteractableObjects
 {
@@ -47,6 +49,7 @@ namespace InteractableObjects
             }
             
             //TODO Need to add the gibs
+            VFX.EXPLOSION_BARREL.PlayAtLocation(transform.position, 3f);
             Destroy(gameObject);
         }
 
