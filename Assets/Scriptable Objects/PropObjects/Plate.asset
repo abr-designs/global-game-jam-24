@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc94193ec9d73e49a646fa970a7ee41, type: 3}
   m_Name: Plate
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 03c2c540a6c5f074a8f4e6b263762b25, type: 3}
   objectName: Plate
   collideScore: 10
   kingPenalty: -250

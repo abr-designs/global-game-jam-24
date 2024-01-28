@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc94193ec9d73e49a646fa970a7ee41, type: 3}
   m_Name: Halberd
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1313dff04a37f4e4c8f942188b706c23, type: 3}
   objectName: Halberd
   collideScore: 100
   kingPenalty: -250
