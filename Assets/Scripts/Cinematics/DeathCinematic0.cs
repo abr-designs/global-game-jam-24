@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Cameras;
 using UnityEngine;
@@ -15,6 +14,9 @@ namespace Cinematics
         private Transform playerMoveToPosition;
         [SerializeField]
         private Rigidbody[] crusherObjects;
+
+        [SerializeField]
+        private AnimationCurve fallCurve;
 
         //Unity Functions
         //============================================================================================================//
@@ -53,15 +55,13 @@ namespace Cinematics
             yield return new WaitForSeconds(Random.Range(0.5f, 3f));
 
             selectedCrusher.gameObject.SetActive(true);
-            selectedCrusher.isKinematic = false;
-            
-            while (true)
-            {
-                var dist = (selectedCrusher.transform.position - playerMoveToPosition.position).sqrMagnitude;
 
-                if (dist <= 1f)
-                    break;
-                
+            var startPosition = selectedCrusher.transform.position;
+            var endPosition = playerMoveToPosition.position;
+
+            for (float t = 0; t < 1f; t+=Time.deltaTime)
+            {
+                selectedCrusher.transform.position = Vector3.Lerp(startPosition, endPosition, fallCurve.Evaluate(t / 1f));
                 yield return null;
             }
 
