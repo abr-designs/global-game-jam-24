@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utilities.ReadOnly;
 
 namespace Levels
@@ -40,7 +38,7 @@ namespace Levels
             var sum = 0;
             foreach (var propObject in propObjects)
             {
-                var scriptableObject = propObject.GetPropObjectSO();
+                var scriptableObject = propObject.propObjectSO;
 
                 if(scriptableObject == null)
                     continue;

@@ -16,6 +16,7 @@ public class HandsController : MonoBehaviour
     [SerializeField]
     private KeyCode interactKeyCode;
 
+    [SerializeField]
     private InteractableObject _holdingObject;
 
     //============================================================================================================//
