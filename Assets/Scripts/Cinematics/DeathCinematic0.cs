@@ -33,6 +33,10 @@ namespace Cinematics
 
         protected override IEnumerator PlayCinematicCoroutine()
         {
+            if (_playerKinematicRoot == null)
+                FindObjectOfType<HandsController>().transform
+                    .FindObjectWithName("KinematicRoot", out _playerKinematicRoot);
+            
             var playerPuppet = FindObjectOfType<PuppetRagdoll>();
 
             IsPlaying = true;

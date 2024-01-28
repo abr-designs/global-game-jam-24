@@ -271,4 +271,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   playNextCinematics:
+  - {fileID: 3900044909627680599, guid: 43c4ef5d7052ccb4b9025dde1682793b, type: 3}
   - {fileID: 7813403448670176532, guid: 5c869183484256b4b946ad2cd48d703f, type: 3}
