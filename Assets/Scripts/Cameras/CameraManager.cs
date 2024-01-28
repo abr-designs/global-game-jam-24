@@ -78,6 +78,7 @@ namespace Cameras
         {
             var defaultCamera = virtualCameras[(int)CINEMATIC_CAMERA.DEFAULT];
             defaultCamera.Follow = targetTransform;
+            defaultCamera.LookAt = targetTransform;
             
             Debug.Log($"Set Camera target to: {targetTransform.gameObject.name}", targetTransform.gameObject);
         }
