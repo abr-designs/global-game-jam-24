@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -332,6 +332,32 @@ PrefabInstance:
     - target: {fileID: 441185489101039185, guid: fd479ec477e6aac42bfa825de298c8e4,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441185489101039185, guid: fd479ec477e6aac42bfa825de298c8e4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2806507924311342415, guid: fd479ec477e6aac42bfa825de298c8e4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341317936549439633, guid: fd479ec477e6aac42bfa825de298c8e4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 21bbb84c2e3f04c4b9a3757485a306e9,
+        type: 3}
+    - target: {fileID: 3341317936549439633, guid: fd479ec477e6aac42bfa825de298c8e4,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 1.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 3615469607951211312, guid: fd479ec477e6aac42bfa825de298c8e4,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5794611052072628443, guid: fd479ec477e6aac42bfa825de298c8e4,
