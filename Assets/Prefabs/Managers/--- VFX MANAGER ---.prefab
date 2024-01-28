@@ -55,3 +55,8 @@ MonoBehaviour:
     prefab: {fileID: 4157195840533985236, guid: 0d402a085270e324aac2989139f073b0,
       type: 3}
     lifetime: 4
+  - name: FLAMES
+    type: 6
+    prefab: {fileID: 1075723153202845785, guid: 18f4078084791b040b0115d8d745aaa4,
+      type: 3}
+    lifetime: 4
