@@ -8,6 +8,9 @@
         SPILL = 3,
         LAUGH_BUBBLE = 4,
         ANGRY_BUBBLE = 5,
-        FLAMES = 6
+        FLAMES = 6,
+        EXPLOSION_CRATE = 7,
+        EXPLOSION_BARREL = 8,
+
     }
 }
