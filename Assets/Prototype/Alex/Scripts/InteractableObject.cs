@@ -1,64 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour
+namespace Prototype.Alex.Scripts
 {
-    [SerializeField]
-    private Vector3 localPivotOffset;
-    [SerializeField]
-    private LayerMask groundMask;
-    private FixedJoint _joint;
-    // Start is called before the first frame update
-    private Rigidbody rb;
-    private float InitialMass;
-    private void Start()
+    [RequireComponent(typeof(Rigidbody))]
+    public class InteractableObject : MonoBehaviour
     {
-        rb = gameObject.GetComponent<Rigidbody>();
-        InitialMass = rb.mass;
-    }
-    public void Pickup(Vector3 worldPosition, Rigidbody attachTo)
-    {
-        rb.mass = 0;
-        transform.position = worldPosition + localPivotOffset;
-        _joint = gameObject.AddComponent<FixedJoint>();
-        _joint.connectedBody = attachTo;
-        Debug.Log("Picked");
+        [SerializeField]
+        private Vector3 localPivotOffset;
+        [SerializeField]
+        private LayerMask groundMask;
+        private FixedJoint _joint;
+        private Rigidbody _rigidbody;
+        private float _initialMass;
 
-    }
+        //Unity Functions
+        //============================================================================================================//
+    
+        // Start is called before the first frame update
+        private void Start()
+        {
+            _rigidbody = gameObject.GetComponent<Rigidbody>();
+            _initialMass = _rigidbody.mass;
+        }
 
-    public void Drop()
-    {
-        rb.mass = InitialMass;
-        _joint.connectedBody = null;
-        Destroy(_joint);
-    }
+        //============================================================================================================//
+    
+        public void Pickup(Vector3 worldPosition, Rigidbody attachTo)
+        {
+            _rigidbody.mass = 0;
+            transform.position = worldPosition + localPivotOffset;
+            _joint = gameObject.AddComponent<FixedJoint>();
+            _joint.connectedBody = attachTo;
+        }
 
-    public void Throw(Vector3 fromvec, float force)
-    {
-        rb.mass = InitialMass;
-        _joint.connectedBody = null;
-        Destroy(_joint);
-        var tovec = Camera.main.ScreenPointToRay(Input.mousePosition);
+        public void Drop()
+        {
+            _rigidbody.mass = _initialMass;
+            _joint.connectedBody = null;
+            Destroy(_joint);
+        }
 
-        if (Physics.Raycast(tovec, out var raycastHit, 100, groundMask.value) == false)
-            return;
+        public void Throw(Vector3 throwDirection, float launchForce)
+        {
+            _rigidbody.mass = _initialMass;
+            _joint.connectedBody = null;
+            Destroy(_joint);
+        
+            var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        var point = raycastHit.point;
-        //dest - origin
-        Vector3 thrust = (point - fromvec + Vector3.up).normalized;
-        float thrustMag = force;
-        rb.AddForce(thrust * thrustMag, ForceMode.Impulse);
+            if (Physics.Raycast(screenPointToRay, out var raycastHit, 100, groundMask.value) == false)
+                return;
 
-        Debug.DrawLine(fromvec, point, Color.black, 5.0f, true);
+            var hitPoint = raycastHit.point;
+            //dest - origin
+            var launchDirection = (hitPoint - (throwDirection + Vector3.up)).normalized;
+        
+            _rigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
-    }
+            Debug.DrawLine(throwDirection, hitPoint, Color.cyan, 5.0f, true);
+        }
 
-    public void Swat(Vector3 dir, float force)
-    {
-        Vector3 thrust = dir * force;
-        rb.AddForce(thrust + Vector3.up * 0.2f, ForceMode.Impulse);
-
+        public void Push(Vector3 dir, float force)
+        {
+            Vector3 thrust = dir * force;
+            _rigidbody.AddForce(thrust + Vector3.up * 0.2f, ForceMode.Impulse);
+        }
     }
 }

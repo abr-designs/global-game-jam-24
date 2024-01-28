@@ -1,7 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Prototype.Alex.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class HandsController : MonoBehaviour
 {
@@ -18,24 +17,16 @@ public class HandsController : MonoBehaviour
     [SerializeField]
     private float force;
     private InteractableObject _holdingObject;
-    [SerializeField]
-    private Transform playerpos;
+    [FormerlySerializedAs("playerpos")] [SerializeField]
+    private Transform playerRootTransform;
     //============================================================================================================//
     private void OnEnable()
     {
         ObjectInteractionController.OnNewInteractableObject += OnNewInteractableObject;
     }
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(interactKeyCode))
             ToggleObject();
@@ -44,11 +35,6 @@ public class HandsController : MonoBehaviour
         {
             ThrowObject();
         }
-        //Input.GetKeyDown(k)
-        // if (Input.GetKeyDown(k))
-        // {
-        //     return;
-        // }
     }
 
     private void OnDisable()
@@ -71,12 +57,11 @@ public class HandsController : MonoBehaviour
 
 
         //_holdingObject = _objectInRange;
-        _objectInRange.Swat(playerpos.forward, force);
+        _objectInRange.Push(playerRootTransform.forward, force);
     }
 
     private void ToggleObject()
     {
-        Debug.Log("Toggled");
         if (_holdingObject)
         {
             _holdingObject.Drop();
