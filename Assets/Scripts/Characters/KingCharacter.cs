@@ -1,4 +1,6 @@
 using System;
+using Audio;
+using Audio.SoundFX;
 using UnityEngine;
 using VisualFX;
 
@@ -59,6 +61,8 @@ namespace Characters
                     if (_laughingVFX == null)
                         _laughingVFX = VFX.LAUGH_BUBBLE.PlayAtLocation(vfxSpawnLocation.transform.position, keepAlive: true);
 
+                    //TODO Need to figure out how to get this to loop!!
+                    SFX.KING_HAPPY.PlaySound();
                     _laughingVFX.SetActive(true);
                     break;
                 case STATE.ANGRY:
@@ -68,6 +72,7 @@ namespace Characters
                     if (_angryVFX == null)
                         _angryVFX = VFX.ANGRY_BUBBLE.PlayAtLocation(vfxSpawnLocation.transform.position, keepAlive: true);
 
+                    SFX.KING_ANGRY.PlaySound();
                     _angryVFX.SetActive(true);
                     break;
                 default:
