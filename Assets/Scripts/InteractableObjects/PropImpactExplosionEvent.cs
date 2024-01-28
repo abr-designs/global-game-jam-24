@@ -17,6 +17,11 @@ namespace InteractableObjects
 
         [SerializeField]
         private LayerMask layerMask;
+
+        [SerializeField]
+        private Vector3 localVfxPosition;
+        
+        private GameObject _flamesVfx;
         
         protected override void TriggerImpactEvent(Collision _)
         {
@@ -26,6 +31,7 @@ namespace InteractableObjects
             StartCoroutine(ExplosionTimerCoroutine(explosionTimer));
             
             //TODO Need to add sparks effect
+            _flamesVfx = VFX.FLAMES.PlayAtLocation(transform.TransformPoint(localVfxPosition), keepAlive: true);
 
             _triggered = true;
         }
@@ -49,14 +55,18 @@ namespace InteractableObjects
             }
             
             //TODO Need to add the gibs
-            VFX.EXPLOSION_BARREL.PlayAtLocation(transform.position, 3f);
+            VFX.EXPLOSION_BARREL.PlayAtLocation(transform.position, explosionRadius * 1.5f);
             Destroy(gameObject);
+            Destroy(_flamesVfx);
         }
 
 #if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(transform.TransformPoint(localVfxPosition), 0.05f);
+            
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, explosionRadius);
         }
