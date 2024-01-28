@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1831155862760395241}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.518, z: -0.239}
+  m_LocalPosition: {x: -0, y: 0.492, z: -0.222}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -122,10 +122,10 @@ HingeJoint:
   m_GameObject: {fileID: 1831155862760395241}
   m_ConnectedBody: {fileID: 8724440526075323226}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: -0.11, z: -0.1}
+  m_Anchor: {x: 0, y: -0.03, z: -0.1}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.408, z: -0.339}
+  m_ConnectedAnchor: {x: 0, y: 0.384, z: -0.322}
   serializedVersion: 2
   m_UseSpring: 1
   m_Spring:
@@ -171,8 +171,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2199042, y: 0.40276486, z: 0.64913464}
-  m_Center: {x: 0, y: 0.13179278, z: 0.2299195}
+  m_Size: {x: 1.2199042, y: 0.30316573, z: 0.64913464}
+  m_Center: {x: 0, y: 0.18159235, z: 0.2299195}
 --- !u!1 &2774620837906606730
 GameObject:
   m_ObjectHideFlags: 0

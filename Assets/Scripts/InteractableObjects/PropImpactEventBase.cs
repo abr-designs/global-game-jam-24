@@ -44,9 +44,11 @@ namespace InteractableObjects
 
         private void OnImpulse(Collision collision)
         {
+#if UNITY_EDITOR
             var impulseMag = collision.impulse.magnitude;
             if(impulseMag > largestRecorded)
                 largestRecorded = impulseMag;
+#endif
             
             if (collision.impulse.sqrMagnitude < MinImpulseSqr)
                 return;

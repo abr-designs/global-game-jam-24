@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Levels;
+using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 namespace InteractableObjects
@@ -13,22 +14,19 @@ namespace InteractableObjects
         [SerializeField, Min(0f)]
         private float maxSize;
 
-        
-        private float _spawnWaitTime = 5f;
+        private const float SpawnWaitTime = 5f;
         private float _lastSpawned;
         
         protected override void TriggerImpactEvent(Collision collision)
         {
-            if (Time.time - _lastSpawned <= _spawnWaitTime)
+            if (Time.time - _lastSpawned <= SpawnWaitTime)
                 return;
             
-            var decal = Instantiate(decalPrefab);
+            var decal = Instantiate(decalPrefab, LevelLoader.CurrentLevelController.transform, true);
             decal.material = decalMaterial;
 
             var firstContact = collision.contacts[0];
             var myColliderPos = firstContact.thisCollider.transform.position;
-            var dir = (myColliderPos - firstContact.point).normalized; 
-            
             
             decal.transform.position = firstContact.point + Vector3.up;
             decal.transform.forward = Vector3.down;

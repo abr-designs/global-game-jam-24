@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8356448294344554486}
   - component: {fileID: 8154385733661387325}
   - component: {fileID: 8139851820708320979}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Food_Jello
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +54,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 3346882045390622697, guid: c193d4889de102b48b4867ed5d8caeb7,
     type: 3}
   decalMaterial: {fileID: 2100000, guid: 88a99eb6b5c993f4988b576ad242489c, type: 2}
+  minSize: 0
+  maxSize: 0
 --- !u!114 &4300954234498925261
 MonoBehaviour:
   m_ObjectHideFlags: 0
