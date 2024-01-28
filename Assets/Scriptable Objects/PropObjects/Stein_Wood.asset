@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc94193ec9d73e49a646fa970a7ee41, type: 3}
   m_Name: Stein_Wood
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 1d3bfa233df127545b584644eb45dcb1, type: 3}
   objectName: Wooden Cup
   collideScore: 100
   kingPenalty: -100
