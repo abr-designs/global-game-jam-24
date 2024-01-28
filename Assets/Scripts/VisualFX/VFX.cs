@@ -11,6 +11,8 @@
         FLAMES = 6,
         EXPLOSION_CRATE = 7,
         EXPLOSION_BARREL = 8,
+        DUST_CLOUD = 9,
+        RED_CLOUD = 10
 
     }
 }
