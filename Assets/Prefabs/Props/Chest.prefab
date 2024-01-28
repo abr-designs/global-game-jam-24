@@ -188,7 +188,8 @@ GameObject:
   - component: {fileID: 7802457530014999246}
   - component: {fileID: 8724440526075323226}
   - component: {fileID: 8747817828451259579}
-  m_Layer: 0
+  - component: {fileID: -4230816473240920547}
+  m_Layer: 8
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +305,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2774620837906606730}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -344,6 +345,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1464723, y: 0.4952762, z: 0.64820695}
   m_Center: {x: 0.00000047683716, y: 0.24763805, z: 0.023449615}
+--- !u!114 &-4230816473240920547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2774620837906606730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a0ee2e4cfe55a419d78a6c71cf5038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPivotOffset: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &783112298292683145
 PrefabInstance:
   m_ObjectHideFlags: 0

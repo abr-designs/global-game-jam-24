@@ -98,7 +98,8 @@ GameObject:
   - component: {fileID: 2117241829590918127}
   - component: {fileID: 8990292895359336990}
   - component: {fileID: 4582386555257593388}
-  m_Layer: 0
+  - component: {fileID: -2485431495669163005}
+  m_Layer: 8
   m_Name: Barrel-Explosive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,3 +262,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2485431495669163005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899309194269197085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a0ee2e4cfe55a419d78a6c71cf5038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPivotOffset: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
