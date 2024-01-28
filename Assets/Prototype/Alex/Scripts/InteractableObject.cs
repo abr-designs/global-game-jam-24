@@ -1,25 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour
+namespace Prototype.Alex.Scripts
 {
-    [SerializeField]
-    private Vector3 localPivotOffset;
-
-    private FixedJoint _joint;
-    // Start is called before the first frame update
-
-    public void Pickup(Vector3 worldPosition, Rigidbody attachTo)
+    [RequireComponent(typeof(Rigidbody))]
+    public class InteractableObject : MonoBehaviour
     {
-        transform.position = worldPosition + localPivotOffset;
-        _joint = gameObject.AddComponent<FixedJoint>();
-        _joint.connectedBody = attachTo;
-    }
+        [SerializeField]
+        private Vector3 localPivotOffset;
+        [SerializeField]
+        private LayerMask groundMask;
+        private FixedJoint _joint;
+        private Rigidbody _rigidbody;
+        private float _initialMass;
 
-    public void Drop()
-    {
-        _joint.connectedBody = null;
-        Destroy(_joint);
+        //Unity Functions
+        //============================================================================================================//
+    
+        // Start is called before the first frame update
+        private void Start()
+        {
+            _rigidbody = gameObject.GetComponent<Rigidbody>();
+            _initialMass = _rigidbody.mass;
+        }
+
+        //============================================================================================================//
+    
+        public void Pickup(Vector3 worldPosition, Rigidbody attachTo)
+        {
+            _rigidbody.mass = 0;
+            transform.position = worldPosition + localPivotOffset;
+            _joint = gameObject.AddComponent<FixedJoint>();
+            _joint.connectedBody = attachTo;
+        }
+
+        public void Drop()
+        {
+            _rigidbody.mass = _initialMass;
+            _joint.connectedBody = null;
+            Destroy(_joint);
+        }
+
+        public void Throw(Vector3 throwDirection, float launchForce)
+        {
+            _rigidbody.mass = _initialMass;
+            _joint.connectedBody = null;
+            Destroy(_joint);
+        
+            var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(screenPointToRay, out var raycastHit, 100, groundMask.value) == false)
+                return;
+
+            var hitPoint = raycastHit.point;
+            //dest - origin
+            var launchDirection = (hitPoint - (throwDirection + Vector3.up)).normalized;
+        
+            _rigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
+
+            Debug.DrawLine(throwDirection, hitPoint, Color.cyan, 5.0f, true);
+        }
+
+        public void Push(Vector3 dir, float force)
+        {
+            Vector3 thrust = dir * force;
+            _rigidbody.AddForce(thrust + Vector3.up * 0.2f, ForceMode.Impulse);
+        }
     }
 }
