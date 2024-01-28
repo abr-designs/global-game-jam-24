@@ -27,6 +27,10 @@ namespace Prototype.Alex.Scripts
 
         public void Pickup(Vector3 worldPosition, Rigidbody attachTo)
         {
+            if (_rigidbody.isKinematic == true)
+            {
+                _rigidbody.isKinematic = false;
+            }
             _rigidbody.mass = 0;
             transform.position = worldPosition + localPivotOffset;
             _joint = gameObject.AddComponent<FixedJoint>();
@@ -53,7 +57,7 @@ namespace Prototype.Alex.Scripts
 
             var hitPoint = raycastHit.point;
             //dest - origin
-            var launchDirection = (hitPoint - (throwDirection + Vector3.up)).normalized;
+            var launchDirection = (hitPoint - throwDirection).normalized + Vector3.up * 0.25f;
 
             _rigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
@@ -62,6 +66,10 @@ namespace Prototype.Alex.Scripts
 
         public void Push(Vector3 dir, float force)
         {
+            if (_rigidbody.isKinematic == true)
+            {
+                _rigidbody.isKinematic = false;
+            }
             Vector3 thrust = dir * force;
             _rigidbody.AddForce(thrust + Vector3.up * 0.2f, ForceMode.Impulse);
         }
