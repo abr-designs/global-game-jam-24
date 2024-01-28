@@ -126,6 +126,11 @@ namespace Gameplay
 
             CleanPlayerController();
             CreatePlayerController();
+            while (_kingCharacter == null)
+            {
+                _kingCharacter = FindObjectOfType<KingCharacter>();
+                yield return null;
+            }
             _kingCharacter.SetState(KingCharacter.STATE.DEFAULT);
             OnLevelReady?.Invoke();
             GameInputDelegator.LockInputs = true;
