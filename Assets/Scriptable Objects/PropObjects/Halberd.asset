@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   objectName: Halberd
-  collideScore: -300
+  collideScore: 100
   kingPenalty: -250

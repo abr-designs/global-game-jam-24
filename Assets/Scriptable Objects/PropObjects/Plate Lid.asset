@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   objectName: Plate Lid
-  collideScore: -300
+  collideScore: 10
   kingPenalty: -250
