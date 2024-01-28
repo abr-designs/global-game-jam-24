@@ -4,6 +4,8 @@ using Audio;
 using Audio.SoundFX;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Levels;
+using System.Linq;
 
 public class PropObject : MonoBehaviour
 {
@@ -55,9 +57,14 @@ public class PropObject : MonoBehaviour
 
             string pointsDescription = propObjectSO.objectName + "!";
 
-            OnPointsScored?.Invoke(pointsDescription, propObjectSO.collideScore, transform.position);
-            SFX.IMPACT.PlaySoundAtLocation(transform.position);
+            var score = 0;
+            if (LevelLoader.CurrentLevelController.avoidObjects.Any(x => x == propObjectSO))
+                score = propObjectSO.kingPenalty;
+            else
+                score = propObjectSO.collideScore;            
 
+            OnPointsScored?.Invoke(pointsDescription, score, transform.position);
+            SFX.IMPACT.PlaySoundAtLocation(transform.position);
 
             //Debug.Log($"Impulse: {collision.impulse}, Magnitude: {collision.impulse.magnitude}");
             //Debug.Log($"Player initial collision with [{gameObject.name}]. Score points [{propObjectSO.collideScore}]");

@@ -182,9 +182,9 @@ MonoBehaviour:
   levelName: 
   levelDescription: 
   avoidObjects: []
-  levelTime: 100000000
-  minScoreToPass: 0
-  maxScorePossibleInLevel: 3810
+  levelTime: 15
+  minScoreToPass: 1000
+  maxScorePossibleInLevel: 4900
 --- !u!1001 &23304862601333876
 PrefabInstance:
   m_ObjectHideFlags: 0
