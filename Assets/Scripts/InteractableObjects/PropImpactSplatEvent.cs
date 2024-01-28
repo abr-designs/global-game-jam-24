@@ -1,4 +1,6 @@
-﻿using Levels;
+﻿using Audio;
+using Audio.SoundFX;
+using Levels;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -22,11 +24,13 @@ namespace InteractableObjects
             if (Time.time - _lastSpawned <= SpawnWaitTime)
                 return;
             
+            SFX.SQUELCH.PlaySoundAtLocation(transform.position);
+            
             var decal = Instantiate(decalPrefab, LevelLoader.CurrentLevelController.transform, true);
             decal.material = decalMaterial;
 
             var firstContact = collision.contacts[0];
-            var myColliderPos = firstContact.thisCollider.transform.position;
+            //var myColliderPos = firstContact.thisCollider.transform.position;
             
             decal.transform.position = firstContact.point + Vector3.up;
             decal.transform.forward = Vector3.down;

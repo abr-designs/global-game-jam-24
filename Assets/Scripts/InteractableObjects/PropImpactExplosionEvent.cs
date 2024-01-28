@@ -1,4 +1,6 @@
 using System.Collections;
+using Audio;
+using Audio.SoundFX;
 using UnityEngine;
 using VisualFX;
 
@@ -13,6 +15,9 @@ namespace InteractableObjects
         private float explosionForce;
         [SerializeField, Min(0f)]
         private float explosionRadius;
+
+        [SerializeField]private VFX vfxOnExplosion;
+        [SerializeField]private SFX sfxOnExplosion;
 
         [SerializeField]
         private LayerMask layerMask;
@@ -56,7 +61,8 @@ namespace InteractableObjects
             }
             
             //TODO Need to add the gibs
-            VFX.EXPLOSION_BARREL.PlayAtLocation(transform.position, explosionRadius * 1.5f);
+            vfxOnExplosion.PlayAtLocation(transform.position, explosionRadius * 1.5f);
+            sfxOnExplosion.PlaySoundAtLocation(transform.position);
             Destroy(gameObject);
         }
 

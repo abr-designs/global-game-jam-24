@@ -189,3 +189,37 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c16fc5b3670b620479d5553c4285a079, type: 3}
     - {fileID: 8300000, guid: 26a58ea41c5cb8547bc28c4a3eefb301, type: 3}
     volume: 1
+  - name: SQUELCH
+    type: 2
+    audioClips:
+    - {fileID: 8300000, guid: 92e053f7d965ae84f9014f48933d1b29, type: 3}
+    - {fileID: 8300000, guid: 2d10c69bf9d21d448b873fce14e46c16, type: 3}
+    - {fileID: 8300000, guid: 254195e03a81ad840a47b0f043f9fd54, type: 3}
+    - {fileID: 8300000, guid: 06fb15b363034fc4c88ad676c48b952e, type: 3}
+    - {fileID: 8300000, guid: 0db87931b4343464895b93ad99d0e0f1, type: 3}
+    - {fileID: 8300000, guid: cf93c01034a7a034e8594929e03225d8, type: 3}
+    - {fileID: 8300000, guid: 4fb2514e39df83a4fa1c3a94a2fdb9b9, type: 3}
+    - {fileID: 8300000, guid: 929d7b2ba77753b4184c52db8194d975, type: 3}
+    volume: 1
+  - name: WOOD_BREAK
+    type: 3
+    audioClips:
+    - {fileID: 8300000, guid: 49bcea9f2f680304f9f4561a4e05243c, type: 3}
+    - {fileID: 8300000, guid: 80822df4fe2bd084c9376fd2379b2281, type: 3}
+    volume: 1
+  - name: CERAMIC_BREAK
+    type: 4
+    audioClips:
+    - {fileID: 8300000, guid: f3743c9d4fcc0e24b9666df759c6459c, type: 3}
+    volume: 1
+  - name: KING_HAPPY
+    type: 5
+    audioClips:
+    - {fileID: 8300000, guid: f64f510a5efe18f40886705b2e0a7cf2, type: 3}
+    - {fileID: 8300000, guid: 75eaed57d8ab41e4ca79efc89cdf5480, type: 3}
+    volume: 1
+  - name: KING_ANGRY
+    type: 6
+    audioClips:
+    - {fileID: 8300000, guid: 277a374ebee05c04283037c975689e3f, type: 3}
+    volume: 1

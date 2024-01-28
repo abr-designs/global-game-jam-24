@@ -115,6 +115,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5491651014156849475}
     m_Modifications:
+    - target: {fileID: 5075773765866298905, guid: 64e020dcbf081c04aaa5df70cab3190b,
+        type: 3}
+      propertyPath: startMusic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075773765866298905, guid: 64e020dcbf081c04aaa5df70cab3190b,
+        type: 3}
+      propertyPath: musicDatas.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075773765866298905, guid: 64e020dcbf081c04aaa5df70cab3190b,
+        type: 3}
+      propertyPath: musicDatas.Array.data[1].name
+      value: MENU
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075773765866298905, guid: 64e020dcbf081c04aaa5df70cab3190b,
+        type: 3}
+      propertyPath: musicDatas.Array.data[1].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075773765866298905, guid: 64e020dcbf081c04aaa5df70cab3190b,
+        type: 3}
+      propertyPath: musicDatas.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 59e88014204ccdd44b418c2fb50ff670, type: 3}
+    - target: {fileID: 5075773765866298905, guid: 64e020dcbf081c04aaa5df70cab3190b,
+        type: 3}
+      propertyPath: musicDatas.Array.data[1].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 71327417229ae57459f5dd301f1f6567, type: 3}
+    - target: {fileID: 5075773765866298905, guid: 64e020dcbf081c04aaa5df70cab3190b,
+        type: 3}
+      propertyPath: musicDatas.Array.data[1].targetVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7852912579961033763, guid: 64e020dcbf081c04aaa5df70cab3190b,
         type: 3}
       propertyPath: m_Name

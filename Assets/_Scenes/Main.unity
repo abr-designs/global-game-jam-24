@@ -3379,6 +3379,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: === Audio Controllers ===
       objectReference: {fileID: 0}
+    - target: {fileID: 3889470561879482652, guid: 9ae64bdf400f3ac4280958bd36b23f62,
+        type: 3}
+      propertyPath: startMusic
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5491651014156849475, guid: 9ae64bdf400f3ac4280958bd36b23f62,
         type: 3}
       propertyPath: m_LocalPosition.x
