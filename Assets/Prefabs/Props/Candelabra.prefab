@@ -56,7 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propObjectSO: {fileID: 11400000, guid: 5d4fe1da28515ce4f98543ad38a6cc55, type: 2}
   parentPropObject: {fileID: 0}
-  childPropObjectList:
+  childPropObjects:
   - {fileID: 2843908656210091899}
   - {fileID: 7548202085343191365}
   - {fileID: 9077084057131502549}
@@ -235,7 +235,7 @@ PrefabInstance:
     - target: {fileID: 480490905095974479, guid: c72482e9acab6da41bd48d598461e532,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1319259221569673689, guid: c72482e9acab6da41bd48d598461e532,
         type: 3}
@@ -331,7 +331,7 @@ PrefabInstance:
     - target: {fileID: 480490905095974479, guid: c72482e9acab6da41bd48d598461e532,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1319259221569673689, guid: c72482e9acab6da41bd48d598461e532,
         type: 3}
@@ -427,7 +427,7 @@ PrefabInstance:
     - target: {fileID: 480490905095974479, guid: c72482e9acab6da41bd48d598461e532,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1319259221569673689, guid: c72482e9acab6da41bd48d598461e532,
         type: 3}

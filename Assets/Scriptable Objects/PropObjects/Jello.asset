@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Jello
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  objectName: Plate
-  collideScore: -300
+  objectName: Jello
+  collideScore: 20
   kingPenalty: -250

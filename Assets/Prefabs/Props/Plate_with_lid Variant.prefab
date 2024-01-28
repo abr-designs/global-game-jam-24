@@ -101,6 +101,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1980260781226920439, guid: 6ce3ee58faa0f944890f3473b9848f34,
         type: 3}
+      propertyPath: childPropObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 1426991808200441050}
+    - target: {fileID: 1980260781226920439, guid: 6ce3ee58faa0f944890f3473b9848f34,
+        type: 3}
       propertyPath: childPropObjectList.Array.data[0]
       value: 
       objectReference: {fileID: 1426991808200441050}
