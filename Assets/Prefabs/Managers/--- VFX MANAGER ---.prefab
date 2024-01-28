@@ -70,3 +70,13 @@ MonoBehaviour:
     prefab: {fileID: 2086526453057542739, guid: e05cf5db1f414a745a2edd801a63bcc8,
       type: 3}
     lifetime: 4
+  - name: DUST_CLOUD
+    type: 9
+    prefab: {fileID: 2307600577200438099, guid: 4fd08c76c46390447a76aa5270c7a7da,
+      type: 3}
+    lifetime: 4
+  - name: RED_CLOUD
+    type: 10
+    prefab: {fileID: 8948900470130677556, guid: c3dfa2345235ba647b25407d00772922,
+      type: 3}
+    lifetime: 4
