@@ -650,6 +650,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Graphy]'
       objectReference: {fileID: 0}
+    - target: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11496292, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_enableOnStartup
       value: 1
@@ -3331,6 +3335,11 @@ PrefabInstance:
     - target: {fileID: 5763098528946676521, guid: 0f9f8fb065c58554cbff138365d178c7,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5763098528946676521, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6233804613876007106, guid: 0f9f8fb065c58554cbff138365d178c7,
