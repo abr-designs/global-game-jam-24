@@ -92,9 +92,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5302858205220156152}
+  - component: {fileID: 7033999233578477210}
   - component: {fileID: 1202143561851012508}
   - component: {fileID: 3498962969731881683}
-  - component: {fileID: 7033999233578477210}
+  - component: {fileID: 2212271190325458969}
+  - component: {fileID: 9065309279014221208}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -112,12 +114,30 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1.2, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 40598415526864136}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7033999233578477210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4504126122622837806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327fe88df856c444f808d82789206375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propObjectSO: {fileID: 11400000, guid: d9d2d0785ed76a6418f2fdd9cded64d1, type: 2}
+  parentPropObject: {fileID: 0}
+  childPropObjects: []
+  shatterForceThreshold: 0
+  swapOutMeshPrefab: {fileID: 0}
+  swapOutTransformOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &1202143561851012508
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -168,21 +188,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7033999233578477210
-MonoBehaviour:
+--- !u!64 &2212271190325458969
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4504126122622837806}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 327fe88df856c444f808d82789206375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  propObjectSO: {fileID: 0}
-  parentPropObject: {fileID: 0}
-  childPropObjectList: []
-  shatterForceThreshold: 0
-  swapOutMeshPrefab: {fileID: 0}
-  swapOutTransformOffset: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8108563764783910780, guid: 543d546220c6fb24d9221193ab113652, type: 3}
+--- !u!54 &9065309279014221208
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4504126122622837806}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

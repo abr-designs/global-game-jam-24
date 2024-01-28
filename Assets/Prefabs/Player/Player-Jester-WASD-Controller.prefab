@@ -2580,7 +2580,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -1062763576322334616, guid: cf6d24ef4c825f0448e5c20c7a0390ca, type: 3}
@@ -2711,7 +2711,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -1062763576322334616, guid: cf6d24ef4c825f0448e5c20c7a0390ca, type: 3}
@@ -2924,7 +2924,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -9049494072002864277, guid: cf6d24ef4c825f0448e5c20c7a0390ca, type: 3}
@@ -4498,7 +4498,7 @@ MonoBehaviour:
   speed: 5
   groundMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 512
   minRoomPosition: {x: -5, y: 0, z: -6.08}
   maxRoomPosition: {x: 5.33, y: 0, z: 7.63}
 --- !u!114 &6419137040779714727

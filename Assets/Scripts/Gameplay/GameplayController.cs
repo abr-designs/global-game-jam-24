@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
 using Cameras;
+using Characters;
 using GameInput;
 using Levels;
 using Prototype.Randall.Scripts.ScoringSystem;
 using UI;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 using Utilities;
 
 namespace Gameplay
@@ -23,6 +26,7 @@ namespace Gameplay
         private GameObject playerControllerPrefab;
 
         private GameObject _currentPlayerController;
+        private KingCharacter _kingCharacter;
         
         //============================================================================================================//
         private void OnEnable()
@@ -32,6 +36,9 @@ namespace Gameplay
 
         private void Start()
         {
+            _kingCharacter = FindObjectOfType<KingCharacter>();
+            Assert.IsNotNull(_kingCharacter, "No King currently in scene!!!");
+            
             StartGame();
         }
 
@@ -56,7 +63,13 @@ namespace Gameplay
                 //TODO Need to return to menu here or something
                 if (LevelLoader.OnLastLevel())
                 {
-                    GameplayUI.DisplayOptionWindow("You did it!", "To Menu", null);
+                    GameplayUI.DisplayOptionWindow("You did it!", "To Menu", () =>
+                    {
+                        ScreenFader.FadeOut(1f, () =>
+                        {
+                            SceneManager.LoadScene(0);
+                        });
+                    });
                     return;
                 }
                 
@@ -120,6 +133,12 @@ namespace Gameplay
 
             CleanPlayerController();
             CreatePlayerController();
+            while (_kingCharacter == null)
+            {
+                _kingCharacter = FindObjectOfType<KingCharacter>();
+                yield return null;
+            }
+            _kingCharacter.SetState(KingCharacter.STATE.DEFAULT);
             OnLevelReady?.Invoke();
             GameInputDelegator.LockInputs = true;
             var gameplaySeconds = LevelLoader.CurrentLevelController.levelTime;
@@ -178,12 +197,15 @@ namespace Gameplay
             //TODO Win or Lose
             var wonLevel = DidWin();
             
+            yield return new WaitForSeconds(1f);
+            
+            _kingCharacter.SetState(wonLevel ? KingCharacter.STATE.HAPPY : KingCharacter.STATE.ANGRY);
+            
+            yield return new WaitForSeconds(2f);
+            
             //TODO Play some cinematic
-            //TODO Fade to black
             
             DisplayGameOptions(wonLevel);
-
-            
         }
 
         private static IEnumerator WaitCoroutine(float seconds, Action onCompleted)

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +16,8 @@ public class RagdollHelper : MonoBehaviour
 
     [SerializeField]
     private float radius;
+    
+#if UNITY_EDITOR
 
     [ContextMenu("Generate Bone")]
     private void CreateCapsuleBone()
@@ -67,4 +67,5 @@ public class RagdollHelper : MonoBehaviour
 
         EditorUtility.SetDirty(this);
     }
+#endif
 }

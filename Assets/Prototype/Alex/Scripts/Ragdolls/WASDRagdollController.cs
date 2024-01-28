@@ -96,7 +96,11 @@ public class WASDRagdollController : MonoBehaviour
         origin.y = 10f;
 
         if (Physics.Raycast(origin, Vector3.down, out var raycastHit, 20f, groundMask.value) == false)
+        {
+            Debug.DrawRay(origin, Vector3.down * 100, Color.red);
             return;
+        }
+        Debug.DrawLine(origin, raycastHit.point, Color.green);
 
         height = raycastHit.point.y + _groundHeightOffset;
     }
