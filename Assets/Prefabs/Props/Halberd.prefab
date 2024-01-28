@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1993371184608475619}
   - component: {fileID: 5406269799876103963}
   - component: {fileID: 8424076884340105700}
+  - component: {fileID: 3612906093909189275}
   m_Layer: 8
   m_Name: Halberd
   m_TagString: Untagged
@@ -51,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   propObjectSO: {fileID: 11400000, guid: 3867de21ee2363b49a589becc4a16adc, type: 2}
   parentPropObject: {fileID: 0}
-  childPropObjectList: []
+  childPropObjects: []
   shatterForceThreshold: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
@@ -68,6 +69,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPivotOffset: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!33 &4374966422501317462
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -148,7 +152,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461825398945653153}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 7
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -167,3 +171,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3612906093909189275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461825398945653153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a0ee2e4cfe55a419d78a6c71cf5038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPivotOffset: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1

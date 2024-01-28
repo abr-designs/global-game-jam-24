@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8356448294344554486}
   - component: {fileID: 8154385733661387325}
   - component: {fileID: 8139851820708320979}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Food_Jello
   m_TagString: Untagged
   m_Icon: {fileID: 0}

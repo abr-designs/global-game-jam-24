@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8202099533791819198}
   - component: {fileID: 462477484792472706}
   - component: {fileID: 2746831133643213357}
+  - component: {fileID: -1980491187272561169}
   m_Layer: 8
   m_Name: Torch
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MonoBehaviour:
   localPivotOffset: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &7152539947078866453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +153,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416445199767251531}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -171,6 +172,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1980491187272561169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416445199767251531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a0ee2e4cfe55a419d78a6c71cf5038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPivotOffset: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1001 &3252491613332547225
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ namespace Cinematics
 
             var avoidObjects = LevelLoader.CurrentLevelController.avoidObjects;
 
-            if (avoidObjects.Length == 0)
+            if (avoidObjects.Length >= 0)
             {
                 bubbleTransform.gameObject.SetActive(true);
                 foreach (var objectSo in avoidObjects)

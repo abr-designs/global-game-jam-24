@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc94193ec9d73e49a646fa970a7ee41, type: 3}
   m_Name: Stein_gold
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e59b3352cdf40564483a44ecec17c1e1, type: 3}
   objectName: Golden Cup
   collideScore: 100
   kingPenalty: -100
