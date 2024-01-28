@@ -8,6 +8,7 @@ using Prototype.Randall.Scripts.ScoringSystem;
 using UI;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 using Utilities;
 
 namespace Gameplay
@@ -62,7 +63,13 @@ namespace Gameplay
                 //TODO Need to return to menu here or something
                 if (LevelLoader.OnLastLevel())
                 {
-                    GameplayUI.DisplayOptionWindow("You did it!", "To Menu", null);
+                    GameplayUI.DisplayOptionWindow("You did it!", "To Menu", () =>
+                    {
+                        ScreenFader.FadeOut(1f, () =>
+                        {
+                            SceneManager.LoadScene(0);
+                        });
+                    });
                     return;
                 }
                 
