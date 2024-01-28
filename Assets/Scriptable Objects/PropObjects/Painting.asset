@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc94193ec9d73e49a646fa970a7ee41, type: 3}
   m_Name: Painting
   m_EditorClassIdentifier: 
-  prefab: {fileID: 869298999432483069, guid: 77e7a08c1ef078145a7dc7c3ee16df81, type: 3}
+  icon: {fileID: 0}
   objectName: Painting
-  collideScore: -300
+  collideScore: 0
   kingPenalty: -250
