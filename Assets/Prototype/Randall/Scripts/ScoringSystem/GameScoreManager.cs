@@ -1,4 +1,5 @@
 using System;
+using Gameplay;
 using UnityEngine;
 using Utilities.ReadOnly;
 
@@ -26,20 +27,34 @@ namespace Prototype.Randall.Scripts.ScoringSystem
         private void OnEnable()
         {
             PropObject.OnPointsScored += ScorePoints;
+            GameplayController.OnLevelReady += OnLevelReady;
         }
-    
+        
         private void OnDisable()
         {
             PropObject.OnPointsScored -= ScorePoints;
+            GameplayController.OnLevelReady -= OnLevelReady;
         }
     
         //============================================================================================================//
 
         private void ScorePoints(string description, int points, Vector3 worldPos)
         {
+            //Clamp the score above 0
+            var newScore = gameScore + points;
+            if (newScore < 0)
+            {
+                newScore = 0;
+            }
 
-            gameScore += points;
-            OnPointsTotalChanged?.Invoke(gameScore);
+            //See if the score changed
+            if (newScore != gameScore)
+            {
+                gameScore = newScore;
+                OnPointsTotalChanged?.Invoke(gameScore);
+            }
+
+
             ScorePointsArgs args = new ScorePointsArgs
             {
                 description = description,
@@ -48,6 +63,15 @@ namespace Prototype.Randall.Scripts.ScoringSystem
             };
             OnPointsScored?.Invoke(this, args);
 
+        }
+        
+        private void OnLevelReady()
+        {
+            if (gameScore == 0)
+                return;
+            
+            gameScore = 0;
+            OnPointsTotalChanged?.Invoke(gameScore);
         }
     }
 }
