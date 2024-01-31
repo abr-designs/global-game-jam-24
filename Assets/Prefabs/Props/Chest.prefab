@@ -141,8 +141,8 @@ HingeJoint:
   m_ExtendedLimits: 0
   m_UseAcceleration: 0
   m_Limits:
-    min: -90
-    max: 0
+    min: 0
+    max: 90
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -228,7 +228,10 @@ MonoBehaviour:
   largestRecorded: 0
   minImpulse: 5
   hingeJoint: {fileID: 8159700354947190387}
-  springTarget: -90
+  springTarget: 60
+  spawnables:
+  - {fileID: 1212884823430815914, guid: b3ca0027c8b1c114abae16b8b6c69d48, type: 3}
+  spawnableOffset: {x: 0, y: 0.5, z: 0}
 --- !u!114 &5323175160614808129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +248,8 @@ MonoBehaviour:
   parentPropObject: {fileID: 0}
   childPropObjects: []
   shatterForceThreshold: 0
+  shatterVFX: 
+  shatterSFX: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &3269594896406730151

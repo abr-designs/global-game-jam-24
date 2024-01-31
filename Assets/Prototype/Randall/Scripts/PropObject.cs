@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Levels;
 using System.Linq;
+using VisualFX;
 
 public class PropObject : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class PropObject : MonoBehaviour
 
     [SerializeField, Header("Destructable Prop Objects")]
     private float shatterForceThreshold;
+
+    [SerializeField]
+    private VFX[] shatterVFX;
+    [SerializeField]
+    private SFX shatterSFX = SFX.NONE;
 
     [SerializeField] 
     private GameObject swapOutMeshPrefab;
@@ -144,6 +150,16 @@ public class PropObject : MonoBehaviour
 
             child.GetComponent<Rigidbody>().AddForce(impulse, ForceMode.Impulse);
         }
+
+        // Play any VFX/SFX if they are set
+        if(shatterVFX.Length > 0)
+        {
+            foreach(VFX v in shatterVFX)
+            {
+                v.PlayAtLocation(transform.position);
+            }
+        }
+        shatterSFX.PlaySoundAtLocation(transform.position);
 
         // remove the container
         Destroy(newMeshGameObject);

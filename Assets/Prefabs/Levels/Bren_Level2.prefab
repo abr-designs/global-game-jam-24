@@ -86,7 +86,7 @@ MonoBehaviour:
   levelDescription: 
   avoidObjects:
   - {fileID: 11400000, guid: a107c3ee592408044aab826afbabb83d, type: 2}
-  levelTime: 15
+  levelTime: 300
   minScoreToPass: 250
   maxScorePossibleInLevel: 500
 --- !u!1 &3174172690117477945

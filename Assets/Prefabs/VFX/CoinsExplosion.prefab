@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &934257707634198641
+--- !u!1001 &7443831125379556607
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,72 +10,64 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
         type: 3}
-      propertyPath: looping
-      value: 0
+      propertyPath: ShapeModule.type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
+        type: 3}
+      propertyPath: ShapeModule.donutRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
+        type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 309335453769137949, guid: ed36380ae773bde4296c6eb79f5b9b15,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1154032760701473314, guid: ed36380ae773bde4296c6eb79f5b9b15,
         type: 3}
       propertyPath: m_Name
-      value: BarrelExplosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123647254051840358, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123647254051840358, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.4009434
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123647254051840358, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.4009434
-      objectReference: {fileID: 0}
-    - target: {fileID: 3123647254051840358, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 1
+      value: CoinsExplosion
       objectReference: {fileID: 0}
     - target: {fileID: 5000967201073514701, guid: ed36380ae773bde4296c6eb79f5b9b15,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4712124939935828167, guid: 543d546220c6fb24d9221193ab113652,
+      objectReference: {fileID: -5216581434543980006, guid: 543d546220c6fb24d9221193ab113652,
         type: 3}
     - target: {fileID: 5000967201073514701, guid: ed36380ae773bde4296c6eb79f5b9b15,
         type: 3}
       propertyPath: m_Mesh1
       value: 
-      objectReference: {fileID: -2758898216864879011, guid: 543d546220c6fb24d9221193ab113652,
-        type: 3}
-    - target: {fileID: 5000967201073514701, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: m_Mesh2
-      value: 
-      objectReference: {fileID: 5476774311686046988, guid: 543d546220c6fb24d9221193ab113652,
-        type: 3}
-    - target: {fileID: 5000967201073514701, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: m_Mesh3
-      value: 
-      objectReference: {fileID: -6068680383901858474, guid: 543d546220c6fb24d9221193ab113652,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5000967201073514701, guid: ed36380ae773bde4296c6eb79f5b9b15,
         type: 3}
       propertyPath: m_MeshWeighting
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5000967201073514701, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: m_MeshWeighting1
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5000967201073514701, guid: ed36380ae773bde4296c6eb79f5b9b15,
-        type: 3}
-      propertyPath: m_MeshWeighting2
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8691495001639878562, guid: ed36380ae773bde4296c6eb79f5b9b15,
         type: 3}

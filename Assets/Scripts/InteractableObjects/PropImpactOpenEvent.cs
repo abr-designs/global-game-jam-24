@@ -1,4 +1,5 @@
 using UnityEngine;
+using VisualFX;
 
 namespace InteractableObjects
 {
@@ -10,6 +11,12 @@ namespace InteractableObjects
         [SerializeField]
         private float springTarget;
 
+        [SerializeField]
+        private GameObject[] spawnables;
+
+        [SerializeField]
+        private Vector3 spawnableOffset;
+
         protected override void TriggerImpactEvent(Collision collision)
         {
             var hingeJointSpring = hingeJoint.spring;
@@ -17,7 +24,21 @@ namespace InteractableObjects
 
             hingeJoint.spring = hingeJointSpring;
         
-            //TODO Add gold coin explosion
+            VFX.EXPLOSION_COINS.PlayAtLocation(transform.position);
+
+            // Load any spawnables from open
+            foreach(GameObject obj in spawnables)
+            {
+                GameObject newObj = Instantiate(obj,transform.position + spawnableOffset, transform.rotation, transform.parent);
+
+                // Apply force
+                foreach(Transform child in newObj.transform)
+                {
+                    child.parent = transform.parent;
+                    child.GetComponent<Rigidbody>().AddForce(collision.impulse, ForceMode.Impulse);
+                }
+
+            }
 
             //Turn off this event listener
             enabled = false;
