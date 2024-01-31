@@ -52,7 +52,7 @@ MonoBehaviour:
   propObjectSO: {fileID: 11400000, guid: d9d2d0785ed76a6418f2fdd9cded64d1, type: 2}
   parentPropObject: {fileID: 0}
   childPropObjects: []
-  shatterForceThreshold: 0
+  shatterForceThreshold: 5
   shatterVFX: 0900000008000000
   shatterSFX: 3
   swapOutMeshPrefab: {fileID: 1619789402892633105, guid: 6ee6f12ab8ce2444790b7b1969abe619,

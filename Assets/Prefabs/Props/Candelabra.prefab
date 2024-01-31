@@ -62,6 +62,8 @@ MonoBehaviour:
   - {fileID: 7548202085343191365}
   - {fileID: 9077084057131502549}
   shatterForceThreshold: 0
+  shatterVFX: 
+  shatterSFX: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &4689267539476837879
