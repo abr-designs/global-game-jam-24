@@ -32,7 +32,9 @@ namespace Prototype.Alex.Scripts
                 _rigidbody.isKinematic = false;
             }
             _rigidbody.mass = 0;
+
             transform.position = worldPosition + localPivotOffset;
+            transform.localRotation = attachTo.rotation;
             _joint = gameObject.AddComponent<FixedJoint>();
             _joint.connectedBody = attachTo;
         }

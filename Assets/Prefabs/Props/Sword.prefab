@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 4085210203964465824}
   - component: {fileID: 8752643617022452758}
   - component: {fileID: 3329279402770188484}
-  - component: {fileID: 8297595488261195717}
   - component: {fileID: 4005654457811852350}
   - component: {fileID: 320046205785319034}
+  - component: {fileID: 2904219043584464556}
+  - component: {fileID: 4526662908950105766}
   m_Layer: 8
   m_Name: Sword
   m_TagString: Untagged
@@ -54,6 +55,8 @@ MonoBehaviour:
   parentPropObject: {fileID: 0}
   childPropObjects: []
   shatterForceThreshold: 0
+  shatterVFX: 
+  shatterSFX: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &4085210203964465824
@@ -122,28 +125,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8297595488261195717
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601106886024869872}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4686849319519084627, guid: 543d546220c6fb24d9221193ab113652, type: 3}
 --- !u!54 &4005654457811852350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -187,3 +168,45 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+--- !u!65 &2904219043584464556
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601106886024869872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08425569, y: 1.357359, z: 0.12}
+  m_Center: {x: -0.000000007450581, y: 0.45547253, z: 0}
+--- !u!65 &4526662908950105766
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601106886024869872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08425569, y: 0.07941541, z: 0.41276342}
+  m_Center: {x: 0, y: 0.15452369, z: 0.0012202561}
