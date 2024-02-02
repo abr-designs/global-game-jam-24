@@ -3220,6 +3220,11 @@ PrefabInstance:
       propertyPath: far clip plane
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 7215660244151342233, guid: d9312a5fbcb741549aca6952da3ae1ea,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 2033
+      objectReference: {fileID: 0}
     - target: {fileID: 7772304466580231008, guid: d9312a5fbcb741549aca6952da3ae1ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3284,6 +3289,12 @@ PrefabInstance:
       propertyPath: startPosition.x
       value: 0.3104665
       objectReference: {fileID: 0}
+    - target: {fileID: 7402073662007839701, guid: 6900cc2ef6cffb84c834d63ab03322ee,
+        type: 3}
+      propertyPath: levels.Array.data[0]
+      value: 
+      objectReference: {fileID: 8055164039711591472, guid: 9cb20ae9980dc6041b5ccf2fee0eda0d,
+        type: 3}
     - target: {fileID: 8892484288887192184, guid: 6900cc2ef6cffb84c834d63ab03322ee,
         type: 3}
       propertyPath: m_LocalPosition.x

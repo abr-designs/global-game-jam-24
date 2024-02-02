@@ -74,7 +74,8 @@ public class HandsController : MonoBehaviour
 
 
         _holdingObject = _objectInRange;
-        _holdingObject.Pickup(leftHand.position, closestToLeftHand);
+        //_holdingObject.Pickup(leftHand.position, closestToLeftHand);
+        _holdingObject.Pickup(leftHand.position, leftHand);
     }
 
     //============================================================================================================//

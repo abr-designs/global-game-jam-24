@@ -14,7 +14,7 @@ FIXES
  - Level is now centered on 0 in the x-axis
 	- just needed to move the === LEVEL === container as well as the king character
  - Marked some architecture prefabs as static (in case of baked lighting)
- - Turned on SM_Buildings colliders in scene (wall prefabs already have box colliders on them)
+ - Turned off SM_Buildings colliders in scene (wall prefabs already have box colliders on them)
 	- scaled wall prefabs colliders appropriately (added some extra height to prevent things going over the top)
  - Added shatterVFX and shatterSFX to the PropObject for when shattered event is triggered
 	- this was used for crate/barrel dust + pieces effects
@@ -23,21 +23,22 @@ FIXES
 	- also added a decal-based option that can be enabled on the Window prefab
  - Made scoring text easier to see
  - Changed fonts on labels and buttons
+ - Throwing reworked
+	- Now the held object is set to kinematic with collisions disabled and follows the left hand transform in the update
+	- Upon throw action the collider bounds calculate how far to move the object above the ground before applying force
+		- object is set to "throw" layer which collides with everything except the character
+		- once object hits anything else the layer is returned to "interactable"
 
 BUGS
 ------------
-
- - Throwing has issues
-	- object collides with character if thrown through the body
- 	- when giving object mass it will trigger impulse collisions that break the object while held
-		- getting good results setting the object to a lighter value but adding some drag to reduce the jumpiness
-		- TODO -- use "proxy" object with a rigidbody of mass 1 and 1000 drag + angular drag to make it look like the character is dragging the object around, take the main object out of collision and only use it's visual mesh ( can move it to a separate layer )
 
 PROPS
  - Chest had lid pivot target inverted (needed to be a positive number)
 	- Depends on the x-axis direction
  - Sword needed proper colliders (replaced mesh with boxes)
-
+ - Added DisallowMultipleComponent to PropObject and InteractableObject to prevent multiple components on same object
+ - SwapShatteredMesh could trigger multiple times in a single fixed update if the object collided with several things at once (usually hit the floor and player)
+ 
 MODELS
  - Coin had wrong pivot position
  - Added some coins to treasure chest base

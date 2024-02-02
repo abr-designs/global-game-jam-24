@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8752643617022452758}
   - component: {fileID: 3329279402770188484}
   - component: {fileID: 4005654457811852350}
-  - component: {fileID: 320046205785319034}
   - component: {fileID: 2904219043584464556}
   - component: {fileID: 4526662908950105766}
   m_Layer: 8
@@ -74,7 +73,7 @@ MonoBehaviour:
   localPivotOffset: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1
 --- !u!33 &8752643617022452758
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -152,22 +151,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &320046205785319034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601106886024869872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a0ee2e4cfe55a419d78a6c71cf5038, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localPivotOffset: {x: 0, y: 0, z: 0}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!65 &2904219043584464556
 BoxCollider:
   m_ObjectHideFlags: 0

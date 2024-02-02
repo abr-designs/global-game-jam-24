@@ -1,9 +1,12 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Prototype.Alex.Scripts
 {
     [RequireComponent(typeof(Rigidbody))]
+    [DisallowMultipleComponent]
     public class InteractableObject : MonoBehaviour
     {
         [SerializeField]
@@ -14,7 +17,7 @@ namespace Prototype.Alex.Scripts
         private Rigidbody _rigidbody;
         private float _initialMass;
 
-        private Rigidbody _target;
+        private Transform _target;        
 
         //Unity Functions
         //============================================================================================================//
@@ -24,6 +27,8 @@ namespace Prototype.Alex.Scripts
         {
             _rigidbody = gameObject.GetComponent<Rigidbody>();
             _initialMass = _rigidbody.mass;
+
+            Assert.IsTrue(groundMask > 0, $"Interactable {name} has no ground mask set!");
         }
 
         //============================================================================================================//
@@ -32,12 +37,13 @@ namespace Prototype.Alex.Scripts
         {
             if(_target)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, _target.transform.rotation, 5f);
-                transform.position = Vector3.MoveTowards(transform.position, _target.position, .05f);
+                // TODO -- make the follow speeds configurable for different objects
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, _target.transform.rotation, 1000f * Time.deltaTime);
+                transform.position = _target.position + localPivotOffset;
             }
         }
 
-        public void Pickup(Vector3 worldPosition, Rigidbody attachTo)
+        public void Pickup(Vector3 worldPosition, Transform attachTo)
         {
             // New plan
             // Set the object to kinematic and put on a different layer
@@ -67,25 +73,41 @@ namespace Prototype.Alex.Scripts
             _rigidbody.isKinematic = false;
             _rigidbody.detectCollisions = true;
             _target = null;
-
-            // OLD CODE
-            /*
-            _rigidbody.mass = _initialMass;
-            _joint.connectedBody = null;
-            Destroy(_joint);
-            */
         }
 
         public void Throw(Vector3 throwDirection, float launchForce)
         {
+            // Set object to a layer that won't collide with the player;
+            gameObject.layer = LayerMask.NameToLayer("throw");
 
-            _rigidbody.isKinematic = false;
-            _rigidbody.detectCollisions = true;
-            _target = null;
 
+            // First look for a valid directional point
             var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(screenPointToRay, out var raycastHit, 100, groundMask.value) == false)
+            {
+                Debug.Log($"Throw raycast hit nothing!!!!");
+                // Set the object back to the physics system
+                Drop();
                 return;
+            }
+
+            // First we need to move object outside of any groundmask colliders if possible
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            Bounds bounds = new Bounds(transform.position, Vector3.zero);
+            // Build a bounding box from all nested colliders
+            // TODO -- is this already somewhere in the physics system?
+            foreach(Collider collider in colliders)
+            {
+                bounds.Encapsulate(collider.bounds);
+            }
+            // Determine how much we need to move the box above the ground
+            float offset = Mathf.Abs(Mathf.Min(bounds.min.y, 0)) + 0.1f; // add a little bit extra to avoid overlap
+            Debug.Log($"Offset for throw {offset}, {bounds.min} {bounds.extents.y}");
+            Debug.DrawLine(transform.position, transform.position + Vector3.up * offset, Color.green, 5.0f);
+            transform.Translate(Vector3.up * offset, Space.World);
+
+            // Set the object back to the physics system
+            Drop();
 
             var hitPoint = raycastHit.point;
             //dest - origin
@@ -93,27 +115,6 @@ namespace Prototype.Alex.Scripts
 
             _rigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
-            Debug.DrawLine(throwDirection, hitPoint, Color.cyan, 5.0f, true);
-
-            // OLD CODE BELOW
-            /*
-            _rigidbody.mass = _initialMass;
-            _joint.connectedBody = null;
-            Destroy(_joint);
-
-            var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(screenPointToRay, out var raycastHit, 100, groundMask.value) == false)
-                return;
-
-            var hitPoint = raycastHit.point;
-            //dest - origin
-            var launchDirection = (hitPoint - throwDirection).normalized + Vector3.up * 0.25f;
-
-            _rigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
-
-            Debug.DrawLine(throwDirection, hitPoint, Color.cyan, 5.0f, true);
-            */
         }
 
         public void Push(Vector3 dir, float force)
@@ -125,5 +126,17 @@ namespace Prototype.Alex.Scripts
             Vector3 thrust = dir * force;
             _rigidbody.AddForce(thrust + Vector3.up * 0.2f, ForceMode.Impulse);
         }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            // Reset layer
+            if(gameObject.layer == LayerMask.NameToLayer("throw"))
+            {
+                gameObject.layer = LayerMask.NameToLayer("interactable");
+                Debug.Log("Throw object layer reset");
+            }
+                
+        }
+
     }
 }

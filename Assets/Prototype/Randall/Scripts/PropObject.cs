@@ -8,6 +8,7 @@ using Levels;
 using System.Linq;
 using VisualFX;
 
+[DisallowMultipleComponent]
 public class PropObject : MonoBehaviour
 {
     private const string PLAYER_TAG = "Player";
@@ -39,6 +40,7 @@ public class PropObject : MonoBehaviour
     private Vector3 swapOutTransformOffset;
 
     private bool _initialCollisionWithPlayer;
+    private bool _isShattered;
 
     private Rigidbody _rigidbody;
 
@@ -52,6 +54,8 @@ public class PropObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
+        Debug.Log($"{name} hit {collision.collider.name}");
 
         // check with player collision
         if (!_initialCollisionWithPlayer)
@@ -135,6 +139,11 @@ public class PropObject : MonoBehaviour
 
     private void SwapShatteredMesh(Vector3 impulse)
     {
+        Debug.Log($"Prop {name} was shattered");
+        // Prevent re-entry when multiple collisions happen at once
+        if(_isShattered)
+            return;
+        _isShattered = true;
 
         Transform parentTransform = transform.parent;
 
@@ -144,10 +153,9 @@ public class PropObject : MonoBehaviour
         // remove children in shard container
         foreach (Transform child in newMeshGameObject.transform)
         {
-
             child.parent = parentTransform;
 
-
+            // apply impulse force to shards
             child.GetComponent<Rigidbody>().AddForce(impulse, ForceMode.Impulse);
         }
 
@@ -164,8 +172,7 @@ public class PropObject : MonoBehaviour
         // remove the container
         Destroy(newMeshGameObject);
         Destroy(gameObject);
-
-        // apply impulse force to shards
+   
     }
 
     //============================================================================================================//
