@@ -8,6 +8,7 @@ TODO
         rug
         pie
         books    
+ - Change throw trajectory to be more flat the farther away the mouse is (close up will arc higher)
 
 FIXES
 ------------
@@ -28,6 +29,8 @@ FIXES
 	- Upon throw action the collider bounds calculate how far to move the object above the ground before applying force
 		- object is set to "throw" layer which collides with everything except the character
 		- once object hits anything else the layer is returned to "interactable"
+	- Objects that are picked up now remove kinematic from all parents and children (as if they were bumped by the player)
+		- we also need to unparent any child objects so that the bounds detection for the held item is correct
 
 BUGS
 ------------

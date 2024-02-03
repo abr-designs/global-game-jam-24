@@ -40,11 +40,20 @@ namespace Prototype.Alex.Scripts
                 // TODO -- make the follow speeds configurable for different objects
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, _target.transform.rotation, 1000f * Time.deltaTime);
                 transform.position = _target.position + localPivotOffset;
+                // From new position we re-adjust for ground clipping
+                transform.position = GetThrowPoint();
             }
         }
 
         public void Pickup(Vector3 worldPosition, Transform attachTo)
         {
+            // Set the hierarchy into the physics system
+            // This is to ensure that we only have the prop as kinematic in hand and the rest are simulated
+            if(TryGetComponent<PropObject>(out PropObject prop))
+            {   
+                prop.PlayerTriggerProp();
+            }
+
             // New plan
             // Set the object to kinematic and put on a different layer
             // Have the object follow the target in update
@@ -52,20 +61,6 @@ namespace Prototype.Alex.Scripts
             _rigidbody.detectCollisions = false;
             _target = attachTo;
 
-
-            // OLD CODE BELOW
-            /*
-            if (_rigidbody.isKinematic == true)
-            {
-                _rigidbody.isKinematic = false;
-            }
-            _rigidbody.mass = 0;
-
-            transform.position = worldPosition + localPivotOffset;
-            transform.localRotation = attachTo.rotation;
-            _joint = gameObject.AddComponent<FixedJoint>();
-            _joint.connectedBody = attachTo;
-            */
         }
 
         public void Drop()
@@ -80,39 +75,13 @@ namespace Prototype.Alex.Scripts
             // Set object to a layer that won't collide with the player;
             gameObject.layer = LayerMask.NameToLayer("throw");
 
-
-            // First look for a valid directional point
-            var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(screenPointToRay, out var raycastHit, 100, groundMask.value) == false)
-            {
-                Debug.Log($"Throw raycast hit nothing!!!!");
-                // Set the object back to the physics system
-                Drop();
-                return;
-            }
-
             // First we need to move object outside of any groundmask colliders if possible
-            Collider[] colliders = GetComponentsInChildren<Collider>();
-            Bounds bounds = new Bounds(transform.position, Vector3.zero);
-            // Build a bounding box from all nested colliders
-            // TODO -- is this already somewhere in the physics system?
-            foreach(Collider collider in colliders)
-            {
-                bounds.Encapsulate(collider.bounds);
-            }
-            // Determine how much we need to move the box above the ground
-            float offset = Mathf.Abs(Mathf.Min(bounds.min.y, 0)) + 0.1f; // add a little bit extra to avoid overlap
-            Debug.Log($"Offset for throw {offset}, {bounds.min} {bounds.extents.y}");
-            Debug.DrawLine(transform.position, transform.position + Vector3.up * offset, Color.green, 5.0f);
-            transform.Translate(Vector3.up * offset, Space.World);
+            transform.position = GetThrowPoint();
 
             // Set the object back to the physics system
             Drop();
 
-            var hitPoint = raycastHit.point;
-            //dest - origin
-            var launchDirection = (hitPoint - throwDirection).normalized + Vector3.up * 0.25f;
-
+            var launchDirection = throwDirection.normalized;
             _rigidbody.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
         }
@@ -136,6 +105,46 @@ namespace Prototype.Alex.Scripts
                 Debug.Log("Throw object layer reset");
             }
                 
+        }
+
+        private Bounds _currentBounds;
+        public Bounds GetBounds()
+        {
+            if(_currentBounds == null)
+            {
+                _currentBounds = new Bounds(transform.position,Vector3.zero);
+            }
+            _currentBounds.center = transform.position;
+            _currentBounds.size = Vector3.zero;
+
+            // First we need to move object outside of any groundmask colliders if possible
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            // Build a bounding box from all nested colliders
+            // TODO -- is this already somewhere in the physics system?
+            foreach(Collider collider in colliders)
+            {
+                //if(collider.attachedRigidbody.isKinematic == true)
+                    _currentBounds.Encapsulate(collider.bounds);
+            }
+            return _currentBounds;
+        }
+
+        // This will return the adjusted throw point when an object is released
+        // It uses the object bounds to take into account moving it above the ground
+        private const float groundMinOffset = 0.05f;
+        public Vector3 GetThrowPoint() 
+        {
+            Bounds bounds = GetBounds();
+
+            // Determine how much we need to move the box above the ground
+            float offset = Mathf.Abs(Mathf.Min(bounds.min.y - groundMinOffset, 0));
+
+
+            //Debug.Log($"Offset for throw {offset}, {bounds.min} {bounds.extents.y}");
+            //Debug.DrawLine(transform.position, transform.position + Vector3.up * offset, Color.green, 5.0f);
+            Vector3 result = transform.position + (Vector3.up * offset);
+            //result.y = Mathf.Min(result.y,maxGroundHeight);
+            return result;
         }
 
     }

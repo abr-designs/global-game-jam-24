@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.424, g: 0.454, b: 0.518, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1715,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
         type: 3}
       propertyPath: vfxDatas.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
         type: 3}
@@ -1729,14 +1729,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
         type: 3}
+      propertyPath: vfxDatas.Array.data[8].name
+      value: INTERACT_HIGHLIGHT
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
+        type: 3}
+      propertyPath: vfxDatas.Array.data[8].type
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
+        type: 3}
       propertyPath: vfxDatas.Array.data[7].prefab
       value: 
       objectReference: {fileID: 8596877279210567389, guid: e967449c5526e774fa8fa67c53f45858,
         type: 3}
     - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
         type: 3}
+      propertyPath: vfxDatas.Array.data[8].prefab
+      value: 
+      objectReference: {fileID: 4451138208209425370, guid: 35bfa52671e88461685ef7f8cbd2d086,
+        type: 3}
+    - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
+        type: 3}
       propertyPath: vfxDatas.Array.data[7].lifetime
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408175631809886508, guid: 299706a8674764846a247391a764f146,
+        type: 3}
+      propertyPath: vfxDatas.Array.data[8].lifetime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3694712651037012485, guid: 299706a8674764846a247391a764f146,
         type: 3}

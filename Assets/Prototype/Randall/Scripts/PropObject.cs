@@ -55,7 +55,7 @@ public class PropObject : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        Debug.Log($"{name} hit {collision.collider.name}");
+        Debug.Log($"{name} hit {collision.collider.name} impulse {collision.impulse.magnitude}");
 
         // check with player collision
         if (!_initialCollisionWithPlayer)
@@ -105,10 +105,8 @@ public class PropObject : MonoBehaviour
     {
         if (targetPropObject.parentPropObject != null)
         {
-
             PropObject parentPropObject = targetPropObject.parentPropObject;
             parentPropObject.SetPropObjectAsKinematic(parentPropObject, impulse);
-
         }
         else
         {
@@ -123,7 +121,11 @@ public class PropObject : MonoBehaviour
                 if(child == null)
                     continue;
                 child._rigidbody.isKinematic = false;
+
+                // Unparent the transform
+                child.transform.parent = transform.parent;
             }
+
         }
 
         // check for shatter force
@@ -135,6 +137,11 @@ public class PropObject : MonoBehaviour
             }
         }
 
+    }
+
+    public void PlayerTriggerProp()
+    {
+        SetPropObjectAsKinematic(this,Vector3.zero);
     }
 
     private void SwapShatteredMesh(Vector3 impulse)
