@@ -5,6 +5,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using VisualFX;
 
+enum ThrowType
+{
+    DIRECT = 0,
+    LOB = 1
+}
+
 public class HandsController : MonoBehaviour
 {
     [SerializeField]
@@ -17,10 +23,16 @@ public class HandsController : MonoBehaviour
     private Rigidbody closestToRightHand;
     [SerializeField]
     private KeyCode interactKeyCode;
+
+    [SerializeField]
+    private ThrowType throwType = ThrowType.DIRECT;
+
     [SerializeField]
     private float force;
+    
     [SerializeField]
-    private float maxAccel = 10f; // Limit acceleration of thrown objects
+    private float throwSpeed = 20f; // Speed of object throwing
+    
     private InteractableObject _holdingObject;
     [FormerlySerializedAs("playerpos")] [SerializeField]
     private Transform playerRootTransform;
@@ -34,6 +46,12 @@ public class HandsController : MonoBehaviour
     private float throwIndicatorTimeStep = 0.1f;
     [SerializeField]
     private LayerMask throwLayerMask;
+    [SerializeField]
+    private AnimationCurve throwAngleCurve;
+    
+    [SerializeField]
+    private AnimationCurve throwHeightCurve;
+
 
     //============================================================================================================//
     private void Start()
@@ -72,6 +90,7 @@ public class HandsController : MonoBehaviour
     {
         if (_holdingObject)
         {
+            //Instantiate(_throwIndicator); // clone throw line for debugging
             _holdingObject.Throw(_throwDirection /*leftHand.position*/, _adjustedForce);
             _holdingObject = null;
             return;
@@ -115,33 +134,55 @@ public class HandsController : MonoBehaviour
             return;
         }
 
-        // First we determine where the mouse cursor is located
-        
-        var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        // Get facing direction of mouse from player
-        Plane groundPlane = new Plane(Vector3.up, transform.position.y);
-        if(!groundPlane.Raycast(screenPointToRay, out float enter))
-        {
-            _throwTarget = Vector3.zero;
-            _throwDirection = Vector3.zero;
-            return;
-        }
-        _throwTarget = screenPointToRay.GetPoint(enter);
-        
-        // First we need the rigidbody information
-        // TODO -- should this information be cached to not query each frame?
         Rigidbody rb = _holdingObject.GetComponent<Rigidbody>();
         _throwIndicator.positionCount = throwIndicatorPoints + 1;
         Vector3 throwPoint = _holdingObject.GetThrowPoint();
 
-        // TODO -- these should be configurable maybe? Possibly an angle/mass curve
-        Vector3 upAmount = Vector3.up * Mathf.Max(rb.mass * .05f, .5f);
-        _adjustedForce = Mathf.Min( rb.mass * maxAccel, force );
+        // First we determine where the mouse cursor is located
+        var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        _throwDirection = Vector3.Normalize(Vector3.ProjectOnPlane(_throwTarget - throwPoint, Vector3.up).normalized + upAmount);
+        if(throwType == ThrowType.LOB)
+        {
+            
+            // Get facing direction of mouse from player
+            Plane groundPlane = new Plane(Vector3.up, transform.position.y);
+            if(!groundPlane.Raycast(screenPointToRay, out float enter))
+            {
+                _throwTarget = Vector3.zero;
+                _throwDirection = Vector3.zero;
+                return;
+            }
+            _throwTarget = screenPointToRay.GetPoint(enter);
+            
+            // How far the cursor is from the throw point
+            Vector3 groundVector = Vector3.ProjectOnPlane(_throwTarget - throwPoint, Vector3.up);
+            float groundDist = groundVector.magnitude;
+
+            float theta = Mathf.Deg2Rad * throwAngleCurve.Evaluate(groundDist);
+            Vector3 vel_x = groundVector.normalized * throwSpeed * Mathf.Cos(theta);
+            Vector3 vel_y = Vector3.up * throwSpeed * Mathf.Sin(theta);
+            Vector3 vel = vel_x + vel_y;
+
+            _throwDirection = vel.normalized;
+            _adjustedForce = rb.mass * vel.magnitude;
+
+        } else if (throwType == ThrowType.DIRECT)
+        {
+            if(!Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, throwLayerMask ) )
+            {
+                return;
+            }
+            _throwTarget = raycastHit.point;
+
+            Vector3 throwVector =  _throwTarget - throwPoint;
+            float heightAdjust = throwHeightCurve.Evaluate(throwVector.magnitude);
+
+            _throwDirection = throwVector.normalized;
+            _adjustedForce = throwSpeed * rb.mass;
+        }
+
         Vector3 startPos = throwPoint;
-        Vector3 startVel = (_adjustedForce * _throwDirection) / rb.mass;
+        Vector3 startVel = _throwDirection * (_adjustedForce / rb.mass);
 
         _throwIndicator.SetPosition(0, startPos);
         float time = 0f;

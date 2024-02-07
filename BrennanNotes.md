@@ -7,8 +7,12 @@ TODO
         scrolls
         rug
         pie
-        books    
+        books
+		vase / statues    
  - Change throw trajectory to be more flat the farther away the mouse is (close up will arc higher)
+ - Change negative point popups to red
+ - Allow any collision to trigger points?
+	- Maybe have a shatter point value and a regular collision value
 
 FIXES
 ------------

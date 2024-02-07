@@ -4620,6 +4620,7 @@ MonoBehaviour:
   closestToRightHand: {fileID: 7721012150470948787}
   interactKeyCode: 32
   force: 100
+  throwSpeed: 15
   playerRootTransform: {fileID: 547687094134799523}
   throwIndicatorPrefab: {fileID: 5670676163795536662, guid: aad60d02687474af8b5d66874742a556,
     type: 3}
@@ -4628,6 +4629,54 @@ MonoBehaviour:
   throwLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  throwAngleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 60
+      inSlope: -5.625
+      outSlope: -5.625
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 8
+      value: 15
+      inSlope: -5.625
+      outSlope: -5.625
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  throwHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 8
+      inSlope: -1.4
+      outSlope: -1.4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5
+      value: 1
+      inSlope: -1.4
+      outSlope: -1.4
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8257806942773343428
 GameObject:
   m_ObjectHideFlags: 0
