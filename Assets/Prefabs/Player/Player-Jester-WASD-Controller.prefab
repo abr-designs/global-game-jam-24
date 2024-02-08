@@ -4619,13 +4619,14 @@ MonoBehaviour:
   rightHand: {fileID: 800882604294441536}
   closestToRightHand: {fileID: 7721012150470948787}
   interactKeyCode: 32
+  throwType: 0
   force: 100
   throwSpeed: 15
   playerRootTransform: {fileID: 547687094134799523}
   throwIndicatorPrefab: {fileID: 5670676163795536662, guid: aad60d02687474af8b5d66874742a556,
     type: 3}
-  throwIndicatorPoints: 20
-  throwIndicatorTimeStep: 0.1
+  throwIndicatorPoints: 10
+  throwIndicatorTimeStep: 0.05
   throwLayerMask:
     serializedVersion: 2
     m_Bits: 1

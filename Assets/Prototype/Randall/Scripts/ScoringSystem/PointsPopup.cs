@@ -43,6 +43,12 @@ public class PointsPopup : MonoBehaviour
         pointsDescriptionText.text = args.description;
         pointsAmountText.text = args.points.ToString();
 
+        if(args.points < 0)
+        {
+            pointsDescriptionText.color = Color.red;
+            pointsAmountText.color = Color.red;
+        }
+
         popupCountdown = popupDuration;
 
         if (placeInWorldPos) {
