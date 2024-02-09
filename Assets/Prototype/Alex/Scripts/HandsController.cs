@@ -1,3 +1,4 @@
+using System;
 using Prototype.Alex.Scripts;
 using Unity.Mathematics;
 using UnityEditor.Search;
@@ -8,7 +9,9 @@ using VisualFX;
 enum ThrowType
 {
     DIRECT = 0,
-    LOB = 1
+    LOB = 1,
+    CHARGE = 2,
+    FIXED = 3
 }
 
 public class HandsController : MonoBehaviour
@@ -52,6 +55,20 @@ public class HandsController : MonoBehaviour
     [SerializeField]
     private AnimationCurve throwHeightCurve;
 
+    // CHARGE THROW
+        [SerializeField]
+        private float minThrowSpeed = 10f;
+        
+        [SerializeField]
+        private float maxThrowSpeed = 30f;
+        private float throwSpeedRange => maxThrowSpeed - minThrowSpeed;
+        
+        [SerializeField]
+        private float chargeTime = 3f;
+
+        private float _chargeLevel = 0f;
+        
+    
 
     //============================================================================================================//
     private void Start()
@@ -74,7 +91,7 @@ public class HandsController : MonoBehaviour
         if (Input.GetKeyDown(interactKeyCode))
             ToggleObject();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             ThrowObject();
         }
@@ -131,6 +148,7 @@ public class HandsController : MonoBehaviour
         {
             // disable indicator
             _throwIndicator.enabled = false;
+            _chargeLevel = 0;
             return;
         }
 
@@ -179,6 +197,50 @@ public class HandsController : MonoBehaviour
 
             _throwDirection = throwVector.normalized;
             _adjustedForce = throwSpeed * rb.mass;
+        } else if (throwType == ThrowType.CHARGE)
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                _chargeLevel = Mathf.Clamp01(_chargeLevel + ((throwSpeedRange*(Time.deltaTime/chargeTime)) / throwSpeedRange) );
+                Debug.Log($"ChargeLevel - {_chargeLevel}");
+            }
+
+            if(!Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, throwLayerMask ) )
+            {
+                return;
+            }
+            _throwTarget = raycastHit.point;
+            
+            // TODO -- have angle change from straight to 45 degrees up?
+            Vector3 throwVector = _throwTarget - throwPoint + Vector3.up * _chargeLevel * 5f;
+            _throwDirection = throwVector.normalized;
+            _adjustedForce = minThrowSpeed + throwSpeedRange * _chargeLevel * rb.mass;
+
+        } else if(throwType == ThrowType.FIXED)
+        {
+            if(!Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, throwLayerMask ) )
+            {
+                return;
+            }
+            _throwTarget = raycastHit.point;
+
+            Vector3 throwVector = _throwTarget - throwPoint;
+            Vector3 groundVector = Vector3.ProjectOnPlane(throwVector,Vector3.up);
+            float heightOffset = throwVector.y;
+            float distance = groundVector.magnitude;
+
+            bool targetInRange = ProjectileMath.LaunchAngle(throwSpeed, distance, heightOffset, Physics.gravity.magnitude, out float angle0, out float angle1 );
+            float currentAngle = Mathf.PI / 4; // 45 degrees default
+            if(targetInRange)
+            {
+                currentAngle = Mathf.Min(angle0,angle1);
+            }
+
+            // Update vectors with angle
+            _throwDirection = Vector3.Normalize((groundVector.normalized * (Mathf.Cos(currentAngle) * throwSpeed)) + (Vector3.up * (Mathf.Sin(currentAngle) * throwSpeed)));
+            Debug.Log($"angle: {currentAngle} a0 {angle0} a1 {angle1} yOff: {heightOffset} ");
+            _adjustedForce = throwSpeed * rb.mass;
+
         }
 
         Vector3 startPos = throwPoint;
