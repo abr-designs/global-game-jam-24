@@ -6,14 +6,6 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using VisualFX;
 
-enum ThrowType
-{
-    DIRECT = 0,
-    LOB = 1,
-    CHARGE = 2,
-    FIXED = 3
-}
-
 public class HandsController : MonoBehaviour
 {
     [SerializeField]
@@ -28,9 +20,6 @@ public class HandsController : MonoBehaviour
     private KeyCode interactKeyCode;
 
     [SerializeField]
-    private ThrowType throwType = ThrowType.DIRECT;
-
-    [SerializeField]
     private float force;
     
     [SerializeField]
@@ -43,31 +32,18 @@ public class HandsController : MonoBehaviour
     [SerializeField]
     private LineRenderer throwIndicatorPrefab;
     private LineRenderer _throwIndicator;
+    
+    [SerializeField]
+    private TargetReticle reticlePrefab;
+    private TargetReticle _reticle;
+    
     [SerializeField, Range(10,100)]
     private int throwIndicatorPoints = 25;
     [SerializeField, Range(0.01f,0.25f)]
     private float throwIndicatorTimeStep = 0.1f;
+
     [SerializeField]
     private LayerMask throwLayerMask;
-    [SerializeField]
-    private AnimationCurve throwAngleCurve;
-    
-    [SerializeField]
-    private AnimationCurve throwHeightCurve;
-
-    // CHARGE THROW
-        [SerializeField]
-        private float minThrowSpeed = 10f;
-        
-        [SerializeField]
-        private float maxThrowSpeed = 30f;
-        private float throwSpeedRange => maxThrowSpeed - minThrowSpeed;
-        
-        [SerializeField]
-        private float chargeTime = 3f;
-
-        private float _chargeLevel = 0f;
-        
     
 
     //============================================================================================================//
@@ -75,6 +51,8 @@ public class HandsController : MonoBehaviour
     {
         if(_throwIndicator == null)
             _throwIndicator = Instantiate<LineRenderer>(throwIndicatorPrefab, transform);
+        if(_reticle == null)
+            _reticle = Instantiate<TargetReticle>(reticlePrefab, transform);
     }
 
     private void OnEnable()
@@ -148,7 +126,7 @@ public class HandsController : MonoBehaviour
         {
             // disable indicator
             _throwIndicator.enabled = false;
-            _chargeLevel = 0;
+            _reticle.gameObject.SetActive(false);
             return;
         }
 
@@ -159,89 +137,28 @@ public class HandsController : MonoBehaviour
         // First we determine where the mouse cursor is located
         var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if(throwType == ThrowType.LOB)
+        if(!Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, throwLayerMask ) )
         {
-            
-            // Get facing direction of mouse from player
-            Plane groundPlane = new Plane(Vector3.up, transform.position.y);
-            if(!groundPlane.Raycast(screenPointToRay, out float enter))
-            {
-                _throwTarget = Vector3.zero;
-                _throwDirection = Vector3.zero;
-                return;
-            }
-            _throwTarget = screenPointToRay.GetPoint(enter);
-            
-            // How far the cursor is from the throw point
-            Vector3 groundVector = Vector3.ProjectOnPlane(_throwTarget - throwPoint, Vector3.up);
-            float groundDist = groundVector.magnitude;
-
-            float theta = Mathf.Deg2Rad * throwAngleCurve.Evaluate(groundDist);
-            Vector3 vel_x = groundVector.normalized * throwSpeed * Mathf.Cos(theta);
-            Vector3 vel_y = Vector3.up * throwSpeed * Mathf.Sin(theta);
-            Vector3 vel = vel_x + vel_y;
-
-            _throwDirection = vel.normalized;
-            _adjustedForce = rb.mass * vel.magnitude;
-
-        } else if (throwType == ThrowType.DIRECT)
-        {
-            if(!Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, throwLayerMask ) )
-            {
-                return;
-            }
-            _throwTarget = raycastHit.point;
-
-            Vector3 throwVector =  _throwTarget - throwPoint;
-            float heightAdjust = throwHeightCurve.Evaluate(throwVector.magnitude);
-
-            _throwDirection = throwVector.normalized;
-            _adjustedForce = throwSpeed * rb.mass;
-        } else if (throwType == ThrowType.CHARGE)
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                _chargeLevel = Mathf.Clamp01(_chargeLevel + ((throwSpeedRange*(Time.deltaTime/chargeTime)) / throwSpeedRange) );
-                Debug.Log($"ChargeLevel - {_chargeLevel}");
-            }
-
-            if(!Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, throwLayerMask ) )
-            {
-                return;
-            }
-            _throwTarget = raycastHit.point;
-            
-            // TODO -- have angle change from straight to 45 degrees up?
-            Vector3 throwVector = _throwTarget - throwPoint + Vector3.up * _chargeLevel * 5f;
-            _throwDirection = throwVector.normalized;
-            _adjustedForce = minThrowSpeed + throwSpeedRange * _chargeLevel * rb.mass;
-
-        } else if(throwType == ThrowType.FIXED)
-        {
-            if(!Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, throwLayerMask ) )
-            {
-                return;
-            }
-            _throwTarget = raycastHit.point;
-
-            Vector3 throwVector = _throwTarget - throwPoint;
-            Vector3 groundVector = Vector3.ProjectOnPlane(throwVector,Vector3.up);
-            float heightOffset = throwVector.y;
-            float distance = groundVector.magnitude;
-
-            bool targetInRange = ProjectileMath.LaunchAngle(throwSpeed, distance, heightOffset, Physics.gravity.magnitude, out float angle0, out float angle1 );
-            float currentAngle = Mathf.PI / 4; // 45 degrees default
-            if(targetInRange)
-            {
-                currentAngle = Mathf.Min(angle0,angle1);
-            }
-
-            // Update vectors with angle
-            _throwDirection = Vector3.Normalize((groundVector.normalized * (Mathf.Cos(currentAngle) * throwSpeed)) + (Vector3.up * (Mathf.Sin(currentAngle) * throwSpeed)));
-            Debug.Log($"angle: {currentAngle} a0 {angle0} a1 {angle1} yOff: {heightOffset} ");
-            _adjustedForce = throwSpeed * rb.mass;
-
+            return;
         }
+        _throwTarget = raycastHit.point;
+
+        Vector3 throwVector = _throwTarget - throwPoint;
+        Vector3 groundVector = Vector3.ProjectOnPlane(throwVector,Vector3.up);
+        float heightOffset = throwVector.y;
+        float distance = groundVector.magnitude;
+
+        bool targetInRange = ProjectileMath.LaunchAngle(throwSpeed, distance, heightOffset, Physics.gravity.magnitude, out float angle0, out float angle1 );
+        float currentAngle = Mathf.PI / 4; // 45 degrees default
+        if(targetInRange)
+        {
+            currentAngle = Mathf.Min(angle0,angle1);
+        }
+
+        // Update vectors with angle
+        _throwDirection = Vector3.Normalize((groundVector.normalized * (Mathf.Cos(currentAngle) * throwSpeed)) + (Vector3.up * (Mathf.Sin(currentAngle) * throwSpeed)));
+        //Debug.Log($"angle: {currentAngle} a0 {angle0} a1 {angle1} yOff: {heightOffset} ");
+        _adjustedForce = throwSpeed * rb.mass;
 
         Vector3 startPos = throwPoint;
         Vector3 startVel = _throwDirection * (_adjustedForce / rb.mass);
@@ -258,6 +175,7 @@ public class HandsController : MonoBehaviour
 
         // Show line
         _throwIndicator.enabled = true;
+        _reticle.gameObject.SetActive(true);
     
     }
 
