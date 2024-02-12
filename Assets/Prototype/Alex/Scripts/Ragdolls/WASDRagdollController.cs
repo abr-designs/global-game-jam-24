@@ -1,7 +1,11 @@
 using System;
+using System.Collections;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using GameInput;
+using Gameplay;
 using UnityEngine;
+using VisualFX;
 
 public class WASDRagdollController : MonoBehaviour
 {
@@ -12,6 +16,7 @@ public class WASDRagdollController : MonoBehaviour
 
     [SerializeField]
     private Rigidbody root;
+    private ConfigurableJoint[] _playerJoints;
 
     private Transform _cameraTransform;
     [SerializeField, Min(0)]
@@ -47,12 +52,28 @@ public class WASDRagdollController : MonoBehaviour
         _cameraTransform = Camera.main.transform;
         CheckGroundHeight(out _groundHeightOffset);
         _groundHeightOffset *= 0.95f;
+
+        _playerJoints = GetComponentsInChildren<ConfigurableJoint>();
     }
 
     // Update is called once per frame
     private void Update()
     {
         if (_ragdollActive)
+        {
+            // Set kinematic root to the average of all joints
+            Vector3 average = Vector3.zero;
+            foreach(ConfigurableJoint joint in _playerJoints)
+            {
+                average += joint.transform.position;
+            }
+            average = average / _playerJoints.Length;
+            root.transform.position = average;
+
+            return;
+        }
+
+        if(_isStunned)
             return;
         
         CheckGroundHeight(out _heightOffGround);
@@ -145,6 +166,34 @@ public class WASDRagdollController : MonoBehaviour
         return finalForce;
     }
     
+    private bool _isStunned = false;
+    public bool IsStunned => _isStunned;
+
+    public void StunPlayer(float stunTime)
+    {
+        StartCoroutine(StunTimerCoroutine(stunTime));
+    }
+
+    private IEnumerator StunTimerCoroutine(float waitTime)
+    {
+        _isStunned = true;
+        PuppetRagdoll player = GetComponent<PuppetRagdoll>();
+        //GameInputDelegator.LockInputs = true;
+        player.EnableRagdoll(true);
+        player.transform.FindObjectWithName("KinematicRoot", out var root);
+
+        var stunVFX = VFX.STUNNED_STARS.PlayAtLocation(root.transform.position + Vector3.up, 1, true);
+        stunVFX.transform.parent = root.transform;
+
+        yield return new WaitForSeconds(waitTime);
+
+        player.EnableRagdoll(false);
+        _isStunned = false;
+
+        Destroy(stunVFX);
+        
+    }
+
     //============================================================================================================//
 
 #if UNITY_EDITOR

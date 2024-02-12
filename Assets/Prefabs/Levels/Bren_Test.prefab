@@ -141,6 +141,7 @@ Transform:
   - {fileID: 7479664101126610393}
   - {fileID: 7585884329367750759}
   - {fileID: 5359869842950846861}
+  - {fileID: 5353326691272219701}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8055164039711591472
@@ -794,6 +795,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4636258636663685080, guid: ed7db2f689812ab48a415bfdefe602ae,
     type: 3}
   m_PrefabInstance: {fileID: 2005986362108207655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2101217664276448526
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6555179199567882604}
+    m_Modifications:
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6899309194269197085, guid: 8510eb04ae2018f45b9bdad590bb3427,
+        type: 3}
+      propertyPath: m_Name
+      value: Barrel-Explosive
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8510eb04ae2018f45b9bdad590bb3427, type: 3}
+--- !u!4 &5353326691272219701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6297105497121921339, guid: 8510eb04ae2018f45b9bdad590bb3427,
+    type: 3}
+  m_PrefabInstance: {fileID: 2101217664276448526}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2209105595701232772
 PrefabInstance:

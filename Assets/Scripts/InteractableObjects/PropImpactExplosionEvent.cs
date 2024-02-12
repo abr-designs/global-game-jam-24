@@ -25,7 +25,7 @@ namespace InteractableObjects
         [SerializeField]
         private Vector3 localVfxPosition;
         
-        private GameObject _flamesVfx;
+        private GameObject _flamesVfx; 
 
         protected override void TriggerImpactEvent(Collision _)
         {
@@ -48,6 +48,7 @@ namespace InteractableObjects
             
             var colliders = Physics.OverlapSphere(transform.position, explosionRadius, layerMask.value);
 
+            bool didHitPlayer = false;
             foreach (var collider in colliders)
             {
                 var targetRb = collider.attachedRigidbody;
@@ -55,9 +56,17 @@ namespace InteractableObjects
                 if(targetRb == null)
                     continue;
 
+                if(!didHitPlayer && collider.gameObject.CompareTag("Player"))
+                {
+                    Debug.Log("Explosion hit player!");
+                    didHitPlayer = true;
+                    var player = collider.GetComponentInParent<WASDRagdollController>();
+                    player.StunPlayer(3f);
+                }
 
                 targetRb.isKinematic = false;
-                collider.attachedRigidbody?.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+                collider.attachedRigidbody?.AddExplosionForce(explosionForce, transform.position, 0 /*explosionRadius*/, 0.5f);
+        
             }
             
             //TODO Need to add the gibs

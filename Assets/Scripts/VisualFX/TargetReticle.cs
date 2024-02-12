@@ -36,12 +36,14 @@ public class TargetReticle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         var screenPointToRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(screenPointToRay, out RaycastHit raycastHit, 100f, targetMask))
         {
             transform.position = raycastHit.point;
             transform.rotation = Quaternion.FromToRotation(Vector3.up, raycastHit.normal);
         }
+        */
         
         if(reticleType == ReticleType.Crosshair)
         {

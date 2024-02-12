@@ -137,7 +137,7 @@ MonoBehaviour:
   largestRecorded: 0
   minImpulse: 5
   explosionTimer: 2
-  explosionForce: 100
+  explosionForce: 800
   explosionRadius: 3
   vfxOnExplosion: 8
   sfxOnExplosion: 3
@@ -161,6 +161,8 @@ MonoBehaviour:
   parentPropObject: {fileID: 0}
   childPropObjects: []
   shatterForceThreshold: 0
+  shatterVFX: 
+  shatterSFX: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &2931574755881090518

@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.Assertions;
+using VisualFX;
 
 namespace Prototype.Alex.Scripts
 {
@@ -145,6 +148,35 @@ namespace Prototype.Alex.Scripts
             Vector3 result = transform.position + (Vector3.up * offset);
             //result.y = Mathf.Min(result.y,maxGroundHeight);
             return result;
+        }
+
+        private List<MeshRenderer> meshes = new List<MeshRenderer>();
+        // Highlight or restore the object
+        public void SetHighlight(bool isOn) 
+        {
+            if(meshes.Count == 0)
+            {
+                var meshRenderers = GetComponentsInChildren<MeshRenderer>();
+                foreach(MeshRenderer mesh in meshRenderers)
+                {
+                    if(mesh.sharedMaterial == VFXMaterialLibrary.GetMaterial(VFXMaterial.DEFAULT))
+                        meshes.Add(mesh);
+                }
+            }
+
+            if(isOn) {
+                foreach(MeshRenderer mesh in meshes)
+                {
+                    mesh.sharedMaterial = VFXMaterialLibrary.GetMaterial(VFXMaterial.HIGHLIGHT);
+                }
+            } else { 
+                foreach(MeshRenderer mesh in meshes)
+                {
+                    mesh.sharedMaterial = VFXMaterialLibrary.GetMaterial(VFXMaterial.DEFAULT);
+                }
+            }
+                 
+
         }
 
     }

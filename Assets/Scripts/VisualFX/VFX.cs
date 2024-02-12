@@ -14,7 +14,8 @@
         DUST_CLOUD = 9,
         RED_CLOUD = 10,
         EXPLOSION_COINS = 11,
-        INTERACT_HIGHLIGHT = 12
+        INTERACT_HIGHLIGHT = 12,
+        STUNNED_STARS = 13
 
     }
 }

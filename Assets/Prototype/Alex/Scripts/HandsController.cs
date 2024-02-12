@@ -44,6 +44,8 @@ public class HandsController : MonoBehaviour
 
     [SerializeField]
     private LayerMask throwLayerMask;
+
+    private WASDRagdollController _playerController;
     
 
     //============================================================================================================//
@@ -53,6 +55,8 @@ public class HandsController : MonoBehaviour
             _throwIndicator = Instantiate<LineRenderer>(throwIndicatorPrefab, transform);
         if(_reticle == null)
             _reticle = Instantiate<TargetReticle>(reticlePrefab, transform);
+        
+        _playerController = GetComponent<WASDRagdollController>();
     }
 
     private void OnEnable()
@@ -65,6 +69,9 @@ public class HandsController : MonoBehaviour
     {
         // Show direction arrow
         UpdateTargetIndicator();
+
+        if(_playerController.IsStunned)
+            return;
 
         if (Input.GetKeyDown(interactKeyCode))
             ToggleObject();
@@ -142,6 +149,8 @@ public class HandsController : MonoBehaviour
             return;
         }
         _throwTarget = raycastHit.point;
+        _reticle.transform.position = raycastHit.point;
+        _reticle.transform.rotation = Quaternion.FromToRotation(Vector3.up, raycastHit.normal);
 
         Vector3 throwVector = _throwTarget - throwPoint;
         Vector3 groundVector = Vector3.ProjectOnPlane(throwVector,Vector3.up);
@@ -182,28 +191,49 @@ public class HandsController : MonoBehaviour
     //============================================================================================================//
 
     private InteractableObject _objectInRange;
+    private InteractableObject _lastObjectInRange;
     private GameObject _currentHighlight;
     private void OnNewInteractableObject(InteractableObject objectInRange)
     {
         Debug.Log($"New interactable in range {objectInRange}");
+        _lastObjectInRange = _objectInRange;
         _objectInRange = objectInRange;
-        
+
+        // Clear highlight from last object
+        if(_lastObjectInRange != null)
+        {
+            //_lastObjectInRange.SetHighlight(false);
+            _lastObjectInRange = null;
+        }
 
         // If character moved away from any objects
         if(objectInRange == null)
         {
-            Debug.Log("No interactable in range");
+            //Debug.Log("No interactable in range");
             if(_currentHighlight)
             {
                 Destroy(_currentHighlight);
                 _currentHighlight = null;
             }
         } else {
+            
             // Character moved near a new object - move highlight to object
+            Bounds bounds = _objectInRange.GetBounds();
+            float scale = Mathf.Max(new Vector2(bounds.extents.x,bounds.extents.z).magnitude * 2f, 1f);
+            Vector3 pos = bounds.center;
+            pos.y = Mathf.Max(bounds.min.y + 0.1f, 0.1f);
+            
             if(_currentHighlight == null)
-                _currentHighlight = VFX.INTERACT_HIGHLIGHT.PlayAtLocation(objectInRange.transform.position, 1, true);
+            {
+                _currentHighlight = VFX.INTERACT_HIGHLIGHT.PlayAtLocation(pos, scale, true);
+            } else {
+                _currentHighlight.transform.position = pos;
+                _currentHighlight.transform.localScale = Vector3.one * scale;
+            }
             _currentHighlight.transform.parent = _objectInRange.transform;
-            _currentHighlight.transform.position = _objectInRange.transform.position;
+            //_currentHighlight.transform.position = _objectInRange.transform.position;
+
+            //_objectInRange.SetHighlight(true);
         }
 
     }
