@@ -171,6 +171,9 @@ public class WASDRagdollController : MonoBehaviour
 
     public void StunPlayer(float stunTime)
     {
+        // Can't stun player twice
+        if(_isStunned) return;
+        
         StartCoroutine(StunTimerCoroutine(stunTime));
     }
 

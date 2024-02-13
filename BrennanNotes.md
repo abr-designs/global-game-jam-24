@@ -37,6 +37,8 @@ FIXES
 		- we also need to unparent any child objects so that the bounds detection for the held item is correct
 - Change negative point popups to red
 - Added VFX for stunned player
+- Changed prop triggering to happening when a thrown object hits a prop as well
+
 
 BUGS
 ------------

@@ -65,7 +65,16 @@ namespace InteractableObjects
                 }
 
                 targetRb.isKinematic = false;
-                collider.attachedRigidbody?.AddExplosionForce(explosionForce, transform.position, 0 /*explosionRadius*/, 0.5f);
+                Vector3 force = Vector3.Normalize(collider.transform.position - transform.position + Vector3.up * 1f) * explosionForce;
+                // Trigger any props
+                if(collider.gameObject.TryGetComponent<PropObject>(out PropObject prop))
+                {
+                    // TODO -- maybe add impulse based on distance?
+                    prop.TriggerProp(force * Time.fixedDeltaTime);
+                }
+
+                collider.attachedRigidbody?.AddForce(force, ForceMode.Force);
+                //collider.attachedRigidbody?.AddExplosionForce(explosionForce, transform.position, 0 /*explosionRadius*/, 0.5f);
         
             }
             

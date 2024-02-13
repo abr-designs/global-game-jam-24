@@ -39,8 +39,9 @@ public class PropObject : MonoBehaviour
     [SerializeField] 
     private Vector3 swapOutTransformOffset;
 
-    private bool _initialCollisionWithPlayer;
     private bool _isShattered;
+    // Track whether the object has been scored
+    private bool _isTriggered;
 
     private Rigidbody _rigidbody;
 
@@ -57,46 +58,28 @@ public class PropObject : MonoBehaviour
 
         Debug.Log($"{name} hit {collision.collider.name} impulse {collision.impulse.magnitude}");
 
-        // check with player collision
-        if (!_initialCollisionWithPlayer)
+        // Player will always trigger a prop
+        if (collision.gameObject.CompareTag(PLAYER_TAG) == true)
         {
-            if (collision.gameObject.CompareTag(PLAYER_TAG) == false)
-                return;
-            
-            _initialCollisionWithPlayer = true;
+            TriggerProp(collision.impulse);
+        }  
 
-            string pointsDescription = propObjectSO.objectName + "!";
+        var impulse = collision.impulse.magnitude;
+        
+        OnImpulse?.Invoke(collision);
 
-            var score = 0;
-            if (LevelLoader.CurrentLevelController.avoidObjects.Any(x => x == propObjectSO))
-                score = propObjectSO.kingPenalty;
-            else
-                score = propObjectSO.collideScore;            
-
-            OnPointsScored?.Invoke(pointsDescription, score, transform.position);
-            SFX.IMPACT.PlaySoundAtLocation(transform.position);
-
-            //Debug.Log($"Impulse: {collision.impulse}, Magnitude: {collision.impulse.magnitude}");
-            //Debug.Log($"Player initial collision with [{gameObject.name}]. Score points [{propObjectSO.collideScore}]");
-            SetPropObjectAsKinematic(this, collision.impulse);
-        }
-        else
+        // check for shatter only
+        //if (collision.gameObject.tag == CONST_TAG_PLAYER) {
+        // check for shatter force
+        if (swapOutMeshPrefab == null) 
+            return;
+        
+        if (impulse > shatterForceThreshold)
         {
-            var impulse = collision.impulse.magnitude;
-            
-            OnImpulse?.Invoke(collision);
-
-            // check for shatter only
-            //if (collision.gameObject.tag == CONST_TAG_PLAYER) {
-            // check for shatter force
-            if (swapOutMeshPrefab == null) 
-                return;
-            
-            if (impulse > shatterForceThreshold)
-            {
-                SwapShatteredMesh(collision.impulse);
-            }
+            TriggerProp(collision.impulse);
+            SwapShatteredMesh(collision.impulse);
         }
+
     }
 
     //============================================================================================================//
@@ -139,9 +122,28 @@ public class PropObject : MonoBehaviour
 
     }
 
-    public void PlayerTriggerProp()
+    public void TriggerProp(Vector3 impulse)
     {
-        SetPropObjectAsKinematic(this,Vector3.zero);
+        Debug.Log($"Trigger prop {gameObject.name} ");
+
+        if(_isTriggered) 
+            return;
+
+        _isTriggered = true;
+
+        string pointsDescription = propObjectSO.objectName + "!";
+
+        var score = 0;
+        if (LevelLoader.CurrentLevelController.avoidObjects.Any(x => x == propObjectSO))
+            score = propObjectSO.kingPenalty;
+        else
+            score = propObjectSO.collideScore;            
+
+        OnPointsScored?.Invoke(pointsDescription, score, transform.position);
+        SFX.IMPACT.PlaySoundAtLocation(transform.position);
+
+        SetPropObjectAsKinematic(this,impulse);
+
     }
 
     private void SwapShatteredMesh(Vector3 impulse)
