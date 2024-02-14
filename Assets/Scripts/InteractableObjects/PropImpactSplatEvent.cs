@@ -24,6 +24,9 @@ namespace InteractableObjects
             if (Time.time - _lastSpawned <= SpawnWaitTime)
                 return;
             
+            var _source = GetComponent<PropObject>();
+            _source?.TriggerScore();
+
             SFX.SQUELCH.PlaySoundAtLocation(transform.position);
             
             var decal = Instantiate(decalPrefab, LevelLoader.CurrentLevelController.transform, true);

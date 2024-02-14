@@ -158,6 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propObjectSO: {fileID: 11400000, guid: d9d2d0785ed76a6418f2fdd9cded64d1, type: 2}
+  scoreForceThreshold: 0
+  scoreType: 3
   parentPropObject: {fileID: 0}
   childPropObjects: []
   shatterForceThreshold: 0

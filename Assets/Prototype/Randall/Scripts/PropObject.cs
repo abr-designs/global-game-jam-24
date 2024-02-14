@@ -7,6 +7,20 @@ using UnityEngine.Serialization;
 using Levels;
 using System.Linq;
 using VisualFX;
+using Unity.VisualScripting;
+
+public enum PropImpactType {
+    DEFAULT = 1,
+    PLAYER = 2,
+    THROWN = 3,
+    EXPLOSION = 4
+}
+
+public enum PropScoreType {
+    IMPACT = 1,
+    DESTROY = 2,
+    EVENT = 3
+}
 
 [DisallowMultipleComponent]
 public class PropObject : MonoBehaviour
@@ -19,6 +33,12 @@ public class PropObject : MonoBehaviour
 
     [SerializeField] 
     public PropObjectSO propObjectSO;
+
+    [SerializeField]
+    private float scoreForceThreshold = 0f;
+    [SerializeField]
+    private PropScoreType scoreType = PropScoreType.IMPACT;
+    public PropScoreType GetScoreType => scoreType;
 
     [SerializeField, Header("Related Prop Objects")]
     private PropObject parentPropObject;
@@ -41,6 +61,8 @@ public class PropObject : MonoBehaviour
 
     private bool _isShattered;
     // Track whether the object has been scored
+    private bool _isScored;
+    // Track whether object was triggered for kinematic
     private bool _isTriggered;
 
     private Rigidbody _rigidbody;
@@ -48,7 +70,7 @@ public class PropObject : MonoBehaviour
     //Unity Functions
     //============================================================================================================//
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
@@ -58,27 +80,16 @@ public class PropObject : MonoBehaviour
 
         Debug.Log($"{name} hit {collision.collider.name} impulse {collision.impulse.magnitude}");
 
+        PropImpactType impactType = PropImpactType.DEFAULT;
         // Player will always trigger a prop
         if (collision.gameObject.CompareTag(PLAYER_TAG) == true)
         {
-            TriggerProp(collision.impulse);
+            impactType = PropImpactType.PLAYER;
         }  
 
-        var impulse = collision.impulse.magnitude;
-        
         OnImpulse?.Invoke(collision);
 
-        // check for shatter only
-        //if (collision.gameObject.tag == CONST_TAG_PLAYER) {
-        // check for shatter force
-        if (swapOutMeshPrefab == null) 
-            return;
-        
-        if (impulse > shatterForceThreshold)
-        {
-            TriggerProp(collision.impulse);
-            SwapShatteredMesh(collision.impulse);
-        }
+        ApplyImpact(impactType, collision.impulse);
 
     }
 
@@ -86,72 +97,63 @@ public class PropObject : MonoBehaviour
 
     private void SetPropObjectAsKinematic(PropObject targetPropObject, Vector3 impulse)
     {
+        if(targetPropObject._isTriggered)
+            return;
+
+        Debug.Log($"Setting prop to non-kinematic {name} rigidbody {targetPropObject._rigidbody}");
+
+        targetPropObject._isTriggered = true;
+
+        if (targetPropObject._rigidbody.isKinematic)
+        {
+            targetPropObject._rigidbody.isKinematic = false;
+        }
+
         if (targetPropObject.parentPropObject != null)
         {
             PropObject parentPropObject = targetPropObject.parentPropObject;
-            parentPropObject.SetPropObjectAsKinematic(parentPropObject, impulse);
+            SetPropObjectAsKinematic(parentPropObject, impulse);
+            // Clear parent
+            targetPropObject.parentPropObject = null;
         }
-        else
+        
+        // Toggle all child objects and unparent
+        foreach (PropObject child in targetPropObject.childPropObjects)
         {
+            Debug.Log($"Set prop child {child}");
+            if(child == null)
+                continue;
 
-            if (targetPropObject._rigidbody.isKinematic)
-            {
-                targetPropObject._rigidbody.isKinematic = false;
-            }
+            SetPropObjectAsKinematic(child, impulse);
 
-            foreach (PropObject child in targetPropObject.childPropObjects)
-            {
-                if(child == null)
-                    continue;
-                child._rigidbody.isKinematic = false;
-
-                // Unparent the transform
-                child.transform.parent = transform.parent;
-            }
-
+            // Unparent the transform
+            child.transform.parent = transform.parent;
         }
 
-        // check for shatter force
-        if (targetPropObject.swapOutMeshPrefab != null)
-        {
-            if (impulse.magnitude > targetPropObject.shatterForceThreshold)
-            {
-                SwapShatteredMesh(impulse);
-            }
-        }
+        // Clear all children
+        targetPropObject.childPropObjects.Clear();    
 
     }
 
-    public void TriggerProp(Vector3 impulse)
+    public void ApplyImpact(PropImpactType impactType, Vector3 impulse) 
     {
-        Debug.Log($"Trigger prop {gameObject.name} ");
-
-        if(_isTriggered) 
-            return;
-
-        _isTriggered = true;
-
-        string pointsDescription = propObjectSO.objectName + "!";
-
-        var score = 0;
-        if (LevelLoader.CurrentLevelController.avoidObjects.Any(x => x == propObjectSO))
-            score = propObjectSO.kingPenalty;
-        else
-            score = propObjectSO.collideScore;            
-
-        OnPointsScored?.Invoke(pointsDescription, score, transform.position);
-        SFX.IMPACT.PlaySoundAtLocation(transform.position);
-
-        SetPropObjectAsKinematic(this,impulse);
-
+        SetPropObjectAsKinematic(this, impulse);
+        SwapShatteredMesh(impulse);
+        if(scoreType == PropScoreType.IMPACT)
+            TriggerScore();
     }
 
     private void SwapShatteredMesh(Vector3 impulse)
     {
-        Debug.Log($"Prop {name} was shattered");
         // Prevent re-entry when multiple collisions happen at once
-        if(_isShattered)
+        if(_isShattered || swapOutMeshPrefab == null)
             return;
+
+        // check for shatter force
+        if(impulse.magnitude < shatterForceThreshold)
+            return;
+
+        Debug.Log($"Prop {name} was shattered");
         _isShattered = true;
 
         Transform parentTransform = transform.parent;
@@ -178,10 +180,35 @@ public class PropObject : MonoBehaviour
         }
         shatterSFX.PlaySoundAtLocation(transform.position);
 
+        if(scoreType == PropScoreType.DESTROY)
+        {
+            TriggerScore();
+        }
+
         // remove the container
         Destroy(newMeshGameObject);
         Destroy(gameObject);
    
+    }
+
+    public void TriggerScore() {
+
+        if(_isScored)
+            return;
+        
+        _isScored = true;
+
+        string pointsDescription = propObjectSO.objectName + "!";
+
+        var score = 0;
+        if (LevelLoader.CurrentLevelController.avoidObjects.Any(x => x == propObjectSO))
+            score = propObjectSO.kingPenalty;
+        else
+            score = propObjectSO.collideScore;            
+
+        OnPointsScored?.Invoke(pointsDescription, score, transform.position);
+        SFX.IMPACT.PlaySoundAtLocation(transform.position);
+
     }
 
     //============================================================================================================//

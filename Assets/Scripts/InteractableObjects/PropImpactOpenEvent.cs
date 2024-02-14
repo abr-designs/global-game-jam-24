@@ -40,6 +40,9 @@ namespace InteractableObjects
 
             }
 
+            var _source = GetComponent<PropObject>();
+            _source?.TriggerScore();
+
             //Turn off this event listener
             enabled = false;
         }

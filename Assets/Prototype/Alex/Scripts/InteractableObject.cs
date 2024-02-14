@@ -54,7 +54,7 @@ namespace Prototype.Alex.Scripts
             // This is to ensure that we only have the prop as kinematic in hand and the rest are simulated
             if(TryGetComponent<PropObject>(out PropObject prop))
             {   
-                prop.TriggerProp(Vector3.zero);
+                prop.ApplyImpact(PropImpactType.PLAYER, Vector3.zero);
             }
 
             // New plan
@@ -110,11 +110,11 @@ namespace Prototype.Alex.Scripts
                 // Trigger any prop we hit
                 if(collision.gameObject.TryGetComponent<PropObject>(out PropObject prop))
                 {   
-                    prop.TriggerProp(collision.impulse);
+                    prop.ApplyImpact(PropImpactType.THROWN, collision.impulse);
                 } else {
                     // Check parents for prop
                     var parentProp = collision.gameObject.GetComponentInParent<PropObject>();
-                    parentProp?.TriggerProp(collision.impulse);
+                    parentProp?.ApplyImpact(PropImpactType.THROWN, collision.impulse);
                 }
 
             }

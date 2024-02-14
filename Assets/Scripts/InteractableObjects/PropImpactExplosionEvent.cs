@@ -70,7 +70,7 @@ namespace InteractableObjects
                 if(collider.gameObject.TryGetComponent<PropObject>(out PropObject prop))
                 {
                     // TODO -- maybe add impulse based on distance?
-                    prop.TriggerProp(force * Time.fixedDeltaTime);
+                    prop.ApplyImpact(PropImpactType.EXPLOSION, force * Time.fixedDeltaTime);
                 }
 
                 collider.attachedRigidbody?.AddForce(force, ForceMode.Force);
@@ -78,6 +78,10 @@ namespace InteractableObjects
         
             }
             
+            // Score the object
+            var _source = GetComponent<PropObject>();
+            _source?.TriggerScore();
+
             //TODO Need to add the gibs
             vfxOnExplosion.PlayAtLocation(transform.position, 1f);
             VFX.RED_CLOUD.PlayAtLocation(transform.position, explosionRadius * 1.5f);
