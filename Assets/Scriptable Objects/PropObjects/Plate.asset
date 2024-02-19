@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 03c2c540a6c5f074a8f4e6b263762b25, type: 3}
   objectName: Plate
-  collideScore: 10
+  collideScore: 50
   kingPenalty: -250

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc94193ec9d73e49a646fa970a7ee41, type: 3}
   m_Name: Candle
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8105430911579722217, guid: e228bb29a5d0b0849a4d6d91a561d004, type: 3}
+  icon: {fileID: 0}
   objectName: Candle
-  collideScore: 10
+  collideScore: 50
   kingPenalty: -50

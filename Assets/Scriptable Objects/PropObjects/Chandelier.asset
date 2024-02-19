@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 2e35929cadfed5a4c92421d1ab4cad06, type: 3}
   objectName: Chandelier
-  collideScore: 100
+  collideScore: 200
   kingPenalty: -100

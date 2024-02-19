@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 2064bda521a479846bc2ace5c9e328d9, type: 3}
   objectName: Candelabra
-  collideScore: 250
+  collideScore: 50
   kingPenalty: -500

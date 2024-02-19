@@ -4621,7 +4621,7 @@ MonoBehaviour:
   closestToLeftHand: {fileID: 8672946464598601109}
   rightHand: {fileID: 800882604294441536}
   closestToRightHand: {fileID: 7721012150470948787}
-  interactKeyCode: 32
+  interactKeyCode: 101
   force: 100
   throwSpeed: 15
   playerRootTransform: {fileID: 547687094134799523}

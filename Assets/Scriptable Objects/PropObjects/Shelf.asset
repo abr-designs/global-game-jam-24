@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   objectName: Shelf
-  collideScore: 10
+  collideScore: 100
   kingPenalty: -50

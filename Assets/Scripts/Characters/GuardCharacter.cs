@@ -15,6 +15,7 @@ namespace Characters
 
         [SerializeField]
         private Transform HeadVFXPosition;
+        private GameObject _alertVFX;
 
         // Flag to prevent multiple triggers firing in the same window
         private bool _isTriggered = false;
@@ -34,13 +35,16 @@ namespace Characters
 
                 //var push = VFX.PUSH.PlayAtLocation(collision.contacts[0].point);
                 //push.transform.rotation = Quaternion.LookRotation(groundDir);
-                var alert = VFX.GUARD_ALERT.PlayAtLocation(HeadVFXPosition.position);
-                alert.transform.parent = HeadVFXPosition;
-                alert.transform.rotation = HeadVFXPosition.rotation;
-
                 StartCoroutine(TriggerCoroutine(.5f));
-
             }
+
+            if(_alertVFX == null)
+            {
+                _alertVFX = VFX.GUARD_ALERT.PlayAtLocation(HeadVFXPosition.position);
+                _alertVFX.transform.parent = HeadVFXPosition;
+                _alertVFX.transform.rotation = HeadVFXPosition.rotation;
+            }
+
         }
 
         private IEnumerator TriggerCoroutine(float waitTime)
