@@ -29,6 +29,7 @@ namespace Gameplay
 
         private GameObject _currentPlayerController;
         private KingCharacter _kingCharacter;
+        private static GameScoreManager _gameScoreManager;
         
         //============================================================================================================//
         private void OnEnable()
@@ -41,6 +42,8 @@ namespace Gameplay
             _kingCharacter = FindObjectOfType<KingCharacter>();
             Assert.IsNotNull(_kingCharacter, "No King currently in scene!!!");
             
+            _gameScoreManager = FindObjectOfType<GameScoreManager>();
+
             StartGame();
         }
 
@@ -101,7 +104,7 @@ namespace Gameplay
         private static bool DidWin()
         {
             var scoreThreshold = LevelLoader.CurrentLevelController.minScoreToPass;
-            var currentScore = FindObjectOfType<GameScoreManager>().GameScore;
+            var currentScore = _gameScoreManager.GameScore; //FindObjectOfType<GameScoreManager>().GameScore;
 
             return currentScore >= scoreThreshold;
         }
@@ -170,16 +173,23 @@ namespace Gameplay
             //TODO Maybe some countdown?
             GameInputDelegator.LockInputs = false;
             
+            bool wonLevel = false;
             for (int i = 0; i < gameplaySeconds; i++)
             {
                 OnTimerCountdownUpdate?.Invoke(1f - ((i + 1) /(float)gameplaySeconds), gameplaySeconds - i);
                 yield return new WaitForSeconds(1f);
+                
+                wonLevel = DidWin();
+                if(wonLevel) break;
             }
             
-            //Countdown finished
-            OnTimerCountdownUpdate?.Invoke(0f, 0);
-            OnDisplayText?.Invoke("Times Up!");
-            
+            if(!wonLevel)
+            {
+                //Countdown finished
+                OnTimerCountdownUpdate?.Invoke(0f, 0);
+                OnDisplayText?.Invoke("Times Up!");   
+            }
+
             GameInputDelegator.LockInputs = true;
             yield return new WaitForSeconds(1f);
             
@@ -187,7 +197,6 @@ namespace Gameplay
             
             //TODO Review Score
             //TODO Win or Lose
-            var wonLevel = DidWin();
             
             if(wonLevel)
                 yield return CinematicController.PlayCinematic("VictoryCinematic");

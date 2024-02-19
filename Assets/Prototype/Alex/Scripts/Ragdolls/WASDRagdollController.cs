@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using GameInput;
@@ -30,6 +31,9 @@ public class WASDRagdollController : MonoBehaviour
     [SerializeField]
     private LayerMask groundMask;
 
+    [SerializeField]
+    private LayerMask characterMask;
+
     private float _groundHeightOffset;
     private float _heightOffGround;
 
@@ -54,6 +58,19 @@ public class WASDRagdollController : MonoBehaviour
         _groundHeightOffset *= 0.95f;
 
         _playerJoints = GetComponentsInChildren<ConfigurableJoint>();
+
+        // Get all character rigidbodies
+        List<Rigidbody> rbList = new List<Rigidbody>();
+        var playerRbs = GetComponentsInChildren<Rigidbody>();
+        foreach(Rigidbody rb in playerRbs)
+        {
+            if(characterMask == (characterMask | (1 << rb.gameObject.layer)) )
+            {
+                rbList.Add(rb);
+            }
+        }
+        _playerRbs = rbList.ToArray();
+
     }
 
     // Update is called once per frame
@@ -177,6 +194,19 @@ public class WASDRagdollController : MonoBehaviour
         StartCoroutine(StunTimerCoroutine(stunTime));
     }
 
+    // Apply a force to all rigidbodies attached to the player
+    private Rigidbody[] _playerRbs;
+    public void ApplyForce(Vector3 forceDir, float forceAmount)
+    {
+        Vector3 forceVector = forceDir * forceAmount;
+        foreach(Rigidbody rb in _playerRbs)
+        {
+            // TODO -- maybe make clearing of current velocity optional
+            rb.velocity = Vector3.zero;
+            rb.AddForce(forceVector, ForceMode.Force);
+        }
+    }
+
     private IEnumerator StunTimerCoroutine(float waitTime)
     {
         _isStunned = true;
@@ -209,7 +239,6 @@ public class WASDRagdollController : MonoBehaviour
             /*br*/new Vector3(maxRoomPosition.x, minRoomPosition.y, minRoomPosition.z),
             /*bl*/minRoomPosition
         };
-        
         
         Gizmos.color = Color.blue;
         Gizmos.DrawLineStrip(points, true);

@@ -64,7 +64,7 @@ namespace InteractableObjects
                     player.StunPlayer(3f);
                 }
 
-                targetRb.isKinematic = false;
+                //targetRb.isKinematic = false;
                 Vector3 force = Vector3.Normalize(collider.transform.position - transform.position + Vector3.up * 1f) * explosionForce;
                 // Trigger any props
                 if(collider.gameObject.TryGetComponent<PropObject>(out PropObject prop))

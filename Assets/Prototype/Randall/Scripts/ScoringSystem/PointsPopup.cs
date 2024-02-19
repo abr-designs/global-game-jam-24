@@ -62,6 +62,10 @@ public class PointsPopup : MonoBehaviour
             // Set the UI element's position to the screen position
             //RectTransform rt = GetComponent<RectTransform>();
 
+            // Clamp the popup to the screen bounds
+            screenPos.x = Mathf.Clamp(screenPos.x, 0, Screen.width);
+            screenPos.y = Mathf.Clamp(screenPos.y, 0, Screen.height * .85f);
+    
             rectTransform.position = screenPos;
 
             rectTransform.anchoredPosition += new Vector2(0, worldPosOffset);

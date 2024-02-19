@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4576979796594357123}
   - component: {fileID: 7449636338798586888}
   - component: {fileID: 7313648478505807600}
-  - component: {fileID: 3741757335727642348}
+  - component: {fileID: 3843718533618433101}
   m_Layer: 0
   m_Name: Guard-Character
   m_TagString: Untagged
@@ -33,7 +33,8 @@ Transform:
   m_LocalPosition: {x: -0.8552654, y: -0.08999872, z: -0.019499302}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 192275379660217798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1702086841094869227
@@ -105,8 +106,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.6617951, y: 2.4817867, z: 1.7164291}
-  m_Center: {x: -0.06920695, y: 0, z: 0}
+  m_Size: {x: 2.1942651, y: 2.4817867, z: 1.549851}
+  m_Center: {x: 0.16455805, y: 0, z: -0.08328915}
 --- !u!54 &7313648478505807600
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,7 +135,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3741757335727642348
+--- !u!114 &3843718533618433101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,12 +144,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 603839738423845733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 327fe88df856c444f808d82789206375, type: 3}
+  m_Script: {fileID: 11500000, guid: fe2b268ad484848909f26717bb43c741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propObjectSO: {fileID: 11400000, guid: 445b49b7bc308d442aca7b4289b70631, type: 2}
-  parentPropObject: {fileID: 0}
-  childPropObjects: []
-  shatterForceThreshold: 0
-  swapOutMeshPrefab: {fileID: 0}
-  swapOutTransformOffset: {x: 0, y: 0, z: 0}
+  RepelForce: 400
+  HeadVFXPosition: {fileID: 192275379660217798}
+--- !u!1 &2292214084701213457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 192275379660217798}
+  m_Layer: 0
+  m_Name: HeadVFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &192275379660217798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2292214084701213457}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.152, y: 0.854, z: -0.178}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1935472616547833939}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

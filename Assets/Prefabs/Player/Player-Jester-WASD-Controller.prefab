@@ -4499,6 +4499,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 512
+  characterMask:
+    serializedVersion: 2
+    m_Bits: 128
   minRoomPosition: {x: -5.33, y: 0, z: -6.08}
   maxRoomPosition: {x: 5.33, y: 0, z: 7.63}
 --- !u!114 &6419137040779714727

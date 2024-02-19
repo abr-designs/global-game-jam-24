@@ -27,6 +27,8 @@ FIXES
  - Added slight spotlight for windows (starts toggled off but you can turn in on in a scene by checking it)
 	- also added a decal-based option that can be enabled on the Window prefab
  - Made scoring text easier to see
+	- Changed negative point popups to red
+	- Adding a grid system to ensure popups spread out when stacked in the same area
  - Changed fonts on labels and buttons
  - Throwing reworked
 	- Now the held object is set to kinematic with collisions disabled and follows the left hand transform in the update
@@ -35,10 +37,12 @@ FIXES
 		- once object hits anything else the layer is returned to "interactable"
 	- Objects that are picked up now remove kinematic from all parents and children (as if they were bumped by the player)
 		- we also need to unparent any child objects so that the bounds detection for the held item is correct
-- Change negative point popups to red
 - Added VFX for stunned player
 - Changed prop triggering to happening when a thrown object hits a prop as well
-
+- Temporarily removed Push action (is a little confusing when throw using similar interaction)
+- Changed guards from prop to character object, guards will stun and push player away when they get near
+- Added scoring slider to track how close player is to winning
+- Added early exit if player achieves target score early
 
 BUGS
 ------------

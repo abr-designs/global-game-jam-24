@@ -1,5 +1,6 @@
 using System;
 using Gameplay;
+using Levels;
 using Prototype.Randall.Scripts.ScoringSystem;
 using TMPro;
 using UnityEngine;
@@ -20,6 +21,8 @@ namespace UI
         
         [SerializeField, Header("Scoring")] 
         private TMP_Text gameScoreText;
+        [SerializeField]
+        private Slider scoreSlider;
 
         [SerializeField, Header("Option Window")]
         private GameObject optionWindow;
@@ -59,6 +62,7 @@ namespace UI
             textDisplay.text = string.Empty;
             timerText.text = string.Empty;
             timerSlider.value = 1f;
+            scoreSlider.value = 0f;
             
             OnPointsTotalChanged(0);
             optionWindow.SetActive(false);
@@ -99,6 +103,8 @@ namespace UI
         private void OnPointsTotalChanged(int pointsTotal)
         {
             gameScoreText.text = $"Score: {pointsTotal}";
+            var scoreToWin = LevelLoader.CurrentLevelController.minScoreToPass;
+            scoreSlider.value = ((float)pointsTotal / scoreToWin);
         }
         
         //============================================================================================================//

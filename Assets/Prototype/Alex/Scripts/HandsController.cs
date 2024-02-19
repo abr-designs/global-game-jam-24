@@ -103,7 +103,13 @@ public class HandsController : MonoBehaviour
 
 
         //_holdingObject = _objectInRange;
-        _objectInRange.Push(playerRootTransform.forward, _adjustedForce);
+        /*
+        _objectInRange.Push(playerRootTransform.forward, force);
+        var pushVFX = VFX.PUSH.PlayAtLocation(playerRootTransform.position);
+        pushVFX.transform.parent = playerRootTransform;
+        pushVFX.transform.rotation = playerRootTransform.rotation;
+        */
+
     }
 
     private void ToggleObject()

@@ -15,7 +15,9 @@
         RED_CLOUD = 10,
         EXPLOSION_COINS = 11,
         INTERACT_HIGHLIGHT = 12,
-        STUNNED_STARS = 13
+        STUNNED_STARS = 13,
+        PUSH = 14,
+        GUARD_ALERT = 15
 
     }
 }
