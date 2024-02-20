@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8587732652988060681}
   m_Layer: 0
   m_Name: BarrelPiece-Plank-Quarter
-  m_TagString: Untagged
+  m_TagString: Debris
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

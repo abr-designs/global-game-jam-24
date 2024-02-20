@@ -17,7 +17,8 @@
         INTERACT_HIGHLIGHT = 12,
         STUNNED_STARS = 13,
         PUSH = 14,
-        GUARD_ALERT = 15
+        GUARD_ALERT = 15,
+        RANGE_CIRCLE = 16
 
     }
 }

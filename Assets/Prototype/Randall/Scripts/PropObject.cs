@@ -80,6 +80,10 @@ public class PropObject : MonoBehaviour
 
         Debug.Log($"{name} hit {collision.collider.name} impulse {collision.impulse.magnitude}");
 
+        // Ignore debris collisions
+        if(collision.gameObject.CompareTag("Debris") == true)
+            return;
+
         PropImpactType impactType = PropImpactType.DEFAULT;
         // Player will always trigger a prop
         if (collision.gameObject.CompareTag(PLAYER_TAG) == true)

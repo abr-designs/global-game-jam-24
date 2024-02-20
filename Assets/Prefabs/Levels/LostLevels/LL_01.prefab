@@ -52,7 +52,7 @@ MonoBehaviour:
   levelName: 
   levelDescription: 
   avoidObjects: []
-  levelTime: 30
+  levelTime: 45
   minScoreToPass: 1500
   maxScorePossibleInLevel: 2100
 --- !u!1 &2381340643412539084

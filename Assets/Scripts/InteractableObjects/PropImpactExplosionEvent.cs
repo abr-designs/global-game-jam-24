@@ -26,6 +26,7 @@ namespace InteractableObjects
         private Vector3 localVfxPosition;
         
         private GameObject _flamesVfx; 
+        private GameObject _circleVfx;
 
         protected override void TriggerImpactEvent(Collision _)
         {
@@ -36,8 +37,11 @@ namespace InteractableObjects
             
             //TODO Need to add sparks effect
             _flamesVfx = VFX.FLAMES.PlayAtLocation(transform.TransformPoint(localVfxPosition), keepAlive: true);
+            _circleVfx = VFX.RANGE_CIRCLE.PlayAtLocation(transform.position, explosionRadius*2f, keepAlive: true);
+            _circleVfx.GetComponent<RangeCircle>().SetTimer(explosionTimer);
 
             _flamesVfx.transform.SetParent(transform, true);
+            _circleVfx.transform.SetParent(transform, true);
             _triggered = true;
         }
         

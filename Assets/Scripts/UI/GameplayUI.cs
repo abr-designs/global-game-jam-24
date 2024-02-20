@@ -103,8 +103,13 @@ namespace UI
         private void OnPointsTotalChanged(int pointsTotal)
         {
             gameScoreText.text = $"Score: {pointsTotal}";
-            var scoreToWin = LevelLoader.CurrentLevelController.minScoreToPass;
-            scoreSlider.value = ((float)pointsTotal / scoreToWin);
+            if(LevelLoader.CurrentLevelController)
+            {   
+                var scoreToWin = LevelLoader.CurrentLevelController.minScoreToPass;
+                scoreSlider.value = ((float)pointsTotal / scoreToWin);
+            } else {
+                scoreSlider.value = 0;
+            }
         }
         
         //============================================================================================================//

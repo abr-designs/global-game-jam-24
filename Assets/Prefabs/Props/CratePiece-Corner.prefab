@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3660458616026146864}
   m_Layer: 0
   m_Name: CratePiece-Corner
-  m_TagString: Untagged
+  m_TagString: Debris
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -101,6 +101,10 @@ namespace Prototype.Alex.Scripts
 
         private void OnCollisionEnter(Collision collision)
         {
+            // Ignore debris collisions
+            if(collision.gameObject.CompareTag("Debris") == true)
+                return;
+
             // Reset layer
             if(gameObject.layer == LayerMask.NameToLayer("throw"))
             {
