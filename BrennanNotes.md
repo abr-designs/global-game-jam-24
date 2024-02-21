@@ -9,9 +9,6 @@ TODO
         pie
         books
 		vase / statues    
- - Change throw trajectory to be more flat the farther away the mouse is (close up will arc higher)
- - Allow any collision to trigger points?
-	- Maybe have a shatter point value and a regular collision value
  - Change input everywhere to use Input delegator events (especially in hands controller)
 
 FIXES
@@ -43,6 +40,7 @@ FIXES
 - Changed guards from prop to character object, guards will stun and push player away when they get near
 - Added scoring slider to track how close player is to winning
 - Added early exit if player achieves target score early
+- Added range circle indicator with timer to explosive barrels
 
 BUGS
 ------------
