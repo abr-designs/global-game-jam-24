@@ -145,7 +145,7 @@ namespace Gameplay
             }
             _kingCharacter.SetState(KingCharacter.STATE.DEFAULT);
             OnLevelReady?.Invoke();
-            CameraManager.SetDefaultCameraTargets(FindObjectOfType<CameraTarget>().transform);
+            CameraManager.SetDefaultCameraTargets(_currentPlayerController.GetComponentInChildren<CameraTarget>().transform);
             GameInputDelegator.LockInputs = true;
             var gameplaySeconds = LevelLoader.CurrentLevelController.levelTime;
 

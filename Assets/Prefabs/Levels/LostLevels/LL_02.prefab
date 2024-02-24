@@ -594,6 +594,7 @@ MonoBehaviour:
   levelTime: 45
   minScoreToPass: 2000
   maxScorePossibleInLevel: 3100
+  maxPenaltyScorePossibleInLevel: 0
 --- !u!1 &5803957054320801934
 GameObject:
   m_ObjectHideFlags: 0

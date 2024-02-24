@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 
@@ -30,7 +31,7 @@ namespace Cameras
 
 
         //============================================================================================================//
-        
+
         private void SetCamera(CINEMATIC_CAMERA cinematicCamera)
         {
             var index = (int)cinematicCamera;
@@ -44,11 +45,13 @@ namespace Cameras
         private void SetDefaultCameraTarget(Transform targetTransform)
         {
             var defaultCamera = virtualCameras[(int)CINEMATIC_CAMERA.DEFAULT];
+
             defaultCamera.Follow = targetTransform;
             defaultCamera.LookAt = targetTransform;
-            
+
             if(targetTransform != null)
                 Debug.Log($"Set Camera target to: {targetTransform.gameObject.name}", targetTransform.gameObject);
+
         }
         
         //============================================================================================================//

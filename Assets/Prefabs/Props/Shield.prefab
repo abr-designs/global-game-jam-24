@@ -49,10 +49,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327fe88df856c444f808d82789206375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propObjectSO: {fileID: 11400000, guid: 4cfe60b3ef0ef644189f37022f275f67, type: 2}
+  propObjectSO: {fileID: 11400000, guid: b9182f4db0270884895581f35cc3292e, type: 2}
+  scoreForceThreshold: 0
+  scoreType: 1
   parentPropObject: {fileID: 0}
   childPropObjects: []
   shatterForceThreshold: 0
+  shatterVFX: 
+  shatterSFX: 0
   swapOutMeshPrefab: {fileID: 0}
   swapOutTransformOffset: {x: 0, y: 0, z: 0}
 --- !u!33 &2706170814518703109

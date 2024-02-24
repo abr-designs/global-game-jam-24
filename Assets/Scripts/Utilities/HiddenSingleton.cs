@@ -11,7 +11,7 @@ namespace Utilities
     {
         protected internal static T Instance;
         
-        private void Awake()
+        protected virtual void Awake()
         {
             if (Instance != null)
             {

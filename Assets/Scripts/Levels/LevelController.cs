@@ -24,18 +24,22 @@ namespace Levels
     
         [ReadOnly]
         public int maxScorePossibleInLevel;
+
+        [ReadOnly]
+        public int maxPenaltyScorePossibleInLevel;
         
         private void OnValidate()
         {
-            maxScorePossibleInLevel = GetMaxScore();
+            GetMaxScores();
         }
 
         [ContextMenu("Update Max Score")]
-        private int GetMaxScore()
+        private void GetMaxScores()
         {
             var propObjects = gameObject.GetComponentsInChildren<PropObject>();
 
             var sum = 0;
+            var penalty = 0;
             foreach (var propObject in propObjects)
             {
                 var scriptableObject = propObject.propObjectSO;
@@ -48,7 +52,9 @@ namespace Levels
                     var meantToAvoid = avoidObjects.Any(x => x.Equals(scriptableObject));
                 
                     if (meantToAvoid)
-                        sum -= scriptableObject.kingPenalty;
+                        penalty += scriptableObject.kingPenalty;
+                    else
+                        sum += scriptableObject.collideScore;
 
                     continue;
                 }
@@ -56,7 +62,8 @@ namespace Levels
                 sum += scriptableObject.collideScore;
             }
 
-            return sum;
+            maxScorePossibleInLevel = sum;
+            maxPenaltyScorePossibleInLevel = penalty;
         }
         
 #endif
