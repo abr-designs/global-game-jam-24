@@ -3607,6 +3607,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: === GAME CANVAS ===
       objectReference: {fileID: 0}
+    - target: {fileID: 4881329094962109509, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5763098528946676521, guid: 0f9f8fb065c58554cbff138365d178c7,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -3736,14 +3741,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: f7095532c4d853448a555b9e62f1dbdf,
+      objectReference: {fileID: 11400000, guid: 5c0d5ae8fe8de544ea19241d4ca195b4,
         type: 2}
     - target: {fileID: 7607667459576344853, guid: 0f9f8fb065c58554cbff138365d178c7,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 5508649435332022414, guid: f7095532c4d853448a555b9e62f1dbdf,
-        type: 2}
+      objectReference: {fileID: 2100000, guid: 1f2bc6533cdb40c4ab01e13e1601b244, type: 2}
     - target: {fileID: 7607667459576344853, guid: 0f9f8fb065c58554cbff138365d178c7,
         type: 3}
       propertyPath: m_hasFontAssetChanged

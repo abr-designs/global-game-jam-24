@@ -5,6 +5,7 @@ using Prototype.Randall.Scripts.ScoringSystem;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class PointsPopup : MonoBehaviour
 {
@@ -23,13 +24,15 @@ public class PointsPopup : MonoBehaviour
     [SerializeField] private bool scalePopup = true;
     [SerializeField] private float worldPosScaleFactor = 0.5f;
 
-    [SerializeField] private Vector3 pointsFlyToLocation;
+    private RectTransform _gameScoreUI;
     private float _pointsFlyCounter = 0f;
     private Vector3 _pointsFlyStart = Vector3.zero;
     private Vector3 _pointsFlyStartScale = Vector3.zero;
 
     private void Awake() {
         rectTransform = GetComponent<RectTransform>();
+        GameObject.Find("GameScoreUI").TryGetComponent<RectTransform>(out _gameScoreUI);
+        Assert.IsNotNull(_gameScoreUI, "No game score UI present in scene!");
     }
 
     private void Update() {
@@ -47,7 +50,7 @@ public class PointsPopup : MonoBehaviour
             if(_pointsFlyStartScale == Vector3.zero)
                 _pointsFlyStartScale = rectTransform.localScale;
 
-            rectTransform.position = Vector3.Lerp(_pointsFlyStart, pointsFlyToLocation, _pointsFlyCounter); 
+            rectTransform.position = Vector3.Lerp(_pointsFlyStart, _gameScoreUI.position, _pointsFlyCounter); 
             rectTransform.localScale = Vector3.Lerp(_pointsFlyStartScale, Vector3.one * .1f, _pointsFlyCounter);
             
             if(_pointsFlyCounter > 1f)

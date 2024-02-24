@@ -257,8 +257,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: est Kidding
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f7095532c4d853448a555b9e62f1dbdf, type: 2}
-  m_sharedMaterial: {fileID: 5508649435332022414, guid: f7095532c4d853448a555b9e62f1dbdf,
+  m_fontAsset: {fileID: 11400000, guid: 5c0d5ae8fe8de544ea19241d4ca195b4, type: 2}
+  m_sharedMaterial: {fileID: 5508649435332022414, guid: 5c0d5ae8fe8de544ea19241d4ca195b4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
