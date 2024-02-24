@@ -3597,6 +3597,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 82350701483992531, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2771470278545376732, guid: 0f9f8fb065c58554cbff138365d178c7,
         type: 3}
       propertyPath: m_Name
@@ -3725,6 +3730,40 @@ PrefabInstance:
     - target: {fileID: 6291615799075935033, guid: 0f9f8fb065c58554cbff138365d178c7,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607667459576344853, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f7095532c4d853448a555b9e62f1dbdf,
+        type: 2}
+    - target: {fileID: 7607667459576344853, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5508649435332022414, guid: f7095532c4d853448a555b9e62f1dbdf,
+        type: 2}
+    - target: {fileID: 7607667459576344853, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635330907219136840, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c0d5ae8fe8de544ea19241d4ca195b4,
+        type: 2}
+    - target: {fileID: 8635330907219136840, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5508649435332022414, guid: 5c0d5ae8fe8de544ea19241d4ca195b4,
+        type: 2}
+    - target: {fileID: 8635330907219136840, guid: 0f9f8fb065c58554cbff138365d178c7,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

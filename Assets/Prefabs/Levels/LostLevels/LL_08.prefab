@@ -237,7 +237,7 @@ MonoBehaviour:
   avoidObjects:
   - {fileID: 11400000, guid: 244116336347c224e9c0464a08b80ccb, type: 2}
   levelTime: 30
-  minScoreToPass: 1000
+  minScoreToPass: 3000
   maxScorePossibleInLevel: 3400
   maxPenaltyScorePossibleInLevel: -450
 --- !u!1001 &226944416038007667

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Lumin;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 namespace Prototype.Randall.Scripts.ScoringSystem
 {
@@ -14,8 +12,7 @@ namespace Prototype.Randall.Scripts.ScoringSystem
 
         [SerializeField] private bool clearExistingPopups = true;
 
-        private PointsPopup[] _popupPoints = new PointsPopup[10];
-        private int _popupPointsIndex = 0;
+        [SerializeField] private float popupMinDistance = 50f;
 
         private Dictionary<Vector2Int, PointsPopup> _popupGridPoints = new Dictionary<Vector2Int, PointsPopup>();
 
@@ -59,8 +56,8 @@ namespace Prototype.Randall.Scripts.ScoringSystem
         private void DistributePopup(PointsPopup popup)
         {
 
-            const float gridSize = 200f;
-            const float randomOffset = gridSize * .25f;
+            float gridSize = popupMinDistance;
+            float randomOffset = gridSize * .25f;
             float xOffset = Screen.width / gridSize / 2f;
             float yOffset = Screen.height / gridSize / 2f;
             
@@ -94,40 +91,16 @@ namespace Prototype.Randall.Scripts.ScoringSystem
             {
                 xOffset += UnityEngine.Random.Range(-randomOffset,randomOffset);
                 yOffset += UnityEngine.Random.Range(-randomOffset,randomOffset);
+                
+                // Calculate new popup position 
+                popup.transform.position = new Vector3(
+                    newGridPt.x * gridSize - xOffset, 
+                    newGridPt.y * gridSize - yOffset, 
+                    0
+                );
             }
             
-            // Calculate new popup position 
-            popup.transform.position = new Vector3(
-                newGridPt.x * gridSize - xOffset, 
-                newGridPt.y * gridSize - yOffset, 
-                0);
-
             _popupGridPoints[newGridPt] = popup;
-
-            /*
-            Vector3 curr = popup.transform.position;
-            Vector3 screenCenter = new Vector3(Screen.width/2, Screen.height/2, 0);
-            Vector3 dir = Vector3.zero;
-            for(int i=0; i<_popupPoints.Length; i++)
-            {
-                PointsPopup pp = _popupPoints[i];
-                if(pp != null)
-                {
-                    if( Vector3.Distance(curr, pp.transform.position) <= 30f )
-                    {
-                        
-                        Debug.Log("POPUP TOO CLOSE");
-                        dir = Vector3.Normalize(screenCenter - curr);
-                        curr = curr + (dir * 100f);
-                    }
-                }
-            }
-
-            popup.transform.position = curr;
-
-            _popupPoints[_popupPointsIndex] = popup;
-            _popupPointsIndex = (_popupPointsIndex + 1) % _popupPoints.Length;
-            */
         }
 
         [ContextMenu("Test Popups")]
@@ -142,6 +115,5 @@ namespace Prototype.Randall.Scripts.ScoringSystem
                 GeneratePopup(args);
             }
         }
-
     }
 }

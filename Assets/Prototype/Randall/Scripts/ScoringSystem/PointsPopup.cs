@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Prototype.Randall.Scripts.ScoringSystem;
@@ -22,19 +23,39 @@ public class PointsPopup : MonoBehaviour
     [SerializeField] private bool scalePopup = true;
     [SerializeField] private float worldPosScaleFactor = 0.5f;
 
+    [SerializeField] private Vector3 pointsFlyToLocation;
+    private float _pointsFlyCounter = 0f;
+    private Vector3 _pointsFlyStart = Vector3.zero;
+    private Vector3 _pointsFlyStartScale = Vector3.zero;
+
     private void Awake() {
         rectTransform = GetComponent<RectTransform>();
     }
 
     private void Update() {
+        if(popupCountdown > 0)
+        {
+            popupCountdown -= Time.deltaTime;
+            rectTransform.anchoredPosition += Vector2.up * Time.deltaTime * floatSpeed;
+            return;
+        } else
+        {
+            _pointsFlyCounter += Time.deltaTime;
+            
+            if(_pointsFlyStart == Vector3.zero)
+                _pointsFlyStart = rectTransform.position;
+            if(_pointsFlyStartScale == Vector3.zero)
+                _pointsFlyStartScale = rectTransform.localScale;
 
-        popupCountdown -= Time.deltaTime;
-
-        rectTransform.anchoredPosition += Vector2.up * Time.deltaTime * floatSpeed;
-
-        if(popupCountdown < 0) {
-            Destroy(gameObject);
-        }
+            rectTransform.position = Vector3.Lerp(_pointsFlyStart, pointsFlyToLocation, _pointsFlyCounter); 
+            rectTransform.localScale = Vector3.Lerp(_pointsFlyStartScale, Vector3.one * .1f, _pointsFlyCounter);
+            
+            if(_pointsFlyCounter > 1f)
+            {
+                Destroy(gameObject);
+            }
+        }         
+            
 
     }
 
@@ -58,13 +79,14 @@ public class PointsPopup : MonoBehaviour
             // Convert the target object's world position to screen space
             //Vector3 screenPos = Camera.main.WorldToScreenPoint(targetObject.position);
             Vector3 screenPos = Camera.main.WorldToScreenPoint(targetPosition);
+            Debug.Log($"Screenpos popup - {targetPosition} {screenPos}");
 
             // Set the UI element's position to the screen position
             //RectTransform rt = GetComponent<RectTransform>();
 
             // Clamp the popup to the screen bounds
-            screenPos.x = Mathf.Clamp(screenPos.x, 0, Screen.width);
-            screenPos.y = Mathf.Clamp(screenPos.y, 0, Screen.height * .85f);
+            screenPos.x = Mathf.Clamp(screenPos.x, 0, Camera.main.pixelWidth);
+            screenPos.y = Mathf.Clamp(screenPos.y, 0, Camera.main.pixelHeight * .85f);
     
             rectTransform.position = screenPos;
 

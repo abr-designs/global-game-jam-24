@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 using Levels;
 using System.Linq;
 using VisualFX;
-using Unity.VisualScripting;
 
 public enum PropImpactType {
     DEFAULT = 1,

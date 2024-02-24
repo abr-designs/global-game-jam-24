@@ -1,7 +1,6 @@
 using System;
 using Prototype.Alex.Scripts;
 using Unity.Mathematics;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VisualFX;

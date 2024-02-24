@@ -55,6 +55,7 @@ MonoBehaviour:
   levelTime: 45
   minScoreToPass: 1500
   maxScorePossibleInLevel: 2100
+  maxPenaltyScorePossibleInLevel: 0
 --- !u!1 &2381340643412539084
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5156672496312614758, guid: 963921884834d9d49b3696757dbf42dc, type: 2}
+  - {fileID: 5508649435332022414, guid: 5c0d5ae8fe8de544ea19241d4ca195b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -633,8 +634,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: to move
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 963921884834d9d49b3696757dbf42dc, type: 2}
-  m_sharedMaterial: {fileID: 5156672496312614758, guid: 963921884834d9d49b3696757dbf42dc,
+  m_fontAsset: {fileID: 11400000, guid: 5c0d5ae8fe8de544ea19241d4ca195b4, type: 2}
+  m_sharedMaterial: {fileID: 5508649435332022414, guid: 5c0d5ae8fe8de544ea19241d4ca195b4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

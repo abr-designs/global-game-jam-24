@@ -1,6 +1,5 @@
 using System;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 
@@ -9,14 +8,14 @@ namespace Cameras
     public enum CINEMATIC_CAMERA : int
     {
         DEFAULT, //Go to Default
-        
+
     }
     public class CameraManager : HiddenSingleton<CameraManager>
     {
         public static float CameraBlendTime => Instance.cameraBlendTime;
         [SerializeField, Min(0)]
         private float cameraBlendTime;
-        
+
         [SerializeField]
         private Camera camera;
         [SerializeField]
@@ -49,11 +48,11 @@ namespace Cameras
             defaultCamera.Follow = targetTransform;
             defaultCamera.LookAt = targetTransform;
 
-            if(targetTransform != null)
+            if (targetTransform != null)
                 Debug.Log($"Set Camera target to: {targetTransform.gameObject.name}", targetTransform.gameObject);
 
         }
-        
+
         //============================================================================================================//
 
         public static void SetDefaultCameraTargets(Transform target)
